@@ -33,16 +33,4 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>Db-diagram.png</name>
-			<type>1</type>
-			<location>C:/Users/developer/Desktop/Db-diagram.png</location>
-		</link>
-		<link>
-			<name>comp433project2_UML.pdf</name>
-			<type>1</type>
-			<location>C:/Users/developer/Downloads/comp433_2016fall/p2/comp433project2_UML.pdf</location>
-		</link>
-	</linkedResources>
 </projectDescription>
