@@ -44,19 +44,19 @@ public class OrderDAO extends Databaseoperation{
 	}
 	
 	public void cancelOrder(int orderID){
-		String updateOrderQuery = "UPDATE order SET OrderStatus_StatusID = 5 WHERE OrderID = " + orderID;
+		String updateOrderQuery = "UPDATE Order SET OrderStatus_StatusID = 5 WHERE OrderID = " + orderID;
 		
 		super.accessDatabase(updateOrderQuery);
 	}
 
 	public void refund(int orderID){
-		String updateOrderQuery = "UPDATE order SET OrderStatus_StatusID = 6 WHERE OrderID = " + orderID;
+		String updateOrderQuery = "UPDATE Order SET OrderStatus_StatusID = 6 WHERE OrderID = " + orderID;
 		
 		super.accessDatabase(updateOrderQuery);
 	}
 	
 	public String getOrderStatus(int orderID){
-		String searchquery = "SELECT OrderStatus FROM order where orderID = ?;"; 
+		String searchquery = "SELECT OrderStatus.StatusName FROM OrderStatus INNER JOIN Order on Order.OrderStatus_StatusID = OrderStatus.StatusID WHERE Order.OrderID = " + orderID; 
         super.accessDatabase(searchquery);
         return (String) super.resultlist.get(1);  //return getOrderStatus
 	}

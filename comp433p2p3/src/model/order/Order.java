@@ -7,9 +7,10 @@ public class Order {
 	float totalprice;
 	float tax;
 	double amount;
+	int orderstatusID;
 	
 	public Order(int orderID, String orderdate, String shipingaddress, 
-			     float totalprice, float tax, double amount){
+			     float totalprice, float tax, double amount, int orderstatusID){
 		
 		this.orderID = orderID;
 		this.orderdate = orderdate;
@@ -17,6 +18,7 @@ public class Order {
 		this.totalprice = totalprice;
 		this.tax=tax;
 		this.amount=amount;
+		this.orderstatusID=orderstatusID;
 	}
 	
 	public int getorderID(){
