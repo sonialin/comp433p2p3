@@ -12,7 +12,7 @@ public class OrderDAO extends Databaseoperation{
 	public void createOrder(int orderID, String orderdate, String shipingaddress, 
 		     float totalprice, float tax, double amount){
 		        
-		String addquery = "INSERT INTO order VALUES (" + orderID + "," + orderdate +","+ shipingaddress+ "," 
+		String addquery = "INSERT INTO Order VALUES (" + orderID + "," + orderdate +","+ shipingaddress+ "," 
 	               + totalprice+","+tax+","+ amount+")";
 	
 	    super.accessDatabase(addquery);
@@ -20,25 +20,25 @@ public class OrderDAO extends Databaseoperation{
 	}
 	
 	public void payOrder(int orderID){
-		String updateOrderQuery = "UPDATE order SET OrderStatus_StatusID = 1 WHERE OrderID = " + orderID;
+		String updateOrderQuery = "UPDATE Order SET OrderStatus_StatusID = 1 WHERE OrderID = " + orderID;
 				
 		super.accessDatabase(updateOrderQuery);
 	}
 	
 	public void fullfillOrder(int orderID){
-		String updateOrderQuery = "UPDATE order SET OrderStatus_StatusID = 2 WHERE OrderID = " + orderID;
+		String updateOrderQuery = "UPDATE Order SET OrderStatus_StatusID = 2 WHERE OrderID = " + orderID;
 		
 		super.accessDatabase(updateOrderQuery);
 	}
 	
 	public void shipOrder(int orderID){
-		String updateOrderQuery = "UPDATE order SET OrderStatus_StatusID = 3 WHERE OrderID = " + orderID;
+		String updateOrderQuery = "UPDATE Order SET OrderStatus_StatusID = 3 WHERE OrderID = " + orderID;
 		
 		super.accessDatabase(updateOrderQuery);
 	}
 	
 	public void deliverOrder(int orderID){
-		String updateOrderQuery = "UPDATE order SET OrderStatus_StatusID = 4 WHERE OrderID = " + orderID;
+		String updateOrderQuery = "UPDATE Order SET OrderStatus_StatusID = 4 WHERE OrderID = " + orderID;
 		
 		super.accessDatabase(updateOrderQuery);
 	}
