@@ -19,25 +19,40 @@ public class OrderDAO extends Databaseoperation{
 	    
 	}
 	
-	public void payOrder(){
-		//TO DO
+	public void payOrder(int orderID){
+		String updateOrderQuery = "UPDATE order SET OrderStatus_StatusID = 1 WHERE OrderID = " + orderID;
+				
+		super.accessDatabase(updateOrderQuery);
 	}
 	
-	public void fullfillOrder(){
-		//TO DO
+	public void fullfillOrder(int orderID){
+		String updateOrderQuery = "UPDATE order SET OrderStatus_StatusID = 2 WHERE OrderID = " + orderID;
+		
+		super.accessDatabase(updateOrderQuery);
 	}
 	
-	public void shipOrder(){
-		//TO DO
+	public void shipOrder(int orderID){
+		String updateOrderQuery = "UPDATE order SET OrderStatus_StatusID = 3 WHERE OrderID = " + orderID;
+		
+		super.accessDatabase(updateOrderQuery);
+	}
+	
+	public void deliverOrder(int orderID){
+		String updateOrderQuery = "UPDATE order SET OrderStatus_StatusID = 4 WHERE OrderID = " + orderID;
+		
+		super.accessDatabase(updateOrderQuery);
 	}
 	
 	public void cancelOrder(int orderID){
-		String deletequery = "DELETE FROM order WHERE orderID =" + orderID + ";"; 
-		super.accessDatabase(deletequery);
+		String updateOrderQuery = "UPDATE order SET OrderStatus_StatusID = 5 WHERE OrderID = " + orderID;
+		
+		super.accessDatabase(updateOrderQuery);
 	}
 
-	public void refund(){
-		//TO DO
+	public void refund(int orderID){
+		String updateOrderQuery = "UPDATE order SET OrderStatus_StatusID = 6 WHERE OrderID = " + orderID;
+		
+		super.accessDatabase(updateOrderQuery);
 	}
 	
 	public String getOrderStatus(int orderID){

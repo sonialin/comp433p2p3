@@ -3,7 +3,7 @@ VALUES (1, 'Amazon', 'Platform');
 
 INSERT INTO `Product` (`ProductID`, `ProductName`, `ProductPrice`, `ProductDescription`, `ProductOwner_ProductOwnerID`, `ProductQuantity`) 
 VALUES (1, 'Kindle Paperwhite E-reader - Black, 6\" High-Resolution Display (300 ppi) with Built-in Light, Wi-Fi - Includes Special Offers', 
-119.99, 'Page Flip makes it easy to find pictures, charts, maps and even your notes and highlights from different parts of a book. While you swipe to other pages or zoom out to see page thumbnails, Page Flip automatically saves the page you¡¯re reading, pinning it to the side of your screen so you¡¯ll never lose your place.', 
+119.99, 'Page Flip makes it easy to find pictures, charts, maps and even your notes and highlights from different parts of a book. While you swipe to other pages or zoom out to see page thumbnails, Page Flip automatically saves the page youï¿½ï¿½re reading, pinning it to the side of your screen so youï¿½ï¿½ll never lose your place.', 
 1, 10);
 
 INSERT INTO `Product` (`ProductID`, `ProductName`, `ProductPrice`, `ProductDescription`, `ProductOwner_ProductOwnerID`, `ProductQuantity`) 
@@ -45,7 +45,7 @@ VALUES (8, 'All-New Fire TV Stick with Alexa Voice Remote | Streaming Media Play
 INSERT INTO `Product` (`ProductID`, `ProductName`, `ProductPrice`, `ProductDescription`, `ProductOwner_ProductOwnerID`, `ProductQuantity`) 
 VALUES (9, 'Amazon Fire TV | Streaming Media Player', 
 99.99, 'Now with 4K Ultra HD
-Amazon Fire TV now brings you 4K Ultra HD streaming capability, giving you a best-in-class television experience with true-to-life picture quality when used with compatible 4K Ultra HD TVs¡ªsomething Apple TV and Chromecast don¡¯t support. Your 4K TV must support minimum HDCP requirements for protected content playback.', 
+Amazon Fire TV now brings you 4K Ultra HD streaming capability, giving you a best-in-class television experience with true-to-life picture quality when used with compatible 4K Ultra HD TVsï¿½ï¿½something Apple TV and Chromecast donï¿½ï¿½t support. Your 4K TV must support minimum HDCP requirements for protected content playback.', 
 1, 5);
 
 INSERT INTO `Product` (`ProductID`, `ProductName`, `ProductPrice`, `ProductDescription`, `ProductOwner_ProductOwnerID`, `ProductQuantity`) 
@@ -69,6 +69,8 @@ INSERT INTO `OrderStatus` (`StatusName`, `StatusID`) VALUES ('Paid', 1);
 INSERT INTO `OrderStatus` (`StatusName`, `StatusID`) VALUES ('Processed', 2);
 INSERT INTO `OrderStatus` (`StatusName`, `StatusID`) VALUES ('Shipped', 3);
 INSERT INTO `OrderStatus` (`StatusName`, `StatusID`) VALUES ('Delivered', 4);
+INSERT INTO `OrderStatus` (`StatusName`, `StatusID`) VALUES ('Cancelled', 5);
+INSERT INTO `OrderStatus` (`StatusName`, `StatusID`) VALUES ('Refunded', 6);
 
 INSERT INTO `Cart` (`CartID`, `CartPrice`, `Tax`) VALUES (1, 159.49, 9.97);
 INSERT INTO `CartLineItem` (`Cart_CartID`, `Product_ProductID`, `CartLineItemQuantity`, `CartLineItemPrice`) VALUES (1, 11, 1, 159.49);
