@@ -1,4 +1,4 @@
-package service;
+package service.review;
 
 public class ReviewResource {
 

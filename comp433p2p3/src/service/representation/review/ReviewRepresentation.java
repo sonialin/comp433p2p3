@@ -1,4 +1,4 @@
-package service.representation;
+package service.representation.review;
 
 public class ReviewRepresentation {
 
