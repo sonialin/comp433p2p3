@@ -5,14 +5,14 @@ create database if not exists ecommerce;
 use ecommerce;
 
 CREATE TABLE if not exists `ProductOwner` (
-  `ProductOwnerID` INT NOT NULL,
+  `ProductOwnerID` INT NOT NULL AUTO_INCREMENT,
   `ProductOwnerName` VARCHAR(255) NULL,
   `ProductOwnerType` VARCHAR(255) NULL,
   PRIMARY KEY (`ProductOwnerID`))
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `ecommerce`.`Partner` (
-  `PartnerID` INT NOT NULL,
+  `PartnerID` INT NOT NULL AUTO_INCREMENT,
   `PartnerName` VARCHAR(255) NULL,
   `PartnerType` VARCHAR(255) NULL,
   `Pasword` VARCHAR(45) NULL,
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `ecommerce`.`Partner` (
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `ecommerce`.`Product` (
-  `ProductID` INT NOT NULL,
+  `ProductID` INT NOT NULL AUTO_INCREMENT,
   `ProductName` VARCHAR(255) NULL,
   `ProductPrice` DECIMAL(10,2) NULL,
   `ProductDescription` TEXT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `ecommerce`.`OrderStatus` (
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `ecommerce`.`Cart` (
-  `CartID` INT NOT NULL,
+  `CartID` INT NOT NULL AUTO_INCREMENT,
   `CartPrice` DECIMAL(10,2) NULL,
   `Tax` DECIMAL(10,2) NULL,
   PRIMARY KEY (`CartID`))
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `ecommerce`.`CartLineItem` (
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `ecommerce`.`Order` (
-  `OrderID` INT NOT NULL,
+  `OrderID` INT NOT NULL AUTO_INCREMENT,
   `OrderPrice` DECIMAL(10,2) NULL,
   `Customer_Username` VARCHAR(45) NOT NULL,
   `OrderDate` DATETIME NULL,
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `ecommerce`.`Order` (
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `ecommerce`.`ProductReview` (
-  `ProductReviewID` INT NOT NULL,
+  `ProductReviewID` INT NOT NULL AUTO_INCREMENT,
   `ProductReviewContent` VARCHAR(255) NULL,
   `Rating` INT NULL,
   `ProductReviewDate` DATETIME NULL,
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `ecommerce`.`Payment` (
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `ecommerce`.`Address` (
-  `AddressID` INT NOT NULL,
+  `AddressID` INT NOT NULL AUTO_INCREMENT,
   `StreetAddressLine1` VARCHAR(45) NULL,
   `StreetAddressLine2` VARCHAR(45) NULL,
   `City` VARCHAR(45) NULL,
@@ -189,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `ecommerce`.`Address` (
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `ecommerce`.`PhoneNumber` (
-  `PhoneNumberID` INT NOT NULL,
+  `PhoneNumberID` INT NOT NULL AUTO_INCREMENT,
   `AreaCode` VARCHAR(45) NULL,
   `Number` VARCHAR(45) NULL,
   `Partner_PartnerID` INT NULL,
