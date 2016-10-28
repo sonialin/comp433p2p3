@@ -1,4 +1,4 @@
-package service.review;
+package service.resource.review;
 
 import java.util.Set;
 

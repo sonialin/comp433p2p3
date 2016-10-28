@@ -1,4 +1,4 @@
-package service.customer;
+package service.resource.customer;
 
 import java.sql.SQLException;
 import javax.ws.rs.DELETE;

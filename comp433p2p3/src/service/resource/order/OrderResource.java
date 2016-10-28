@@ -1,4 +1,4 @@
-package service.order;
+package service.resource.order;
 
 public class OrderResource {
 

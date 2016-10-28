@@ -1,4 +1,4 @@
-package service.customer;
+package service.resource.customer;
 
 import javax.jws.WebService;
 

@@ -1,4 +1,4 @@
-package service.product;
+package service.resource.product;
 
 import java.util.Set;
 

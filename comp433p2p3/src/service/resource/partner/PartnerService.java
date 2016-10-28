@@ -1,4 +1,4 @@
-package service.partner;
+package service.resource.partner;
 
 public class PartnerService {
 
