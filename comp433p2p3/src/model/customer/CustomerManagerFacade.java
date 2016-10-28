@@ -1,27 +1,34 @@
 package model.customer;
 
+import java.sql.SQLException;
+
 import dal.CustomerDAO;
 
 public class CustomerManagerFacade{
 	
 	private static CustomerDAO cdao = new CustomerDAO();
 	
+	public Customer getCustomer(String customerusername) throws SQLException{
 
-	public void addCustomer(String customerusername, String customerpassword,
+		return cdao.getCustomer(customerusername);
+	}
+
+	public Customer addCustomer(String customerusername, String customerpassword,
 			                String customerfirstname, String customerlastname,
-			                String customeremail){
-		cdao.addCustomer(customerusername,customerpassword, customerfirstname, customerlastname, customeremail);
+			                String customeremail) throws SQLException{
+		return cdao.addCustomer(customerusername,customerpassword, customerfirstname, customerlastname, customeremail);
 		
 	}	
-	public void deleteCustomer(String customerusername,String customerpassword){
+	public void deleteCustomer(String customerusername,String customerpassword) throws SQLException{
 		cdao.deleteCustomer(customerusername, customerpassword);
 	}
 	
 	/**
 	 * Verify if cutomer's username matches password when login
 	 * @return
+	 * @throws SQLException 
 	 */
-	public Boolean verifyCustomer(String customerusername, String customerpassword){
+	public Boolean verifyCustomer(String customerusername, String customerpassword) throws SQLException{
 		return cdao.verifyCustomer(customerusername, customerpassword);
 		
 	}
