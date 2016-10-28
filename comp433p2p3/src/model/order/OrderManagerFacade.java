@@ -9,30 +9,30 @@ public class OrderManagerFacade{
 	OrderDAO odao = new OrderDAO();
 
 	public void createOrder(int orderID, String orderdate, String shipingaddress, 
-		     float totalprice, float tax, double amount){
+		     float totalprice, float tax, double amount, int orderstatus){
 		        
-		odao.createOrder(orderID, orderdate, shipingaddress, totalprice, tax, amount);
+		odao.createOrder(orderID, orderdate, shipingaddress, totalprice, tax, amount, orderstatus);
 	    
 	}
 	
-	public void payOrder(){
-		odao.payOrder();
+	public void payOrder(int orderID){
+		odao.payOrder(orderID);
 	}
 	
-	public void fullfillOrder(){
-		odao.fullfillOrder();
+	public void fullfillOrder(int orderID){
+		odao.fullfillOrder(orderID);
 	}
 	
-	public void shipOrder(){
-		odao.shipOrder();
+	public void shipOrder(int orderID){
+		odao.shipOrder(orderID);
 	}
 	
 	public void cancelOrder(int orderID){
 		odao.cancelOrder(orderID);
 	}
 
-	public void refund(){
-		odao.refund();
+	public void refund(int orderID){
+		odao.refund(orderID);
 	}
 	
 	public String getOrderStatus(int orderID){
@@ -40,9 +40,7 @@ public class OrderManagerFacade{
 	}
 	
 	public void getProductDetail(int ProductID){
-		
 		odao.getProductDetail(ProductID);
-       
 	}
 	
 	public void getCustomerDetail(String customerusername){

@@ -10,10 +10,11 @@ public class OrderDAO extends Databaseoperation{
 	
 	
 	public void createOrder(int orderID, String orderdate, String shipingaddress, 
-		     float totalprice, float tax, double amount){
+		     float totalprice, float tax, double amount, int orderstatus){
 		        
 		String addquery = "INSERT INTO Order VALUES (" + orderID + "," + orderdate +","+ shipingaddress+ "," 
 	               + totalprice+","+tax+","+ amount+")";
+		// To do: automatically set orderstatus to 1(paid) when creating an order
 	
 	    super.accessDatabase(addquery);
 	    
