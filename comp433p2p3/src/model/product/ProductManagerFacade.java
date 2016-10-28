@@ -4,6 +4,7 @@ import dal.Databaseoperation;
 import dal.ProductDAO;
 import model.order.Order;
 import model.partner.Partner;
+import model.product.Product;
 
 /**
  * This class is managing the activities related to Product
@@ -19,9 +20,9 @@ public class ProductManagerFacade{
      /**
       * addProduct
       */
-	public void addProduct(int productID, String productname, String productdecription,
+	public void addProduct(String productname, String productdecription,
 	        float productprice, int productownerID, int productquantity){
-	       pdao.addProduct(productID, productname, productdecription, productprice, productownerID, productquantity); 
+	       pdao.addProduct(productname, productdecription, productprice, productownerID, productquantity); 
 	}
 	
     /**

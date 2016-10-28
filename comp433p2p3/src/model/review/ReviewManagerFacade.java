@@ -1,13 +1,13 @@
-package model.reviews;
+package model.review;
 
-import dal.ReviewsDAO;
+import dal.ReviewDAO;
 
 public class ReviewManagerFacade{
 
 	/**
 	 * This class manages reviews for puoducts from cutomers
 	 */
-	ReviewsDAO rdao = new ReviewsDAO();
+	ReviewDAO rdao = new ReviewDAO();
 	
 	public void writeReview(String customerusername, String productID, String reviewcontent,int rate){
 			

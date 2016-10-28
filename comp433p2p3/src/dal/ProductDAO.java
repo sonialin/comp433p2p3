@@ -1,5 +1,10 @@
 package dal;
 
+import java.util.Set;
+
+import dal.Databaseoperation;
+import model.product.Product;
+
 public class ProductDAO extends Databaseoperation {
 	
 	
@@ -10,13 +15,13 @@ public class ProductDAO extends Databaseoperation {
 	  /**
      * addProduct
      */
-	public void addProduct(int productID, String productname, String productdecription,
+	public void addProduct(String productname, String productdecription,
 	        float productprice, int productownerID, int productquantity){
 		//fetch from addproductlist.txt       
         
-		String addquery = "INSERT INTO product VALUES (" + productID + "," + productname +","+ productdecription+ "," 
-		               + productprice+","+productownerID+","+productquantity+")";
-		
+		String addquery = "INSERT INTO `Product` (`ProductName`, `ProductPrice`, `ProductDescription`, `ProductOwner_ProductOwnerID`, `ProductQuantity`) VALUES ("
+				          + productname +","+ productdecription+ "," + productprice+","+productownerID+","+productquantity+")";		
+			
 		super.accessDatabase(addquery);
 	}
 	
@@ -30,12 +35,14 @@ public class ProductDAO extends Databaseoperation {
 	
    /**
     * searchProduct
+ * @return 
     */	
-	public void searchProduct(String ProductName){
+	public Set<Product> searchProduct(String ProductName){
 		String searchquery = "SELECT ProductName, ProductDecription, ProductPrice FROM product where ProductName like "
 	                         + "'%?%'"+";";               //the search key words will get from keyboard input
 		
 		super.accessDatabase(searchquery);
+		return null;
 	}
 	
    /**

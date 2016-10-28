@@ -9,42 +9,53 @@ public class Product {
 	int productownerID;
 	int productquantity;
 	
-	public Product(	int productID, String productname, String productdecription,
-			        float productprice, int productownerID, int productquantity){
-		this.productID = productID;
-		this.productname = productname;
-		this.productdecription = productdecription;
-		this.productprice = productprice;
-		this.productownerID = productownerID;
-		this.productquantity = productquantity;
-		
-	}
+	public Product(){}
 	
-	public void setProductInfo(){
-		
-		}
+	public void setProductID(int productID){
+		this.productID = productID;
+	}
 	
 	public int getProductID(){
 		return productID;
+	}	
+	
+	public void setProductName(String productname){
+		this.productname = productname;
 	}
 	
-	public String getproductname(){
+	public String getProductname(){
 		return productname;
 	}
 	
-	public String getproductdecription(){
+	public void setProductdecription(String productdecription){
+		this.productdecription = productdecription;
+	}
+	
+	public String getProductdecription(){
 		return productdecription;
 	}
 	
-	public float getproductprice(){
+	public void setProductprice(float productprice){
+		this.productprice = productprice;
+	}
+	
+	public float getProductprice(){
 		return productprice;
 	}
 	
-	public int getproductownerID(){
+	public void setProductownerID(int productownerID){
+		this.productownerID = productownerID;
+	}
+	
+	public int getProductownerID(){
 		return productownerID;
 	}
 	
-	public int getproductquantity(){
+	public void setProductquantity(int productquantity){
+		this.productquantity = productquantity;
+	}
+	
+	public int getProductquantity(){
 		return productquantity;
 	}
 
