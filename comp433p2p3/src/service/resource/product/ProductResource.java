@@ -52,7 +52,7 @@ public class ProductResource implements ProductService {
 	@DELETE
 	@Produces({ "application/xml", "application/json" })
 	@Path("/Product/{ProductId}")
-	public Response deleteProduct(@PathParam("ProductId") String id) {
+	public Response deleteProduct(@PathParam("ProductId") int id) {
 		System.out.println("Delete METHOD Request from Client with ProductRequest String ............." + id);
 		ProductActivity pdtActivity = new ProductActivity();
 		String res = pdtActivity.deleteProduct(id);

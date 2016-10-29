@@ -25,6 +25,10 @@ public class ProductManagerFacade{
 	       pdao.addProduct(productname, productdecription, productprice, productownerID, productquantity); 
 	}
 	
+	public Product getProduct(int productID){
+	      return pdao.getProduct(productID); 
+	}
+	
     /**
      * deleteProduct
      */

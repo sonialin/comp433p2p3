@@ -25,6 +25,11 @@ public class ProductDAO extends Databaseoperation {
 		super.accessDatabase(addquery);
 	}
 	
+	public Product getProduct(int productID){
+		String getquery = "SELECT * FROM PRODUCT WHERE productID=" + productID +";"; 
+		
+	}
+	
    /**
     * deleteProduct
     */
