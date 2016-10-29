@@ -8,7 +8,6 @@ import model.costant.Constant;
 
 public class Databaseoperation {
 
-	protected final List<String> resultlist = new ArrayList();
 
 	public Connection getConnection() {
 		try {
