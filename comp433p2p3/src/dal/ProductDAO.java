@@ -1,79 +1,192 @@
 package dal;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashSet;
 import java.util.Set;
+
+import org.bouncycastle.jcajce.provider.asymmetric.RSA;
+
+import com.company.hr.Employee;
+import com.mysql.jdbc.PreparedStatement;
 
 import dal.Databaseoperation;
 import model.product.Product;
 
 public class ProductDAO extends Databaseoperation {
-	
-	
-	public ProductDAO(){
+
+	public ProductDAO() {
 		super();
 	}
-	
-	  /**
-     * addProduct
-     */
-	public void addProduct(String productname, String productdecription,
-	        float productprice, int productownerID, int productquantity){
-		//fetch from addproductlist.txt       
-        
-		String addquery = "INSERT INTO `Product` (`ProductName`, `ProductPrice`, `ProductDescription`, `ProductOwner_ProductOwnerID`, `ProductQuantity`) VALUES ("
-				          + productname +","+ productdecription+ "," + productprice+","+productownerID+","+productquantity+")";		
-			
-		super.accessDatabase(addquery);
+
+	/**
+	 * addProduct
+	 */
+	public void addProduct(String productname, String productdecription, float productprice, int productownerID,
+			int productquantity) {
+
+		String addquery = "INSERT INTO `Product` (`ProductName`, `ProductPrice`, `ProductDescription`, `ProductOwner_ProductOwnerID`, `ProductQuantity`) VALUES (?,?,?,?,?);";
+		// + productname +","+ productdecription+ "," +
+		// productprice+","+productownerID+","+productquantity+")";
+
+		Connection connection = super.getConnection();
+		Statement stmt = null;
+
+		try {
+			stmt = connection.createStatement();
+
+			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(addquery);
+			preStatement.setString(1, "ProductName");
+			preStatement.setFloat(2, productprice);
+			preStatement.setString(3, "ProductDescription");
+			preStatement.setInt(4, productownerID);
+			preStatement.setInt(5, productquantity);
+
+			ResultSet rs = preStatement.executeQuery();
+
+			stmt.close();
+			rs.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		}
+
+		super.closeConnection(connection);
+
 	}
-	
-	public Product getProduct(int productID){
-		String getquery = "SELECT * FROM PRODUCT WHERE productID=" + productID +";"; 
+
+	/**
+	 * getProduct
+	 */
+	public Product getProduct(int productID) {
+		Product product = new Product();
+		String getquery = "SELECT productID, `ProductName`, `ProductPrice`, `ProductDescription`, `ProductOwner_ProductOwnerID`, `ProductQuantity` FROM PRODUCT WHERE productID= ?;";
+		Connection connection = super.getConnection();
+		Statement stmt = null;
+
+		try {
+			stmt = connection.createStatement();
+			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getquery);
+			preStatement.setInt(1, productID);
+			ResultSet rs = preStatement.executeQuery();
+
+			product.setProductID(productID);
+			product.setProductName(rs.getString(2));
+			product.setProductdecription(rs.getString(3));
+			product.setProductprice(rs.getFloat(4));
+			product.setProductownerID(rs.getInt(5));
+			product.setProductquantity(rs.getInt(6));
+
+			stmt.close();
+			rs.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		}
+
+		super.closeConnection(connection);
+
+		return product;
+
+	}
+
+	/**
+	 * deleteProduct
+	 */
+	public void deleteProduct(int productID) {
+		String deletequery = "DELETE FROM product WHERE productID =?";
+		Connection connection = super.getConnection();
+		Statement stmt = null;
+
+		try {
+			stmt = connection.createStatement();
+
+			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(deletequery);
+
+			preStatement.setInt(1, productID);
+
+			ResultSet rs = preStatement.executeQuery();
+
+			stmt.close();
+			rs.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		}
+
+		super.closeConnection(connection);
+
+	}
+
+	/**
+	 * searchProduct
+	 * 
+	 * @return
+	 */
+	public Set<Product> searchProduct(String ProductName) {
+		Set<Product> products = new HashSet<Product>();
+		Product product = new Product();
+		String searchquery = "SELECT ProductName, ProductDecription, ProductPrice FROM product where ProductName like '%?%'";
+		Connection connection = super.getConnection();
+		Statement stmt = null;
+
+		try {
+			stmt = connection.createStatement();
+
+			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(searchquery);
+
+			preStatement.setString(1, ProductName);
+
+			ResultSet rs = preStatement.executeQuery();
+
+			while (rs.next()) {
+				product.setProductID(rs.getInt(1));
+				product.setProductName(rs.getString(2));
+				product.setProductdecription(rs.getString(3));
+				product.setProductprice(rs.getFloat(4));
+				product.setProductownerID(rs.getInt(5));
+				product.setProductquantity(rs.getInt(6));
+
+				products.add(product);
+			}
+
+			stmt.close();
+			rs.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		}
+		super.closeConnection(connection);
+
+		return products;
+	}
+
+	/**
+	 * checckAvailability
+	 */
+	public int checckAvailability(String ProductName) {
+		String checckavailabilityquery = "SELECT Productquantity FROM product where ProductName like " + "'%?%'" + ";";
 		
 	}
+
 	
-   /**
-    * deleteProduct
-    */
-	public void deleteProduct(int productID){
-		String deletequery = "DELETE FROM product WHERE productID ="+ productID+";";  // productID will get from keyboard input
-		super.accessDatabase(deletequery);
-	}
 	
-   /**
-    * searchProduct
- * @return 
-    */	
-	public Set<Product> searchProduct(String ProductName){
-		String searchquery = "SELECT ProductName, ProductDecription, ProductPrice FROM product where ProductName like "
-	                         + "'%?%'"+";";               //the search key words will get from keyboard input
+	/**
+	 * buyproduct, that means submitorder
+	 */
+	//public void buyProduct() {
+		// order.submitOrder();
+	//}
+
+	/**
+	 * getProductOwner
+	 */
+	//public int getProductOwner(int productID) {
+		//String getownerquery = "SELECT ProductOwner_ProductOwnerID FROM product where ProductID=?;";
 		
-		super.accessDatabase(searchquery);
-		return null;
-	}
-	
-   /**
-    * checckAvailability
-    */	
-	public int checckAvailability(String ProductName){
-		String checckavailabilityquery = "SELECT Productquantity FROM product where ProductName like "
-               + "'%?%'"+";";
-		super.accessDatabase(checckavailabilityquery);
-		return (int) super.resultlist.get(1);  //return Productquantity
-	}
-	
-	/**
-    * buyproduct, that means submitorder
-    */
-	public void buyProduct(){
-		//order.submitOrder();  
-	}
-	
-	/**
-    * getProductOwner
-    */
-	public int getProductOwner(int productID){
-		String getownerquery = "SELECT ProductOwner_ProductOwnerID FROM product where ProductID=?;";
-		super.accessDatabase(getownerquery);
-		return (int) super.resultlist.get(1); //return ProductOwner_ProductOwnerID;
-	}
+		//return ProductOwnerID;
+	//}
 
 }
