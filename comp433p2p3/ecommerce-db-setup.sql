@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `ecommerce`.`ProductReview` (
   `ProductReviewID` INT NOT NULL AUTO_INCREMENT,
   `ProductReviewContent` VARCHAR(255) NULL,
   `Rating` INT NULL,
-  `ProductReviewDate` DATETIME NULL,
+  `ProductReviewDate` TIMESTAMP  NULL,
   `Product_ProductID` INT NOT NULL,
   `Customer_Username` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`ProductReviewID`),
