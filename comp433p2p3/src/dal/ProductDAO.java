@@ -1,18 +1,13 @@
 package dal;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.bouncycastle.jcajce.provider.asymmetric.RSA;
-
-import com.company.hr.Employee;
-import com.mysql.jdbc.PreparedStatement;
-
-import dal.Databaseoperation;
 import model.product.Product;
 
 public class ProductDAO extends Databaseoperation {
@@ -168,6 +163,7 @@ public class ProductDAO extends Databaseoperation {
 	 */
 	public int checckAvailability(String ProductName) {
 		String checckavailabilityquery = "SELECT Productquantity FROM product where ProductName like " + "'%?%'" + ";";
+		return 0;
 		
 	}
 
