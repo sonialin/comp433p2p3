@@ -2,10 +2,8 @@ package model.product;
 
 import java.util.Set;
 
-import dal.Databaseoperation;
 import dal.ProductDAO;
 import model.order.Order;
-import model.partner.Partner;
 import model.product.Product;
 
 /**
@@ -15,8 +13,7 @@ public class ProductManagerFacade{
 	
 	Product product = null;
 	Order order;
-	Partner partner;
- 
+	
 	ProductDAO pdao = new ProductDAO();
 	
      /**
@@ -53,7 +50,7 @@ public class ProductManagerFacade{
 	}
 	
 	/**
-     * buyproduct, that means submitorder
+     * buy product, that means create an order
      */
 	public void buyProduct(){
 		//order.submitOrder();  

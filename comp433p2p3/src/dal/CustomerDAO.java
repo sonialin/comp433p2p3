@@ -13,31 +13,23 @@ import model.customer.Customer;
 public class CustomerDAO extends Databaseoperation{
 	
 	private static Connection con = null;
+	private static PreparedStatement pstmt = null;
 	
 	public CustomerDAO(){
 		super();
 	}
 	
-	public static Connection getConnection() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con=DriverManager.getConnection(Constant.URL, Constant.USERNAME, Constant.PASSWORD);
-            return con;
-        } catch (Exception ex) {
-            System.out.println("2:"+ex.getMessage());
-        }
-        return con;
-    }
 	
 	
 	public Customer getCustomer(String customerusername) throws SQLException{
 		
-		Connection con=getConnection();
-		Statement stmt = con.createStatement();
+		con=getConnection();
 		
-		String searchquery = "SELECT * FROM Customer WHERE Username = '"+ customerusername + "';";     
+		String gethquery = "SELECT * FROM Customer WHERE Username = '"+ customerusername + "';";     
 		
-		ResultSet rs = stmt.executeQuery(searchquery);
+		pstmt = (PreparedStatement) con.prepareStatement(gethquery);
+		ResultSet rs = pstmt.executeQuery(gethquery);
+		
 		
 		Customer cus = new Customer();
 		cus.setCustomerUsername(rs.getString(1));
@@ -47,7 +39,6 @@ public class CustomerDAO extends Databaseoperation{
         cus.setCustomerEmail(rs.getString(5));
         
         con.close();
-        stmt.close();
         
 		return cus;
         
@@ -57,8 +48,7 @@ public class CustomerDAO extends Databaseoperation{
             String customerfirstname, String customerlastname,
             String customeremail) throws SQLException{
 		
-		Connection con=getConnection();
-		PreparedStatement pstmt = null;
+		con=getConnection();
 		
 		Customer cus = new Customer();
 		cus.setCustomerUsername(customerusername);
@@ -85,16 +75,16 @@ public class CustomerDAO extends Databaseoperation{
 	
 	public void deleteCustomer(String customerusername,String customerpassword) throws SQLException{
 		
-		Connection con=getConnection();
-		Statement stmt = con.createStatement();
+		con=getConnection();
 		
 		if(verifyCustomer(customerusername,customerpassword))
 		{
 		String deletequery = "DELETE FROM Customer WHERE Customerusername = " + customerusername + ";";  // productID will get from keyboard input
-		stmt.executeQuery(deletequery);
+		pstmt.executeQuery(deletequery);
 		}
 		else
 			System.out.println("Sorry, you are not able to delete this Customer");
+		con.close();
 	}
 	
 	/**
@@ -104,13 +94,12 @@ public class CustomerDAO extends Databaseoperation{
 	 */
 	public Boolean verifyCustomer(String customerusername, String customerpassword) throws SQLException{
 		
-		Connection con=getConnection();
-		Statement stmt = con.createStatement();
+		con=getConnection();
 		String pwd;
 		
 		String searchquery = "SELECT Password FROM Customer WHERE Username = '"+ customerusername + "';";     
 		
-		ResultSet rs = stmt.executeQuery(searchquery);
+		ResultSet rs = pstmt.executeQuery(searchquery);
         pwd = rs.getString(1);
         
         if(customerpassword.equals(pwd)){
@@ -129,14 +118,8 @@ public class CustomerDAO extends Databaseoperation{
 	/**
 	 * Get Order Details customers submitted from database
 	 */
-	public void getOrderDetail(int orderID){
+	public void getCustomDetail(String customerusername){
 		
-		String getorderquery = "SELECT o.OrderID, o.Customer_Username,o.OrderPrice, o.OrderStatus, "
-								+"o.OrderDate, o.Shipping Address, cl.CartLineItemQuantity, cl.CartLineItemPrice,"
-								+"c.CartPrice, c.Tax " 
-                                +"FROM Order as o, Cartlineitem as cl, Cart as c"
-								+"WHERE c.CartID = cl.Cart_CartID AND o.OrderID = c.Order_OrderID AND o.orderID = "+ orderID;
-		super.accessDatabase(getorderquery);
      }
 
 }

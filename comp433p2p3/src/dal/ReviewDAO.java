@@ -4,14 +4,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import com.mysql.jdbc.PreparedStatement;
 
-import model.product.Product;
 import model.review.Review;
 
 public class ReviewDAO extends Databaseoperation {

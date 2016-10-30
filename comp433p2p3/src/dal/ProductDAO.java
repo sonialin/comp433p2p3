@@ -1,18 +1,19 @@
 package dal;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.bouncycastle.jcajce.provider.asymmetric.RSA;
 
-import com.mysql.jdbc.PreparedStatement;
+import org.bouncycastle.jcajce.provider.asymmetric.RSA;
 
 import dal.Databaseoperation;
 import model.order.Order;
+
 import model.product.Product;
 
 public class ProductDAO extends Databaseoperation {
@@ -30,8 +31,6 @@ public class ProductDAO extends Databaseoperation {
 			int productquantity) {
 
 		String addquery = "INSERT INTO `Product` (`ProductName`, `ProductPrice`, `ProductDescription`, `ProductOwner_ProductOwnerID`, `ProductQuantity`) VALUES (?,?,?,?,?);";
-		// + productname +","+ productdecription+ "," +
-		// productprice+","+productownerID+","+productquantity+")";
 
 		Connection connection = super.getConnection();
 		Statement stmt = null;
@@ -162,6 +161,7 @@ public class ProductDAO extends Databaseoperation {
 	/**
 	 * checckAvailability
 	 */
+
 	public int checkAvailability(int productID) {
 		int productquantity = 0;
 		String checkavailabilityquery = "SELECT Productquantity FROM product where ProductID = ?";
@@ -186,8 +186,9 @@ public class ProductDAO extends Databaseoperation {
 		super.closeConnection(connection);
 
 		return productquantity;
-
 	}
+
+
 
 	/**
 	 * buy product means create an order
