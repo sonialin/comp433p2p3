@@ -72,9 +72,9 @@ public final class OrderServiceClient {
         System.out.println("POST MEDTHOD Response ........." + responsePost);
         
         /*****************************************************************************************
-         * GET METHOD invoke for all employees
+         * GET METHOD invoke for all orders
          *****************************************************************************************/
-        System.out.println("GET METHOD for all employees..........................................");
+        System.out.println("GET METHOD for all orders..........................................");
         WebClient getAllClient = WebClient.create("http://localhost:8081", providers);
         WebClient.getConfig(getAllClient).getOutInterceptors().add(new LoggingOutInterceptor());
         WebClient.getConfig(getAllClient).getInInterceptors().add(new LoggingInInterceptor());

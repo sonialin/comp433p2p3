@@ -126,7 +126,7 @@ public class PartnerDAO extends Databaseoperation {
 	public void generateReport(int orderID) {
 		OrderDAO odao = new OrderDAO();
 
-		odao.fullfillOrder(orderID);
+		odao.fulfillOrder(orderID);
 	}
 
 }
