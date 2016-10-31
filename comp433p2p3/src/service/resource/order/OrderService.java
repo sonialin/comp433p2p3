@@ -13,7 +13,7 @@ public interface OrderService {
 	   
 	public Set<OrderRepresentation> getAllOrders();
 	public OrderRepresentation getOrder(int orderId);
-	//public OrderRepresentation createOrder(OrderRequest orderRequest);
+	public OrderRepresentation createOrder(OrderRequest orderRequest);
    
     //public Response updateOrder(OrderRequest orderRequest);
     //public Response deleteOrder(int orderId);

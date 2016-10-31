@@ -78,36 +78,43 @@ public class OrderDAO extends Databaseoperation{
 		return order;
 	}
 	
-//	public void createOrder(float amount, String username, String orderdate){
-//		String addquery = "INSERT INTO `Order` (`OrderPrice`, `Customer_Username`, `OrderDate`, `OrderStatus_StatusID`, `Cart_CartID`) VALUES (?,?,?,?,?);";
-//
-//		// To do: add shipping address to the address table with association to the created order
-//		
-//		Connection connection = super.getConnection();
-//		Statement stmt = null;
-//
-//		try {
-//			stmt = connection.createStatement();
-//
-//			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(addquery);
-//			preStatement.setFloat(1, amount);
-//			preStatement.setString(2, username);
-//			preStatement.setString(3, orderdate);
-//			preStatement.setInt(4, 1);
-//			preStatement.setInt(5, 1); // To do: properly associate order with cart
-//			
-//			ResultSet rs = preStatement.executeQuery();
-//
-//			stmt.close();
-//			rs.close();
-//
-//		} catch (SQLException e) {
-//			System.out.println(e.toString());
-//		}
-//
-//		super.closeConnection(connection); 
-//	}
-//	
+	public Order createOrder(float amount, String username, String orderdate){
+		Order order = new Order();
+		order.setamount(amount);
+		order.setusername(username);
+		order.setorderdate(orderdate);
+		order.setorderstatusID(1);
+		
+		String addquery = "INSERT INTO `Order` (`OrderPrice`, `Customer_Username`, `OrderDate`, `OrderStatus_StatusID`, `Cart_CartID`) VALUES (?,?,?,?,?);";
+
+		// To do: add shipping address to the address table with association to the created order
+		
+		Connection connection = super.getConnection();
+		Statement stmt = null;
+
+		try {
+			stmt = connection.createStatement();
+
+			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(addquery);
+			preStatement.setFloat(1, amount);
+			preStatement.setString(2, username);
+			preStatement.setString(3, orderdate);
+			preStatement.setInt(4, 1);
+			preStatement.setInt(5, 1); // To do: properly associate order with cart
+			
+			ResultSet rs = preStatement.executeQuery();
+
+			stmt.close();
+			rs.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		}
+
+		super.closeConnection(connection); 
+		return order;
+	}
+//	To do: combine the methods (where the order status is updated) into one updateOrder method
 	
 	public void payOrder(int orderID){
 		String updateOrderQuery = "UPDATE Order SET OrderStatus_StatusID = 1 WHERE OrderID = " + orderID;
@@ -151,16 +158,8 @@ public class OrderDAO extends Databaseoperation{
         return (String) super.resultlist.get(1);  //return getOrderStatus
 	}
 	
-	public void getProductDetail(int ProductID){
-		
-		String searchquery = "SELECT ProductName, ProductDecription, ProductPrice ProductOwner FROM product where ProductID =" +ProductID +";";               
-        super.accessDatabase(searchquery);
-        
-	}
-	
-	public void getCustomerDetail(String customerusername){
-		
-		String searchquery = "SELECT Username, Firstname, LastName, Address, PhoneNumber, Email FROM customer where Username =" + customerusername + ";";              
-        super.accessDatabase(searchquery);
+	public String getOrderDetails(){
+		// To do
+		return null;
 	}
 }

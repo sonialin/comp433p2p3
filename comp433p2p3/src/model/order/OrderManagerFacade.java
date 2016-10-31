@@ -21,11 +21,10 @@ public class OrderManagerFacade{
 		return odao.getOrder(orderID);
 	}
 
-
-//	public void createOrder(float amount, String username, String orderdate){
-//		        
-//		odao.createOrder(amount, username, orderdate);
-//	}
+	public Order createOrder(float amount, String username, String orderdate){        
+		Order order = odao.createOrder(amount, username, orderdate);
+		return order;
+	}
 	
 	public void payOrder(int orderID){
 		odao.payOrder(orderID);

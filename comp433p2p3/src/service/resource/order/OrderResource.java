@@ -38,17 +38,15 @@ public class OrderResource implements OrderService {
 		return orderActivity.getOrder(orderID);
 	}
 	
-//	@POST
-//	@Produces({"application/xml" , "application/json"})
-//	@Path("/employee")
-//	public OrderRepresentation createOrder(OrderRequest orderRequest) {
-//		System.out.println("POST METHOD Request from Client with ............." + orderRequest.getorderID() );
-//		OrderActivity orderActivity = new OrderActivity();
-//		return orderActivity.createOrder(orderRequest.getorderID(), orderRequest.getorderdate(), 
-//										orderRequest.getshippingaddress(), orderRequest.gettotalprice(),
-//										orderRequest.gettax(), orderRequest.getamount(), orderRequest.getorderstatus());
-//	}
-	// To do: remove order id argument in the creatorder method across layers since it's auto created and incremented
+	@POST
+	@Produces({"application/xml" , "application/json"})
+	@Path("/order")
+	public OrderRepresentation createOrder(OrderRequest orderRequest) {
+		System.out.println("POST METHOD Request from Client with username............." + orderRequest.getusername() );
+		OrderActivity orderActivity = new OrderActivity();
+		return orderActivity.createOrder(orderRequest.getamount(), orderRequest.getusername(), orderRequest.getorderdate());
+	}
+	
 	
 	// To do: add patch method 
 	

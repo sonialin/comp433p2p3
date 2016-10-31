@@ -56,10 +56,16 @@ public class OrderActivity {
 
 	}
 	
-//	public void createOrder(){
-//       
-//		
-//	}
+	public OrderRepresentation createOrder(float amount, String username, String orderdate) {	
+		Order order = omf.createOrder(amount, username, orderdate);
+		
+		OrderRepresentation orderRep = new OrderRepresentation();
+		orderRep.setamount(order.getamount());
+		orderRep.setusername(order.getusername());
+		orderRep.setorderdate(order.getorderdate());
+		
+		return orderRep;
+	}
 	
 	public void payOrder(int orderID){	
 		omf.payOrder(orderID);
