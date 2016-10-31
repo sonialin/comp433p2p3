@@ -3,17 +3,14 @@ package service.resource.review;
 import java.util.Set;
 
 import javax.jws.WebService;
-
+import javax.ws.rs.core.Response;
 import service.representation.review.ReviewRepresentation;
-import service.representation.review.ReviewRequest;
 
 @WebService
 public interface ReviewService {
 
-	//public String writeReview(String customerusername, String productID, String reviewcontent,int rate);
-	public String writeReview(ReviewRequest ReviewRequest);
-	public ReviewRepresentation displayReview(String Poductname) ;
+	public Response writeReview(String customerusername, int productID, String reviewcontent, int rate);
 
-
+	public Set<ReviewRepresentation> getReview(String Poductname);
 
 }

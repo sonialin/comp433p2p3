@@ -16,7 +16,6 @@ public interface ProductService {
 
 	public ProductRepresentation addProduct(ProductRequest productRequest);
 
-	// public Response updateEmployee(EmployeeRequest employeeRequest);
-	// public Response deleteEmployee(String employeeId);
+
 
 }

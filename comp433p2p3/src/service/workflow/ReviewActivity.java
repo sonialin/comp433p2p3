@@ -4,36 +4,44 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import dal.ReviewDAO;
 import model.review.Review;
+import model.review.ReviewManagerFacade;
 import service.representation.review.ReviewRepresentation;
 
 
 
 public class ReviewActivity {
-	private static ReviewDAO dao = new ReviewDAO();
-	// private static ReviewManager em = new ReviewManager();
+	
+	private static ReviewManagerFacade rm = new ReviewManagerFacade();
 
-	public void writeReview(String customerusername, String productID, String reviewcontent,int rate) {
+	public String writeReview(String customerusername, int productID, String reviewcontent,int rate) {
 
-		// Review rw = dao.addReview(firstName, lastName);
-		dao.writeReview(reviewcontent, reviewcontent, reviewcontent, rate);
+		rm.writeReview(customerusername, productID, reviewcontent, rate);
+		
+		return "OK";
 	}
 
-	public ReviewRepresentation displayReview(String Poductname) {
+	public Set<ReviewRepresentation> getReview(String Poductname) {
+		Set<Review> reviews = new HashSet<Review>();
+		Set<ReviewRepresentation> reviewRepresentations = new HashSet<ReviewRepresentation>();
+		reviews = rm.getReview(Poductname);
 
-		// Review rw = dao.getReview(id);
-		Review rw = dao.displayReview(Poductname);
+		Iterator<Review> it = reviews.iterator();
+		while(it.hasNext()) {
+			Review rw = (Review)it.next();
+			ReviewRepresentation reviewRepresentation = new ReviewRepresentation();
+			reviewRepresentation.setProductreviewID(rw.getProductreviewID());
+			reviewRepresentation.setProductreviewcontent(rw.getProductreviewcontent());
+			reviewRepresentation.setProductreviewDate(rw.getProductreviewDate());
+			reviewRepresentation.setProductproductID(rw.getProductproductID());
+			reviewRepresentation.setCustomerusername(rw.getCustomerusername());
+          //now add this representation in the list
+			reviewRepresentations.add(reviewRepresentation);
+        }
+		return reviewRepresentations;
 
-		ReviewRepresentation rwRep = new ReviewRepresentation();
-		rwRep.setCustomerusername(rw.getCustomerusername());
-		rwRep.setProductproductID(rw.getProductproductID());
-		rwRep.setProductreviewcontent(rw.getProductreviewcontent());
-		rwRep.setRating(rw.getRating());
-
-		return rwRep;
+		
 	}
-
 	
 
 
