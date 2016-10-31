@@ -69,7 +69,7 @@ public class OrderRequest {
 		this.amount = amount;
 	}
 	
-	public float getorderstatus(){
+	public int getorderstatusID(){
 		return orderstatusID;
 	}
 	
