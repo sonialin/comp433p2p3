@@ -32,12 +32,13 @@ public class CustomerDAO extends Databaseoperation{
 		
 		
 		Customer cus = new Customer();
+		if(rs.next()){
 		cus.setCustomerUsername(rs.getString(1));
         cus.setCustomerPassword(rs.getString(2));
         cus.setCustomerFirstname(rs.getString(3));
         cus.setCustomerLastname(rs.getString(4));
         cus.setCustomerEmail(rs.getString(5));
-        
+		}
         con.close();
         
 		return cus;
@@ -73,18 +74,15 @@ public class CustomerDAO extends Databaseoperation{
 
 	}
 	
-	public void deleteCustomer(String customerusername,String customerpassword) throws SQLException{
+	public void deleteCustomer(String customerusername) throws SQLException{
 		
 		con=getConnection();
 		
-		if(verifyCustomer(customerusername,customerpassword))
-		{
-		String deletequery = "DELETE FROM Customer WHERE Customerusername = " + customerusername + ";";  // productID will get from keyboard input
-		pstmt.executeQuery(deletequery);
-		}
-		else
-			System.out.println("Sorry, you are not able to delete this Customer");
-		con.close();
+
+		String deletequery = "DELETE FROM Customer WHERE Username = '" + customerusername + "';";  
+		pstmt = (PreparedStatement) con.prepareStatement(deletequery);
+		pstmt.executeUpdate();
+
 	}
 	
 	/**
@@ -92,22 +90,29 @@ public class CustomerDAO extends Databaseoperation{
 	 * @return
 	 * @throws SQLException 
 	 */
-	public Boolean verifyCustomer(String customerusername, String customerpassword) throws SQLException{
+	/*public Boolean verifyCustomer(String customerusername, String customerpassword) throws SQLException{
 		
 		con=getConnection();
-		String pwd;
+		String pwd = null;
 		
 		String searchquery = "SELECT Password FROM Customer WHERE Username = '"+ customerusername + "';";     
 		
+		pstmt = (PreparedStatement) con.prepareStatement(searchquery);
 		ResultSet rs = pstmt.executeQuery(searchquery);
+		
+		if(rs.next()){
         pwd = rs.getString(1);
-        
-        if(customerpassword.equals(pwd)){
+		}
+		
+        if(pwd.equals(customerpassword)){
         	return true;
         } else {
+        	System.out.println(pwd);
+        	System.out.println(customerusername);
+        	System.out.println(customerpassword);
         	return false;
         }
-	}
+	}*/
 	
 	public void addCustomerProfile(){
 		

@@ -19,8 +19,8 @@ public class CustomerManagerFacade{
 		return cdao.addCustomer(customerusername,customerpassword, customerfirstname, customerlastname, customeremail);
 		
 	}	
-	public void deleteCustomer(String customerusername,String customerpassword) throws SQLException{
-		cdao.deleteCustomer(customerusername, customerpassword);
+	public void deleteCustomer(String customerusername) throws SQLException{
+		cdao.deleteCustomer(customerusername);
 	}
 	
 	/**
@@ -28,10 +28,10 @@ public class CustomerManagerFacade{
 	 * @return
 	 * @throws SQLException 
 	 */
-	public Boolean verifyCustomer(String customerusername, String customerpassword) throws SQLException{
+/*	public Boolean verifyCustomer(String customerusername, String customerpassword) throws SQLException{
 		return cdao.verifyCustomer(customerusername, customerpassword);
 		
-	}
+	}*/
 	
 	public void addCustomerProfile(){
 		
@@ -44,7 +44,7 @@ public class CustomerManagerFacade{
 	 */
 	public void getOrderDetail(int orderID){
 		
-		cdao.getOrderDetail(orderID);
+		//cdao.getOrderDetail(orderID);
 		
     }
 }

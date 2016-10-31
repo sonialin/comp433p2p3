@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 public class OrderRequest {
 	int orderID;
 	String orderdate;
+<<<<<<< HEAD
 	String shippingaddress;
 	float totalprice;
 	float tax;
@@ -19,15 +20,44 @@ public class OrderRequest {
 	int orderstatusID;
 	String orderdetails;
 	String username;
+=======
+	String shippingaddress; // to do: check spelling across layers
+	float totalprice;
+	float tax;
+	double amount;
+	int orderstatusID;
+>>>>>>> f5c8211606d58d7cf9e7c4a72b8895ebb5bbcce8
 	
-	public OrderRequest(){ }
+	public OrderRequest(int orderID, String orderdate, String shippingaddress, 
+			     float totalprice, float tax, double amount, int orderstatusID){
+		
+		this.orderID = orderID;
+		this.orderdate = orderdate;
+		this.shippingaddress = shippingaddress;
+		this.totalprice = totalprice;
+		this.tax=tax;
+		this.amount=amount;
+		this.orderstatusID=orderstatusID;
+	}
 	
 	public int getorderID(){
 		return orderID;
 	}
 	
-	public void setorderID(int orderID){
-		this.orderID = orderID;
+	public String getorderdate(){
+		return orderdate;
+	}
+	
+	public String getshippingaddress(){
+		return shippingaddress;
+	}
+	
+	public float gettotalprice(){
+		return totalprice;
+	}
+	
+	public float gettax(){
+		return tax;
 	}
 	
 	public String getorderdate(){
@@ -50,9 +80,10 @@ public class OrderRequest {
 		return amount;
 	}
 	
-	public void setamount(float amount){
-		this.amount = amount;
+	public int getorderstatus(){
+		return orderstatusID;
 	}
+<<<<<<< HEAD
 	
 	public float gettax(){
 		return tax;
@@ -85,4 +116,7 @@ public class OrderRequest {
 	public void setusername(String username){
 		this.username = username;
 	}
+=======
+
+>>>>>>> f5c8211606d58d7cf9e7c4a72b8895ebb5bbcce8
 }
