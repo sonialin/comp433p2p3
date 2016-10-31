@@ -26,13 +26,14 @@ public class ProductDAO extends Databaseoperation {
 	/**
 	 * addProduct
 	 */
-	public void addProduct(String productname, String productdecription, float productprice, int productownerID,
+	public Product addProduct(String productname, String productdecription, float productprice, int productownerID,
 			int productquantity) {
-
+		Product product = new Product();
 		String addquery = "INSERT INTO `Product` (`ProductName`, `ProductPrice`, `ProductDescription`, `ProductOwner_ProductOwnerID`, `ProductQuantity`) VALUES (?,?,?,?,?);";
-
+		String selectquery = "Select * From Product where ProductID = ?";
 		Connection connection = super.getConnection();
 		Statement stmt = null;
+		int productID = 0;
 
 		try {
 			stmt = connection.createStatement();
@@ -44,16 +45,30 @@ public class ProductDAO extends Databaseoperation {
 			preStatement.setInt(4, productownerID);
 			preStatement.setInt(5, productquantity);
 
-			ResultSet rs = preStatement.executeQuery();
+			preStatement.executeUpdate();
+		
+			//get the auto generated productID first and then get all the product info
+			ResultSet rs = preStatement.getGeneratedKeys();
+			productID = rs.getInt(1);
+			PreparedStatement preStatement2 = (PreparedStatement) connection.prepareStatement(selectquery);
+			preStatement2.setInt(1, productID);
+			ResultSet rs1 = preStatement2.executeQuery();
+			
+			product.setProductID(productID);
+			product.setProductName(rs1.getString(2));
+			product.setProductdecription(rs1.getString(3));
+			product.setProductprice(rs1.getFloat(4));
+			product.setProductownerID(rs1.getInt(5));
+			product.setProductquantity(rs1.getInt(6));
 
 			stmt.close();
-			rs.close();
-
+			
 		} catch (SQLException e) {
 			System.out.println(e.toString());
 		}
 
 		super.closeConnection(connection);
+		return product;
 
 	}
 
@@ -63,12 +78,13 @@ public class ProductDAO extends Databaseoperation {
 	public Product getProduct(int productID) {
 		Product product = new Product();
 		String getquery = "SELECT productID, `ProductName`, `ProductPrice`, `ProductDescription`, `ProductOwner_ProductOwnerID`, `ProductQuantity` FROM PRODUCT WHERE productID= ?;";
+		
 		Connection connection = super.getConnection();
 		Statement stmt = null;
 
 		try {
 			stmt = connection.createStatement();
-			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getquery);
+			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getquery, Statement.RETURN_GENERATED_KEYS);
 			preStatement.setInt(1, productID);
 			ResultSet rs = preStatement.executeQuery();
 
@@ -78,6 +94,9 @@ public class ProductDAO extends Databaseoperation {
 			product.setProductprice(rs.getFloat(4));
 			product.setProductownerID(rs.getInt(5));
 			product.setProductquantity(rs.getInt(6));
+			
+			
+			
 
 			stmt.close();
 			rs.close();
