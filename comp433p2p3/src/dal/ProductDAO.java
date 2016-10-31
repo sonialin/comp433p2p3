@@ -20,6 +20,8 @@ public class ProductDAO extends Databaseoperation {
 	public ProductDAO() {
 		super();
 	}
+	
+	Set<Product> products = new HashSet<Product>();
 
 	/**
 	 * addProduct
@@ -28,8 +30,6 @@ public class ProductDAO extends Databaseoperation {
 			int productquantity) {
 
 		String addquery = "INSERT INTO `Product` (`ProductName`, `ProductPrice`, `ProductDescription`, `ProductOwner_ProductOwnerID`, `ProductQuantity`) VALUES (?,?,?,?,?);";
-		// + productname +","+ productdecription+ "," +
-		// productprice+","+productownerID+","+productquantity+")";
 
 		Connection connection = super.getConnection();
 		Statement stmt = null;
@@ -102,11 +102,8 @@ public class ProductDAO extends Databaseoperation {
 
 		try {
 			stmt = connection.createStatement();
-
 			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(deletequery);
-
 			preStatement.setInt(1, productID);
-
 			ResultSet rs = preStatement.executeQuery();
 
 			stmt.close();
@@ -126,7 +123,7 @@ public class ProductDAO extends Databaseoperation {
 	 * @return
 	 */
 	public Set<Product> searchProduct(String ProductName) {
-		Set<Product> products = new HashSet<Product>();
+		
 		Product product = new Product();
 		String searchquery = "SELECT ProductName, ProductDecription, ProductPrice FROM product where ProductName like '%?%'";
 		Connection connection = super.getConnection();
@@ -134,11 +131,8 @@ public class ProductDAO extends Databaseoperation {
 
 		try {
 			stmt = connection.createStatement();
-
 			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(searchquery);
-
 			preStatement.setString(1, ProductName);
-
 			ResultSet rs = preStatement.executeQuery();
 
 			while (rs.next()) {
@@ -191,36 +185,47 @@ public class ProductDAO extends Databaseoperation {
 		super.closeConnection(connection);
 
 		return productquantity;
-	public int checckAvailability(String ProductName) {
-		String checckavailabilityquery = "SELECT Productquantity FROM product where ProductName like " + "'%?%'" + ";";
-		return 0;
-		
-	public int checckAvailability(String ProductName) {
-		String checckavailabilityquery = "SELECT Productquantity FROM product where ProductName like " + "'%?%'" + ";";
-		return 0;
-		
-	public int checckAvailability(String ProductName) {
-		String checckavailabilityquery = "SELECT Productquantity FROM product where ProductName like " + "'%?%'" + ";";
-		return 0;
-		
 	}
 
-	
-	
+
+
 	/**
-	 * buyproduct, that means submitorder
+	 * buy product means create an order
 	 */
-	//public void buyProduct() {
-		// order.submitOrder();
-	//}
+	 public void buyProduct(Set<Product> products) {
+		 
+		 OrderDAO odao = new OrderDAO();
+		 
+	     odao.createOrder();
+	 }
 
 	/**
 	 * getProductOwner
 	 */
-	//public int getProductOwner(int productID) {
-		//String getownerquery = "SELECT ProductOwner_ProductOwnerID FROM product where ProductID=?;";
-		
-		//return ProductOwnerID;
-	//}
+	public int getProductOwner(int productID) {
+		int owenerID = 0;
+		String getownerquery = "SELECT ProductOwner_ProductOwnerID FROM product where ProductID=?;";
+		Connection connection = super.getConnection();
+		Statement stmt = null;
+
+		try {
+			stmt = connection.createStatement();
+			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getownerquery);
+			preStatement.setInt(1, productID);
+			ResultSet rs = preStatement.executeQuery();
+
+			owenerID = rs.getInt(1);
+			
+			stmt.close();
+			rs.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		}
+
+		super.closeConnection(connection);
+
+		return owenerID;
+	}
 
 }
