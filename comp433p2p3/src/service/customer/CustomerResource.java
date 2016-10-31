@@ -9,10 +9,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
+
 import service.representation.customer.*;
 import service.workflow.CustomerActivity;
 
-public class CustomerResource {
+
+@Path("/customerservice/")
+public class CustomerResource implements CustomerService{
 	
 	@GET
 	@Produces({"application/xml" , "application/json"})
@@ -35,14 +39,15 @@ public class CustomerResource {
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
 	@Path("/customer/{customerUsername}")
-	public Response deleteCustomer(@PathParam("customerUsername") String username, String password) throws SQLException {
+	public Response deleteCustomer(@PathParam("customerUsername") String username) throws SQLException {
 		System.out.println("Delete METHOD Request from Client with customerRequest String ............." + username);
 		CustomerActivity cusActivity = new CustomerActivity();
-		String res = cusActivity.deleteCustomer(username, password);
+		String res = cusActivity.deleteCustomer(username);
 		if (res.equals("OK")) {
 			return Response.status(Status.OK).build();
 		}
 		return null;
 	}
+
 
 }

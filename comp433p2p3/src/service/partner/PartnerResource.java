@@ -11,10 +11,12 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 
+
 import service.representation.partner.*;
 import service.workflow.PartnerActivity;
 
-public class PartnerResource {
+@Path("/partnerservice/")
+public class PartnerResource implements PartnerService{
 	
 	@GET
 	@Produces({"application/xml" , "application/json"})
@@ -36,15 +38,17 @@ public class PartnerResource {
 	
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
-	@Path("/customer/{customerUsername}")
-	public Response deletePartner(@PathParam("partnerID") int partnerID, String partnerpassword) throws SQLException {
+	@Path("/partner/{partnerID}")
+	public Response deletePartner(@PathParam("partnerID") int partnerID) throws SQLException {
 		System.out.println("Delete METHOD Request from Client with customerRequest String ............." + partnerID);
 		PartnerActivity parActivity = new PartnerActivity();
-		String res = parActivity.deletePartner(partnerID, partnerpassword);
+		String res = parActivity.deletePartner(partnerID);
 		if (res.equals("OK")) {
 			return Response.status(Status.OK).build();
 		}
 		return null;
 	}
+
+
 
 }

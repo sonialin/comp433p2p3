@@ -11,23 +11,51 @@ import javax.xml.bind.annotation.XmlType;
 
 public class OrderRequest {
 	int orderID;
-	float amount;
+	String orderdate;
+	String shippingaddress; // to do: check spelling across layers
+	float totalprice;
+	float tax;
+	double amount;
+	int orderstatusID;
 	
-	public OrderRequest(){ }
+	public OrderRequest(int orderID, String orderdate, String shippingaddress, 
+			     float totalprice, float tax, double amount, int orderstatusID){
+		
+		this.orderID = orderID;
+		this.orderdate = orderdate;
+		this.shippingaddress = shippingaddress;
+		this.totalprice = totalprice;
+		this.tax=tax;
+		this.amount=amount;
+		this.orderstatusID=orderstatusID;
+	}
 	
 	public int getorderID(){
 		return orderID;
 	}
 	
-	public void setorderID(int orderID){
-		this.orderID = orderID;
+	public String getorderdate(){
+		return orderdate;
+	}
+	
+	public String getshippingaddress(){
+		return shippingaddress;
+	}
+	
+	public float gettotalprice(){
+		return totalprice;
+	}
+	
+	public float gettax(){
+		return tax;
 	}
 	
 	public double getamount(){
 		return amount;
 	}
 	
-	public void setamount(float amount){
-		this.amount = amount;
+	public int getorderstatus(){
+		return orderstatusID;
 	}
+
 }
