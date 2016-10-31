@@ -4,21 +4,20 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import dal.ProductDAO;
 import model.product.Product;
+import model.product.ProductManagerFacade;
 import service.representation.product.ProductRepresentation;
 
 public class ProductActivity {
 
-	private static ProductDAO dao = new ProductDAO();
-	// private static ProductManager em = new ProductManager();
+	private static ProductManagerFacade pm = new ProductManagerFacade();
 
 	public Set<ProductRepresentation> searchProduct(String productName) {
 
 		Set<Product> products = new HashSet<Product>();
 		Set<ProductRepresentation> ProductRepresentations = new HashSet<ProductRepresentation>();
-		// Products = dao.getAllProducts();
-		products = dao.searchProduct(productName);
+
+		products = pm.searchProduct(productName);
 
 		Iterator<Product> it = products.iterator();
 		while (it.hasNext()) {
@@ -35,42 +34,34 @@ public class ProductActivity {
 		}
 		return ProductRepresentations;
 	}
-	
-/*
-	public ProductRepresentation getProduct(String id) {
 
-		// Product pdt = dao.getProduct(id);
-		Product pdt = dao.getProduct(id);
+	public ProductRepresentation getProduct(int id) {
+
+		Product pdt = pm.getProduct(id);
 
 		ProductRepresentation pdtRep = new ProductRepresentation();
-		pdtRep.setFirstName(pdt.getFirstName());
-		pdtRep.setLastName(pdt.getLastName());
-		pdtRep.setGid(pdt.getGid());
+		pdtRep.setProductID(pdt.getProductID());
+		pdtRep.setProductName(pdt.getProductname());
+		pdtRep.setProductdecription(pdt.getProductdecription());
+		pdtRep.setProductprice(pdt.getProductprice());
+		pdtRep.setProductownerID(pdt.getProductownerID());
+		pdtRep.setProductquantity(pdt.getProductquantity());
 
 		return pdtRep;
 	}
-*/
-	
-	public ProductRepresentation addProduct(String productname, String productdecription,
-	        float productprice, int productownerID, int productquantity) {
 
-		// Product pdt = dao.addProduct(firstName, lastName);
-		Product pdt = dao.addProduct(productname,productdecription,
-				                     productprice, productownerID, productquantity);
+	public ProductRepresentation addProduct(String productname, String productdecription, float productprice, 
+			                 int productownerID,	int productquantity) {
 
-		ProductRepresentation pdtRep = new ProductRepresentation();
-		pdtRep.setProductName(pdt.getProductname());
-		pdtRep.setProductdecription(pdt.getProductdecription());
-		pdtRep.setProductownerID(pdt.getProductownerID());
-		pdtRep.setProductprice(pdt.getProductprice());
+		pm.addProduct(productname, productdecription, productprice, productownerID, productquantity);
+		return null;
 
-		return pdtRep;
+		
 	}
 
 	public String deleteProduct(int id) {
 
-		// dao.deleteProduct(id);
-		dao.deleteProduct(id);
+		pm.deleteProduct(id);
 
 		return "OK";
 	}

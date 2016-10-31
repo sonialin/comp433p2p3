@@ -1,5 +1,7 @@
 package model.product;
 
+import java.util.Set;
+
 import dal.Databaseoperation;
 import dal.ProductDAO;
 import model.order.Order;
@@ -38,16 +40,17 @@ public class ProductManagerFacade{
 	
     /**
      * searchProduct
+     * @return 
      */	
-	public void searchProduct(String ProductName){
-		pdao.searchProduct(ProductName);
+	public Set<Product> searchProduct(String ProductName){
+		return pdao.searchProduct(ProductName);
 	}
 	
     /**
      * checckAvailability
      */	
-	public int checckAvailability(String ProductName){
-		return pdao.checckAvailability(ProductName);
+	public int checkAvailability(String ProductName){
+		return pdao.checkAvailability(ProductName);
 	}
 	
 	/**
