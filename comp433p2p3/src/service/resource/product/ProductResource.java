@@ -11,6 +11,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+
 import service.representation.product.ProductRepresentation;
 import service.representation.product.ProductRequest;
 import service.workflow.ProductActivity;

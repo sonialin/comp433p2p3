@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import dal.ReviewDAO;
 import model.review.Review;
 import model.review.ReviewManagerFacade;
 import service.representation.review.ReviewRepresentation;
@@ -15,9 +14,11 @@ public class ReviewActivity {
 	
 	private static ReviewManagerFacade rm = new ReviewManagerFacade();
 
-	public void writeReview(String customerusername, int productID, String reviewcontent,int rate) {
+	public String writeReview(String customerusername, int productID, String reviewcontent,int rate) {
 
 		rm.writeReview(customerusername, productID, reviewcontent, rate);
+		
+		return "OK";
 	}
 
 	public Set<ReviewRepresentation> getReview(String Poductname) {
