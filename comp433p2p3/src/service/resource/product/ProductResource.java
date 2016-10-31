@@ -43,11 +43,19 @@ public class ProductResource implements ProductService {
 	@Produces({ "application/xml", "application/json" })
 	@Path("/Product")
 	public ProductRepresentation addProduct(ProductRequest ProductRequest) {
-		System.out.println("POST METHOD Request from Client with ............." + ProductRequest.getFirstName() + "  "
-				+ ProductRequest.getLastName());
+		System.out.println("POST METHOD Request from Client with ............." 
+				+ ProductRequest.getProductname()+ "  "
+						+ ProductRequest.getProductdecription()+ "  "
+								+ ProductRequest.getProductprice()+ "  "
+										+ ProductRequest.getProductownerID()+ "  "
+												+ ProductRequest.getProductownerID() + "  "
+												+ ProductRequest.getProductquantity());
 		ProductActivity pdtActivity = new ProductActivity();
-		return pdtActivity.createProduct(ProductRequest.getFirstName(), ProductRequest.getLastName());
+		return pdtActivity.addProduct(ProductRequest.getProductname(), ProductRequest.getProductdecription(), ProductRequest.getProductprice(),
+				ProductRequest.getProductownerID(), ProductRequest.getProductquantity());
 	}
+	
+	
 
 	@DELETE
 	@Produces({ "application/xml", "application/json" })

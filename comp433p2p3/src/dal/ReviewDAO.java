@@ -18,9 +18,9 @@ public class ReviewDAO extends Databaseoperation {
 	}
 
 	Set<Review> reviews = new HashSet<Review>();
-	
+
 	public void writeReview(String reviewcontent, int productID, String customerusername, int rate) {
-	
+
 		String witereviewquery = "insert into productreview (`ProductReviewContent`,`Rating`,`Product_ProductID`,`Customer_Username`)  VALUES(?,?,?,?);";
 
 		Connection connection = super.getConnection();
@@ -34,11 +34,10 @@ public class ReviewDAO extends Databaseoperation {
 			preStatement.setInt(2, rate);
 			preStatement.setInt(3, productID);
 			preStatement.setString(4, "customerusername");
-			
-			ResultSet rs = preStatement.executeQuery();
+
+			preStatement.executeUpdate();
 
 			stmt.close();
-			rs.close();
 
 		} catch (SQLException e) {
 			System.out.println(e.toString());
@@ -49,7 +48,6 @@ public class ReviewDAO extends Databaseoperation {
 
 	public Set<Review> getReview(String productname) {
 
-		
 		Review review = new Review();
 		String dispalyreviewquery = "Select * from ProductReview where Poductname = ?";
 		Connection connection = super.getConnection();
@@ -62,7 +60,7 @@ public class ReviewDAO extends Databaseoperation {
 			ResultSet rs = preStatement.executeQuery();
 
 			while (rs.next()) {
-				
+
 				review.setProductreviewID(rs.getInt(1));
 				review.setProductreviewcontent(rs.getString(2));
 				review.setRating(rs.getInt(3));

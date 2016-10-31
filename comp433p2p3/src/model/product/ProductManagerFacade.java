@@ -49,8 +49,8 @@ public class ProductManagerFacade{
     /**
      * checckAvailability
      */	
-	public int checkAvailability(String ProductName){
-		return pdao.checkAvailability(ProductName);
+	public int checkAvailability(int ProductID){
+		return pdao.checkAvailability(ProductID);
 	}
 	
 	/**
