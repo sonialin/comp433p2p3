@@ -71,20 +71,24 @@ public class OrderActivity {
 		omf.payOrder(orderID);
 	}
 	
-	public void fullfillOrder(int orderID){
-		omf.fullfillOrder(orderID);
+	public void fulfillOrder(int orderID){
+		omf.fulfillOrder(orderID);
 	}
 	
 	public void shipOrder(int orderID){
 		omf.shipOrder(orderID);
 	}
 	
+	public void deliverOrder(int orderID){
+		omf.deliverOrder(orderID);
+	}
+	
 	public void cancelOrder(int orderID){
 		omf.cancelOrder(orderID);
 	}
 
-	public void refund(int orderID){
-		omf.refund(orderID);
+	public void refundOrder(int orderID){
+		omf.refundOrder(orderID);
 	}
 	
 	public String getOrderStatus(int orderID){

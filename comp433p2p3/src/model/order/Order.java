@@ -1,9 +1,12 @@
 package model.order;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlElement;
 
-@XmlRootElement
-public class Order {
+import java.io.Serializable;
+
+@XmlRootElement(name = "order")
+public class Order implements Serializable {
 	int orderID;
 	String orderdate;
 	String shippingaddress;
@@ -19,6 +22,7 @@ public class Order {
 		return orderID;
 	}
 	
+	@XmlElement
 	public void setorderID(int orderID){
 		this.orderID = orderID;
 	}
@@ -27,6 +31,7 @@ public class Order {
 		return orderdate;
 	}
 	
+	@XmlElement
 	public void setorderdate(String orderdate){
 		this.orderdate = orderdate;
 	}
@@ -35,6 +40,7 @@ public class Order {
 		return shippingaddress;
 	}
 	
+	@XmlElement
 	public void setshippingaddress(String shippingaddress){
 		this.shippingaddress = shippingaddress;
 	}
@@ -43,6 +49,7 @@ public class Order {
 		return totalprice;
 	}
 	
+	@XmlElement
 	public void settotalprice(float totalprice){
 		this.totalprice = totalprice;
 	}
@@ -51,6 +58,7 @@ public class Order {
 		return tax;
 	}
 	
+	@XmlElement
 	public void settax(float tax){
 		this.tax = tax;
 	}
@@ -59,6 +67,7 @@ public class Order {
 		return amount;
 	}
 	
+	@XmlElement
 	public void setamount(float amount){
 		this.amount = amount;
 	}
@@ -67,6 +76,7 @@ public class Order {
 		return orderstatusID;
 	}
 	
+	@XmlElement
 	public void setorderstatusID(int orderstatusID){
 		this.orderstatusID = orderstatusID;
 	}
@@ -75,6 +85,7 @@ public class Order {
 		return username;
 	}
 	
+	@XmlElement
 	public void setusername(String username){
 		this.username = username;
 	}

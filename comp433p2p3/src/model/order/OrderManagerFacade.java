@@ -30,20 +30,24 @@ public class OrderManagerFacade{
 		odao.payOrder(orderID);
 	}
 	
-	public void fullfillOrder(int orderID){
-		odao.fullfillOrder(orderID);
+	public void fulfillOrder(int orderID){
+		odao.fulfillOrder(orderID);
 	}
 	
 	public void shipOrder(int orderID){
 		odao.shipOrder(orderID);
 	}
 	
+	public void deliverOrder(int orderID){
+		odao.deliverOrder(orderID);
+	}
+	
 	public void cancelOrder(int orderID){
 		odao.cancelOrder(orderID);
 	}
 
-	public void refund(int orderID){
-		odao.refund(orderID);
+	public void refundOrder(int orderID){
+		odao.refundOrder(orderID);
 	}
 	
 	public String getOrderStatus(int orderID){

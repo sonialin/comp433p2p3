@@ -113,48 +113,152 @@ public class OrderDAO extends Databaseoperation{
 		super.closeConnection(connection); 
 		return order;
 	}
-//	To do: combine the methods (where the order status is updated) into one updateOrder method
 	
 	public void payOrder(int orderID){
-		String updateOrderQuery = "UPDATE Order SET OrderStatus_StatusID = 1 WHERE OrderID = " + orderID;
-				
-		super.accessDatabase(updateOrderQuery);
+		String updateOrderQuery = "UPDATE Order SET OrderStatus_StatusID = 1 WHERE OrderID = ?";
+		Connection connection = super.getConnection();
+		Statement stmt = null;
+
+		try {
+			stmt = connection.createStatement();
+			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(updateOrderQuery);
+			preStatement.setInt(1, orderID);
+			preStatement.executeQuery();
+
+			stmt.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		}
+
+		super.closeConnection(connection);
 	}
 	
-	public void fullfillOrder(int orderID){
-		String updateOrderQuery = "UPDATE Order SET OrderStatus_StatusID = 2 WHERE OrderID = " + orderID;
-		
-		super.accessDatabase(updateOrderQuery);
+	public void fulfillOrder(int orderID){
+		String updateOrderQuery = "UPDATE Order SET OrderStatus_StatusID = 2 WHERE OrderID = ?";
+		Connection connection = super.getConnection();
+		Statement stmt = null;
+
+		try {
+			stmt = connection.createStatement();
+			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(updateOrderQuery);
+			preStatement.setInt(1, orderID);
+			preStatement.executeQuery();
+
+			stmt.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		}
+
+		super.closeConnection(connection);
 	}
 	
 	public void shipOrder(int orderID){
-		String updateOrderQuery = "UPDATE Order SET OrderStatus_StatusID = 3 WHERE OrderID = " + orderID;
-		
-		super.accessDatabase(updateOrderQuery);
+		String updateOrderQuery = "UPDATE Order SET OrderStatus_StatusID = 3 WHERE OrderID = ?";
+		Connection connection = super.getConnection();
+		Statement stmt = null;
+
+		try {
+			stmt = connection.createStatement();
+			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(updateOrderQuery);
+			preStatement.setInt(1, orderID);
+			preStatement.executeQuery();
+
+			stmt.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		}
+
+		super.closeConnection(connection);
 	}
 	
 	public void deliverOrder(int orderID){
-		String updateOrderQuery = "UPDATE Order SET OrderStatus_StatusID = 4 WHERE OrderID = " + orderID;
-		
-		super.accessDatabase(updateOrderQuery);
+		String updateOrderQuery = "UPDATE Order SET OrderStatus_StatusID = 4 WHERE OrderID = ?";
+		Connection connection = super.getConnection();
+		Statement stmt = null;
+
+		try {
+			stmt = connection.createStatement();
+			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(updateOrderQuery);
+			preStatement.setInt(1, orderID);
+			preStatement.executeQuery();
+
+			stmt.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		}
+
+		super.closeConnection(connection);
 	}
 	
 	public void cancelOrder(int orderID){
-		String updateOrderQuery = "UPDATE Order SET OrderStatus_StatusID = 5 WHERE OrderID = " + orderID;
-		
-		super.accessDatabase(updateOrderQuery);
+		String updateOrderQuery = "UPDATE Order SET OrderStatus_StatusID = 5 WHERE OrderID = ?";
+		Connection connection = super.getConnection();
+		Statement stmt = null;
+
+		try {
+			stmt = connection.createStatement();
+			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(updateOrderQuery);
+			preStatement.setInt(1, orderID);
+			preStatement.executeQuery();
+
+			stmt.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		}
+
+		super.closeConnection(connection);
 	}
 
-	public void refund(int orderID){
-		String updateOrderQuery = "UPDATE Order SET OrderStatus_StatusID = 6 WHERE OrderID = " + orderID;
-		
-		super.accessDatabase(updateOrderQuery);
+	public void refundOrder(int orderID){
+		String updateOrderQuery = "UPDATE Order SET OrderStatus_StatusID = 6 WHERE OrderID = ?";
+		Connection connection = super.getConnection();
+		Statement stmt = null;
+
+		try {
+			stmt = connection.createStatement();
+			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(updateOrderQuery);
+			preStatement.setInt(1, orderID);
+			preStatement.executeQuery();
+
+			stmt.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		}
+
+		super.closeConnection(connection);
 	}
 	
 	public String getOrderStatus(int orderID){
-		String searchquery = "SELECT OrderStatus.StatusName FROM OrderStatus INNER JOIN Order on Order.OrderStatus_StatusID = OrderStatus.StatusID WHERE Order.OrderID = " + orderID; 
-        super.accessDatabase(searchquery);
-        return (String) super.resultlist.get(1);  //return getOrderStatus
+		String status = null;
+		String getquery = "SELECT OrderStatus.StatusName FROM OrderStatus INNER JOIN Order on Order.OrderStatus_StatusID = OrderStatus.StatusID WHERE Order.OrderID = ?";
+		Connection connection = super.getConnection();
+		Statement stmt = null;
+
+		try {
+			stmt = connection.createStatement();
+			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getquery);
+			preStatement.setInt(1, orderID);
+			ResultSet rs = preStatement.executeQuery();
+
+			status = rs.getString(1);
+
+			stmt.close();
+			rs.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		}
+
+		super.closeConnection(connection);
+
+		return status;
+		
 	}
 	
 	public String getOrderDetails(){

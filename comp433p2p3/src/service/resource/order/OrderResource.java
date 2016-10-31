@@ -12,6 +12,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.CacheControl;
 
+import org.apache.cxf.jaxrs.ext.PATCH;
+
 import service.representation.order.OrderRepresentation;
 import service.representation.order.OrderRequest;
 import service.workflow.OrderActivity;
@@ -47,8 +49,76 @@ public class OrderResource implements OrderService {
 		return orderActivity.createOrder(orderRequest.getamount(), orderRequest.getusername(), orderRequest.getorderdate());
 	}
 	
+	@PATCH
+	@Produces({"application/xml" , "application/json"})
+	@Path("/order/{orderID}")
+	public Response payOrder(int orderID) {
+		System.out.println("PATCH METHOD Request from Client with orderID............." + orderID );
+		OrderActivity orderActivity = new OrderActivity();
+		orderActivity.payOrder(orderID);
+		return null;
+	}
 	
-	// To do: add patch method 
+	@PATCH
+	@Produces({"application/xml" , "application/json"})
+	@Path("/order/{orderID}")
+	public Response fulfillOrder(int orderID) {
+		System.out.println("PATCH METHOD Request from Client with orderID............." + orderID );
+		OrderActivity orderActivity = new OrderActivity();
+		orderActivity.fulfillOrder(orderID);
+		return null;
+	}
+	
+	@PATCH
+	@Produces({"application/xml" , "application/json"})
+	@Path("/order/{orderID}")
+	public Response shipOrder(int orderID) {
+		System.out.println("PATCH METHOD Request from Client with orderID............." + orderID );
+		OrderActivity orderActivity = new OrderActivity();
+		orderActivity.shipOrder(orderID);
+		return null;
+	}
+	
+	@PATCH
+	@Produces({"application/xml" , "application/json"})
+	@Path("/order/{orderID}")
+	public Response deliverOrder(int orderID) {
+		System.out.println("PATCH METHOD Request from Client with orderID............." + orderID );
+		OrderActivity orderActivity = new OrderActivity();
+		orderActivity.deliverOrder(orderID);
+		return null;
+	}
+	
+	@PATCH
+	@Produces({"application/xml" , "application/json"})
+	@Path("/order/{orderID}")
+	public Response cancelOrder(int orderID) {
+		System.out.println("PATCH METHOD Request from Client with orderID............." + orderID );
+		OrderActivity orderActivity = new OrderActivity();
+		orderActivity.cancelOrder(orderID);
+		return null;
+	}
+	
+	@PATCH
+	@Produces({"application/xml" , "application/json"})
+	@Path("/order/{orderID}")
+	public Response refundOrder(int orderID) {
+		System.out.println("PATCH METHOD Request from Client with orderID............." + orderID );
+		OrderActivity orderActivity = new OrderActivity();
+		orderActivity.refundOrder(orderID);
+		return null;
+	}
+	
+	@GET
+	@Produces({"application/xml" , "application/json"})
+	@Path("/order/{orderID}")
+	public String getOrderStatus(@PathParam("orderID") int orderID) {
+		System.out.println("GET METHOD Request from Client with orderID ............." + orderID);
+		OrderActivity orderActivity = new OrderActivity();
+		String res = orderActivity.getOrderStatus(orderID);
+
+		return res;
+	}
 	
 	@DELETE
 	@Produces({"application/xml" , "application/json"})

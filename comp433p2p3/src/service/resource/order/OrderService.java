@@ -15,6 +15,12 @@ public interface OrderService {
 	public OrderRepresentation getOrder(int orderId);
 	public OrderRepresentation createOrder(OrderRequest orderRequest);
    
-    //public Response updateOrder(OrderRequest orderRequest);
+    public Response payOrder(int orderID);
+    public Response fulfillOrder(int orderID);
+    public Response deliverOrder(int orderID);
+    public Response shipOrder(int orderID);
+    public Response cancelOrder(int orderID);
+    public Response refundOrder(int orderID);
+    public String getOrderStatus(int orderID);
     public Response deleteOrder(int orderId);
 }
