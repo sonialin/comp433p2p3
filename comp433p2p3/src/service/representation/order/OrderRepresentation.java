@@ -37,7 +37,7 @@ public class OrderRepresentation {
 		this.orderdate = orderdate;
 	}
 	
-	public String getshipingaddress(){
+	public String getshippingaddress(){
 		return shippingaddress;
 	}
 	

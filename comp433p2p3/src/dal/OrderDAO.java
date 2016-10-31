@@ -21,8 +21,31 @@ public class OrderDAO extends Databaseoperation{
 	}
 	
 	public Set<Order> getAllOrders(){
+		String getquery = "SELECT OrderID, `OrderPrice`, `Customer_Username`, `OrderDate`, `OrderStatus_StatusID` FROM Order;";
+		Connection connection = super.getConnection();
+		Statement stmt = null;
+
+		try {
+			stmt = connection.createStatement();
+			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getquery);
+			ResultSet rs = preStatement.executeQuery();
+
+			while (rs.next()) {
+	            for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) {
+	              orders.add((Order)rs.getObject(i));
+	            }
+	        }
+
+			stmt.close();
+			rs.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		}
+
+		super.closeConnection(connection);
+
 		return orders;
-		// To do: select * from orders and add to set for return
 	}
 	
 	public Order getOrder(int orderID) {
