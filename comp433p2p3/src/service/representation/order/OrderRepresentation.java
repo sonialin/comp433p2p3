@@ -12,32 +12,46 @@ import javax.xml.bind.annotation.XmlType;
 public class OrderRepresentation {
 	int orderID;
 	String orderdate;
-	float amount;
+	String shipingaddress;
+	float totalprice;
+	float tax;
+	double amount;
+	int orderstatusID;
 	
-	public OrderRepresentation(){ }
+	public OrderRepresentation(int orderID, String orderdate, String shipingaddress, 
+			     float totalprice, float tax, double amount, int orderstatusID){
+		
+		this.orderID = orderID;
+		this.orderdate = orderdate;
+		this.shipingaddress = shipingaddress;
+		this.totalprice = totalprice;
+		this.tax=tax;
+		this.amount=amount;
+		this.orderstatusID=orderstatusID;
+	}
 	
 	public int getorderID(){
 		return orderID;
-	}
-	
-	public void setorderID(int orderID){
-		this.orderID = orderID;
 	}
 	
 	public String getorderdate(){
 		return orderdate;
 	}
 	
-	public void setorderdate(String orderdate) {
-		this.orderdate = orderdate;
+	public String getshipingaddress(){
+		return shipingaddress;
+	}
+	
+	public float gettotalprice(){
+		return totalprice;
+	}
+	
+	public float gettax(){
+		return tax;
 	}
 	
 	public double getamount(){
 		return amount;
-	}
-	
-	public void setamount(float amount){
-		this.amount = amount;
 	}
 
 }

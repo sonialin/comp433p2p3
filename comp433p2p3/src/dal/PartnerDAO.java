@@ -27,6 +27,7 @@ public class PartnerDAO  extends Databaseoperation{
 			
 			
 			Partner par = new Partner();
+			if(rs.next()){
 			par.setpartnerID(rs.getInt(1));
 			par.setpartnername(rs.getString(2));
 	        par.setpartnertype(rs.getString(3));
@@ -35,6 +36,7 @@ public class PartnerDAO  extends Databaseoperation{
 	        par.setpartnerphonenumber(rs.getString(7));
 	        par.setpartneraddress(rs.getString(8));
 	        con.close();
+			}
 	        
 			return par;
 	        
@@ -54,9 +56,10 @@ public class PartnerDAO  extends Databaseoperation{
         par.setpartnerphonenumber(partnerphonenumber);
         par.setpartneraddress(partneraddress);
 		
-		String addquery = "insert into Customer (Username,Password,Firstname,Lastname,Email) values(?,?,?,?,?)";
+		String addquery = "insert into Partner (PartnerID,PartnerName,PartnerType,Pasword,Username) values(?,?,?,?,?)";
 		
 		pstmt = con.prepareStatement(addquery);
+		pstmt.setInt(1, par.getpartnerID());
 		pstmt.setString(2, par.getpartnername());
 		pstmt.setString(3, par.getpartnertype());
 		pstmt.setString(4, par.getpartnerpassword());
@@ -67,11 +70,13 @@ public class PartnerDAO  extends Databaseoperation{
 		pstmt = con.prepareStatement(addquery2);
 		pstmt.setString(1, par.getpartnerphonenumber());
 		pstmt.setInt(2, par.getpartnerID());
+		pstmt.executeUpdate();
 		
 		String addquery3 = "insert into Address (StreetAddressLine1,Partner_PartnerID) values(?,?)";
 		pstmt = con.prepareStatement(addquery3);
 		pstmt.setString(1, par.getpartneraddress());
 		pstmt.setInt(2, par.getpartnerID());
+		pstmt.executeUpdate();
 		
 		pstmt.close();
 		con.close();		
@@ -80,22 +85,27 @@ public class PartnerDAO  extends Databaseoperation{
 	
 	}
 
-	public void deletePartner(int partnerID, String partnerpassword) throws SQLException{
+	public void deletePartner(int partnerID) throws SQLException{
 		
         con=getConnection();
 		
-		if(verifyPartner(partnerID,partnerpassword))
-		{
-		String deletequery = "DELETE FROM Customer WHERE PartnerID = " + partnerID + ";";  // productID will get from keyboard input
-		pstmt.executeQuery(deletequery);
-		}
-		else
-			System.out.println("Sorry, you are not able to delete this Partner");
-		
+        String deletequery1="SET FOREIGN_KEY_CHECKS = 0;";
+        pstmt = con.prepareStatement(deletequery1);
+        pstmt.executeUpdate();
+		String deletequery2 = "delete pa.*FROM Partner pa Where pa.PartnerID='"+partnerID+"';";
+		pstmt = con.prepareStatement(deletequery2);
+        pstmt.executeUpdate();
+		String deletequery3 = "delete p.*FROM PhoneNumber p Where p.Partner_PartnerID='"+partnerID+"';";
+		pstmt = con.prepareStatement(deletequery3);
+        pstmt.executeUpdate();
+		String deletequery4 = "delete a.* FROM Address a Where a.Partner_PartnerID='"+partnerID+"';";
+		pstmt = con.prepareStatement(deletequery4);
+        pstmt.executeUpdate();
+
 		con.close();
 	}
 	
-	public Boolean verifyPartner(int partnerID, String partnerpassword) throws SQLException{
+/*	public Boolean verifyPartner(int partnerID, String partnerpassword) throws SQLException{
 		con=getConnection();
 		String pwd;
 		
@@ -109,7 +119,7 @@ public class PartnerDAO  extends Databaseoperation{
         } else {
         	return false;
         }
-	}
+	}*/
 	
 	public void notifyPartnersofsale(){
 		//TO DO

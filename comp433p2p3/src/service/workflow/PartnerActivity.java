@@ -27,7 +27,7 @@ public class PartnerActivity {
 		}
 	
 	public PartnerRepresentation addPartner(int partnerID, String partnerusername, String partnerpassword, String partnertype, 
-			String partnername, String partneraddress, String partnerphonenumber) throws SQLException {
+			String partnername, String partnerphonenumber,String partneraddress) throws SQLException {
 			
 			Partner par = pamf.addPartner(partnerID, partnerusername, partnerpassword, partnertype,
 					partnername, partneraddress, partnerphonenumber);
@@ -44,9 +44,9 @@ public class PartnerActivity {
 			return parRep;
 		}
 	
-	public String deletePartner(int partnerID, String partnerpassword) throws SQLException {
+	public String deletePartner(int partnerID) throws SQLException {
 			
-			pamf.deletePartner(partnerID, partnerpassword);
+			pamf.deletePartner(partnerID);
 			
 			return "OK";
 		}

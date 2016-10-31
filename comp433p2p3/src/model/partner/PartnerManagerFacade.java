@@ -17,20 +17,20 @@ public class PartnerManagerFacade{
 	}
 	
 	public Partner addPartner(int partnerID, String partnerusername, String partnerpassword, String partnertype, 
-			String partnername, String partneraddress, String partnerphonenumber) throws SQLException{
+			String partnername, String partnerphonenumber,String partneraddress) throws SQLException{
 		
 		return ptdao.addPartner(partnerID, partnerusername, partnerpassword, partnertype,
-				partnername, partneraddress, partnerphonenumber);
+				partnername, partnerphonenumber,partneraddress);
 		
 	}
 
-	public void deletePartner(int partnerID, String partnerpassword) throws SQLException{
-		ptdao.deletePartner(partnerID, partnerpassword);
+	public void deletePartner(int partnerID) throws SQLException{
+		ptdao.deletePartner(partnerID);
 	}
 	
-	public Boolean verifyPartner(int partnerusername, String partnerpassword) throws SQLException{
+/*	public Boolean verifyPartner(int partnerusername, String partnerpassword) throws SQLException{
 		return ptdao.verifyPartner(partnerusername, partnerpassword);
-	}
+	}*/
 	
 	public void notifyPartnersofsale(){
 		ptdao.notifyPartnersofsale();

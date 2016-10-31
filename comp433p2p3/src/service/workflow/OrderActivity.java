@@ -4,6 +4,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.company.hr.Employee;
+import com.company.hr.service.representation.EmployeeRepresentation;
+
 import dal.OrderDAO;
 import model.order.Order;
 import model.order.OrderManagerFacade;
@@ -13,11 +16,11 @@ public class OrderActivity {
 	
 	private static OrderManagerFacade omf = new OrderManagerFacade();
 	
-//	public OrderRepresentation createOrder(int orderID, String orderdate, String shipingaddress, 
-//		     float totalprice, float tax, double amount, int orderstatus){
-//		        
-//		omf.createOrder(orderID, orderdate, shipingaddress, totalprice, tax, amount, orderstatus);    
-//	}
+	public OrderRepresentation createOrder(int orderID, String orderdate, String shipingaddress, 
+		     float totalprice, float tax, double amount, int orderstatus){
+		        
+		omf.createOrder(orderID, orderdate, shipingaddress, totalprice, tax, amount, orderstatus);    
+	}
 	
 	public Set<OrderRepresentation> getOrders() {
 		
@@ -26,14 +29,7 @@ public class OrderActivity {
 	
 	public OrderRepresentation getOrder(int orderID) {
 		
-		Order ord = omf.getOrder(orderID);
-		
-		OrderRepresentation ordRep = new OrderRepresentation();
-		ordRep.setamount(ord.getamount());
-		ordRep.setorderdate(ord.getorderdate());
-		ordRep.setorderID(ord.getorderID());
-		
-		return ordRep;
+		//To do
 	}
 	
 	public void payOrder(int orderID){	
@@ -56,9 +52,9 @@ public class OrderActivity {
 		omf.refund(orderID);
 	}
 	
-//	public String getOrderStatus(int orderID){
-//		return omf.getOrderStatus(orderID);
-//	}
+	public String getOrderStatus(int orderID){
+		return omf.getOrderStatus(orderID);
+	}
 	
 //	public String getProductDetail(int ProductID){
 //		omf.getProductDetail(ProductID);

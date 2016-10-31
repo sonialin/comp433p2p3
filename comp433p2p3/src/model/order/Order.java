@@ -1,83 +1,49 @@
 package model.order;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
 public class Order {
 	int orderID;
 	String orderdate;
-	String shippingaddress;
+	String shipingaddress;
 	float totalprice;
 	float tax;
-	float amount;
+	double amount;
 	int orderstatusID;
-	String orderdetails;
-	String username;
 	
-	public Order(){ }
+	public Order(int orderID, String orderdate, String shipingaddress, 
+			     float totalprice, float tax, double amount, int orderstatusID){
+		
+		this.orderID = orderID;
+		this.orderdate = orderdate;
+		this.shipingaddress = shipingaddress;
+		this.totalprice = totalprice;
+		this.tax=tax;
+		this.amount=amount;
+		this.orderstatusID=orderstatusID;
+	}
 	
 	public int getorderID(){
 		return orderID;
-	}
-	
-	public void setorderID(int orderID){
-		this.orderID = orderID;
 	}
 	
 	public String getorderdate(){
 		return orderdate;
 	}
 	
-	public void setorderdate(String orderdate) {
-		this.orderdate = orderdate;
-	}
-	
-	public String getshippingaddress(){
-		return shippingaddress;
-	}
-	
-	public void setshippingaddress(String address) {
-		this.shippingaddress = address;
-	}
-	
-	public float getamount(){
-		return amount;
-	}
-	
-	public void setamount(float amount){
-		this.amount = amount;
-	}
-	
-	public float gettax(){
-		return tax;
-	}
-	
-	public void settax(float tax){
-		this.tax = tax;
+	public String getshipingaddress(){
+		return shipingaddress;
 	}
 	
 	public float gettotalprice(){
 		return totalprice;
 	}
 	
-	public void settotalprice(float totalprice){
-		this.totalprice = totalprice;
+	public float gettax(){
+		return tax;
 	}
 	
-	public String getorderdetails() {
-		return orderdetails;
+	public double getamount(){
+		return amount;
 	}
-	
-	public void setorderdetails(String orderdetails){
-		this.orderdetails = orderdetails;
-	}
-	
-	public String getusername() {
-		return orderdetails;
-	}
-	
-	public void setusername(String username){
-		this.username = username;
-	}
+
 
 }

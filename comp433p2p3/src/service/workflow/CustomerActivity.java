@@ -38,9 +38,9 @@ private static CustomerManagerFacade cmf = new CustomerManagerFacade();
 		return cusRep;
 	}
 	
-	public String deleteCustomer(String username, String password) throws SQLException {
+	public String deleteCustomer(String username) throws SQLException {
 		
-		cmf.deleteCustomer(username, password);
+		cmf.deleteCustomer(username);
 		
 		return "OK";
 	}
