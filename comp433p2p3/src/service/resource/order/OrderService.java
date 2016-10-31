@@ -11,10 +11,10 @@ import service.representation.order.OrderRequest;
 @WebService
 public interface OrderService {
 	   
-//	public Set<OrderRepresentation> getOrders();
-	// To do: implement getOrders method across layers
+	public Set<OrderRepresentation> getOrders();
 	public OrderRepresentation getOrder(int orderID);
-//	public OrderRepresentation createOrder(OrderRequest orderRequest);
-//    public Response updateOrder(OrderRequest orderRequest);
-//    public Response deleteOrder(int orderId);
+	//public OrderRepresentation createOrder(OrderRequest orderRequest);
+   
+    //public Response updateEmployee(EmployeeRequest employeeRequest);
+    //public Response deleteEmployee(String employeeId);
 }

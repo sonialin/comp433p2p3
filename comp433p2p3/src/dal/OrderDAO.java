@@ -5,75 +5,106 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 import model.order.Order;
 
 public class OrderDAO extends Databaseoperation{
 	
-	public OrderDAO(){
-		super();
-	}
+	private static Set<Order> orders = new HashSet<Order>();
 	
-	public void createOrder(float amount, String username, String orderdate){
-		String addquery = "INSERT INTO `Order` (`OrderPrice`, `Customer_Username`, `OrderDate`, `OrderStatus_StatusID`, `Cart_CartID`) VALUES (?,?,?,?,?);";
-
-		// To do: add shipping address to the address table with association to the created order
-		
-		Connection connection = super.getConnection();
-		Statement stmt = null;
-
-		try {
-			stmt = connection.createStatement();
-
-			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(addquery);
-			preStatement.setFloat(1, amount);
-			preStatement.setString(2, username);
-			preStatement.setString(3, orderdate);
-			preStatement.setInt(4, 1);
-			preStatement.setInt(5, 1); // To do: properly associate order with cart
-			
-			ResultSet rs = preStatement.executeQuery();
-
-			stmt.close();
-			rs.close();
-
-		} catch (SQLException e) {
-			System.out.println(e.toString());
-		}
-
-		super.closeConnection(connection); 
-	}
-	
-	public Order getOrder(int orderID) {
+	public OrderDAO() {
 		Order order = new Order();
-		String getquery = "SELECT OrderID, `OrderPrice`, `Customer_Username`, `OrderDate` FROM Order WHERE OrderID = ?;";
-		Connection connection = super.getConnection();
-		Statement stmt = null;
-
-		try {
-			stmt = connection.createStatement();
-			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getquery);
-			preStatement.setInt(1, orderID);
-			ResultSet rs = preStatement.executeQuery();
+	    
+		order.setorderID(2);
+		order.setusername("sonialin2");
+		order.setorderdate("20161031");
+		order.setamount(10);
+		order.setshippingaddress("5566 N sheridan rd");
+		order.settax(1);
+		order.settotalprice(11);
+		order.setorderdetails("some details");
 		
-			order.setorderID(orderID);
-			order.settotalprice(rs.getFloat(2));
-			order.setusername(rs.getString(3));
-			order.setorderdate(rs.getString(4));
-
-			stmt.close();
-			rs.close();
-
-		} catch (SQLException e) {
-			System.out.println(e.toString());
-		}
-
-		super.closeConnection(connection);
-
-		return order;
-
+		orders.add(order);
 	}
 	
+	public Set<Order> getAllOrders(){
+		return orders;
+	}
+	
+	public Order getOrder(int id) {
+		Iterator<Order> it = orders.iterator();
+		while(it.hasNext()) {
+          Order order = (Order)it.next();
+          if (order.getorderID()==id) {
+        	  return order;
+          }
+        }
+		return null;
+	}
+	
+//	public void createOrder(float amount, String username, String orderdate){
+//		String addquery = "INSERT INTO `Order` (`OrderPrice`, `Customer_Username`, `OrderDate`, `OrderStatus_StatusID`, `Cart_CartID`) VALUES (?,?,?,?,?);";
+//
+//		// To do: add shipping address to the address table with association to the created order
+//		
+//		Connection connection = super.getConnection();
+//		Statement stmt = null;
+//
+//		try {
+//			stmt = connection.createStatement();
+//
+//			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(addquery);
+//			preStatement.setFloat(1, amount);
+//			preStatement.setString(2, username);
+//			preStatement.setString(3, orderdate);
+//			preStatement.setInt(4, 1);
+//			preStatement.setInt(5, 1); // To do: properly associate order with cart
+//			
+//			ResultSet rs = preStatement.executeQuery();
+//
+//			stmt.close();
+//			rs.close();
+//
+//		} catch (SQLException e) {
+//			System.out.println(e.toString());
+//		}
+//
+//		super.closeConnection(connection); 
+//	}
+//	
+//	public Order getOrder(int orderID) {
+//		Order order = new Order();
+//		String getquery = "SELECT OrderID, `OrderPrice`, `Customer_Username`, `OrderDate` FROM Order WHERE OrderID = ?;";
+//		Connection connection = super.getConnection();
+//		Statement stmt = null;
+//
+//		try {
+//			stmt = connection.createStatement();
+//			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getquery);
+//			preStatement.setInt(1, orderID);
+//			ResultSet rs = preStatement.executeQuery();
+//		
+//			order.setorderID(orderID);
+//			order.settotalprice(rs.getFloat(2));
+//			order.setusername(rs.getString(3));
+//			order.setorderdate(rs.getString(4));
+//
+//			stmt.close();
+//			rs.close();
+//
+//		} catch (SQLException e) {
+//			System.out.println(e.toString());
+//		}
+//
+//		super.closeConnection(connection);
+//
+//		return order;
+//
+//	}
+//	
 	public void payOrder(int orderID){
 		String updatequery = "UPDATE Order SET OrderStatus_StatusID = 1 WHERE OrderID = ?;";
 		Connection connection = super.getConnection();

@@ -19,15 +19,15 @@ import service.workflow.OrderActivity;
 @Path("/orderservice/")
 public class OrderResource implements OrderService {
 
-//	@GET
-//	@Produces({"application/xml" , "application/json"})
-//	@Path("/order")
-//	//@Cacheable(cc="public, maxAge=3600") example for caching
-//	public Set<OrderRepresentation> getOrders() {
-//		System.out.println("GET METHOD Request for all orders .............");
-//		OrderActivity orderActivity = new OrderActivity();
-//		return orderActivity.getOrders();	
-//	}
+	@GET
+	@Produces({"application/xml" , "application/json"})
+	@Path("/order")
+	//@Cacheable(cc="public, maxAge=3600") example for caching
+	public Set<OrderRepresentation> getOrders() {
+		System.out.println("GET METHOD Request for all orders .............");
+		OrderActivity orderActivity = new OrderActivity();
+		return orderActivity.getOrders();	
+	}
 	
 	@GET
 	@Produces({"application/xml" , "application/json"})

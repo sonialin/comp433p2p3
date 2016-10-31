@@ -35,7 +35,7 @@ public final class OrderServiceClient {
          WebClient.getConfig(getClient).getInInterceptors().add(new LoggingInInterceptor());
          
          // change application/xml  to get in xml format
-         getClient = getClient.accept("application/json").type("application/json").path("/orderservice/order/1");
+         getClient = getClient.accept("application/json").type("application/json").path("/orderservice/order/");
          
          //The following lines are to show how to log messages without the CXF interceptors
          String getRequestURI = getClient.getCurrentURI().toString();

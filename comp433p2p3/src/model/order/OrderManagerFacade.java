@@ -1,21 +1,30 @@
 package model.order;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Random;
+import java.util.Set;
+
 import dal.Databaseoperation;
 import dal.OrderDAO;
 import model.order.Order;
 
 public class OrderManagerFacade{
 	
-	OrderDAO odao = new OrderDAO();
-
-	public void createOrder(float amount, String username, String orderdate){
-		        
-		odao.createOrder(amount, username, orderdate);
+	private static OrderDAO odao = new OrderDAO();
+	
+	public Set<Order> getAllOrders(){
+		return odao.getAllOrders();
 	}
 	
-	public Order getOrder(int orderID) {
-		return odao.getOrder(orderID); 
+	public Order getOrder(int id) {
+		return odao.getOrder(id);
 	}
+
+//	public void createOrder(float amount, String username, String orderdate){
+//		        
+//		odao.createOrder(amount, username, orderdate);
+//	}
 	
 	public void payOrder(int orderID){
 		odao.payOrder(orderID);
