@@ -32,7 +32,7 @@ public class OrderResource implements OrderService {
 	@GET
 	@Produces({"application/xml" , "application/json"})
 	@Path("/order/{orderID}")
-	public OrderRepresentation getOrder(@PathParam("orderId") int orderID) {
+	public OrderRepresentation getOrder(@PathParam("orderID") int orderID) {
 		System.out.println("GET METHOD Request from Client with orderRequest int ............." + orderID);
 		OrderActivity orderActivity = new OrderActivity();
 		return orderActivity.getOrder(orderID);
@@ -50,15 +50,17 @@ public class OrderResource implements OrderService {
 	
 	// To do: add patch method 
 	
-//	@DELETE
-//	@Produces({"application/xml" , "application/json"})
-//	@Path("/order/{orderId}")
-//	public Response deleteOrder(@PathParam("orderId") int id) {
-//		System.out.println("Delete METHOD Request from Client with orderRequest int ............." + id);
-//		OrderActivity orderActivity = new OrderActivity();
-//		orderActivity.cancelOrder(id);
-//		return null;
-//		// To do: properly return a response to indicate the order has been cancelled
-//	}
+	@DELETE
+	@Produces({"application/xml" , "application/json"})
+	@Path("/order/{orderID}")
+	public Response deleteOrder(@PathParam("orderID") int orderID) {
+		System.out.println("Delete METHOD Request from Client with orderID ............." + orderID);
+		OrderActivity orderActivity = new OrderActivity();
+		String res = orderActivity.deleteOrder(orderID);
+		if (res.equals("OK")) {
+			return Response.status(Status.OK).build();
+		}
+		return null;
+	}
 	
 }

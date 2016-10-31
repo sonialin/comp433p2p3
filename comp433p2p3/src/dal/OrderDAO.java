@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.Set;
 
 import model.order.Order;
-import model.product.Product;
 
 public class OrderDAO extends Databaseoperation{
 	
@@ -161,5 +160,16 @@ public class OrderDAO extends Databaseoperation{
 	public String getOrderDetails(){
 		// To do
 		return null;
+	}
+	
+	public void deleteOrder(int orderID) {
+		Iterator<Order> it = orders.iterator();
+		while(it.hasNext()) {
+          Order order = (Order)it.next();
+          if (order.getorderID()==orderID) {
+        	  orders.remove(order);
+        	  return;
+          }
+        }
 	}
 }

@@ -90,5 +90,11 @@ public class OrderActivity {
 	public String getOrderStatus(int orderID){
 		return omf.getOrderStatus(orderID);
 	}
+	
+	public String deleteOrder(int orderID) {	
+		omf.deleteOrder(orderID);
+		
+		return "OK";
+	}
 
 }

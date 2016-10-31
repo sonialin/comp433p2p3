@@ -49,4 +49,8 @@ public class OrderManagerFacade{
 	public String getOrderStatus(int orderID){
 		return odao.getOrderStatus(orderID);
 	}
+	
+	public void deleteOrder(int orderID) {
+		odao.deleteOrder(orderID);
+	}
 }
