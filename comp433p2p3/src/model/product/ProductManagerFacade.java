@@ -1,9 +1,9 @@
 package model.product;
 
-import java.util.Set;
-
+import dal.Databaseoperation;
 import dal.ProductDAO;
 import model.order.Order;
+import model.partner.Partner;
 import model.product.Product;
 
 /**
@@ -13,7 +13,8 @@ public class ProductManagerFacade{
 	
 	Product product = null;
 	Order order;
-	
+	Partner partner;
+ 
 	ProductDAO pdao = new ProductDAO();
 	
      /**
@@ -38,19 +39,19 @@ public class ProductManagerFacade{
     /**
      * searchProduct
      */	
-	public Set<Product> searchProduct(String ProductName){
-		return pdao.searchProduct(ProductName);
+	public void searchProduct(String ProductName){
+		pdao.searchProduct(ProductName);
 	}
 	
     /**
      * checckAvailability
      */	
-	public int checkAvailability(int productID){
-		return pdao.checkAvailability(productID);
+	public int checckAvailability(String ProductName){
+		return pdao.checckAvailability(ProductName);
 	}
 	
 	/**
-     * buy product, that means create an order
+     * buyproduct, that means submitorder
      */
 	public void buyProduct(){
 		//order.submitOrder();  
