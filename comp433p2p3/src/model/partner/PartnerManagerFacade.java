@@ -32,19 +32,13 @@ public class PartnerManagerFacade{
 		return ptdao.verifyPartner(partnerusername, partnerpassword);
 	}*/
 	
-	public void notifyPartnersofsale(){
-		ptdao.notifyPartnersofsale();
-	}
-	
-	public void addPartnerProducts(){
-         ptdao.addPartnerProducts();
-	}
-	
-	public void settleAccount(){
-		ptdao.settleAccount();
-	}
-	
-	public void generateReport(){
-		ptdao.generateReport();
-	}
+	public void notifyPartnersofsale(int orderID){
+        ptdao.notifyPartnersofsale(orderID);
+}
+
+
+public void generateReport(int orderID){
+        ptdao.generateReport(orderID);
+}
+
 }
