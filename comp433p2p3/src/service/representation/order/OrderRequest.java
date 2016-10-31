@@ -12,85 +12,37 @@ import javax.xml.bind.annotation.XmlType;
 public class OrderRequest {
 	int orderID;
 	String orderdate;
-<<<<<<< HEAD
 	String shippingaddress;
 	float totalprice;
 	float tax;
 	float amount;
 	int orderstatusID;
-	String orderdetails;
 	String username;
-=======
-	String shippingaddress; // to do: check spelling across layers
-	float totalprice;
-	float tax;
-	double amount;
-	int orderstatusID;
->>>>>>> f5c8211606d58d7cf9e7c4a72b8895ebb5bbcce8
 	
-	public OrderRequest(int orderID, String orderdate, String shippingaddress, 
-			     float totalprice, float tax, double amount, int orderstatusID){
-		
-		this.orderID = orderID;
-		this.orderdate = orderdate;
-		this.shippingaddress = shippingaddress;
-		this.totalprice = totalprice;
-		this.tax=tax;
-		this.amount=amount;
-		this.orderstatusID=orderstatusID;
-	}
+	public OrderRequest( ){ }
 	
 	public int getorderID(){
 		return orderID;
 	}
 	
-	public String getorderdate(){
-		return orderdate;
-	}
-	
-	public String getshippingaddress(){
-		return shippingaddress;
-	}
-	
-	public float gettotalprice(){
-		return totalprice;
-	}
-	
-	public float gettax(){
-		return tax;
+	public void setorderID(int orderID){
+		this.orderID = orderID;
 	}
 	
 	public String getorderdate(){
 		return orderdate;
 	}
 	
-	public void setorderdate(String orderdate) {
+	public void setorderdate(String orderdate){
 		this.orderdate = orderdate;
 	}
 	
-	public String getshippingaddress(){
+	public String getshipingaddress(){
 		return shippingaddress;
 	}
 	
-	public void setshippingaddress(String address) {
-		this.shippingaddress = address;
-	}
-	
-	public float getamount(){
-		return amount;
-	}
-	
-	public int getorderstatus(){
-		return orderstatusID;
-	}
-<<<<<<< HEAD
-	
-	public float gettax(){
-		return tax;
-	}
-	
-	public void settax(float tax){
-		this.tax = tax;
+	public void setshippingaddress(String shippingaddress){
+		this.shippingaddress = shippingaddress;
 	}
 	
 	public float gettotalprice(){
@@ -101,22 +53,36 @@ public class OrderRequest {
 		this.totalprice = totalprice;
 	}
 	
-	public String getorderdetails() {
-		return orderdetails;
+	public float gettax(){
+		return tax;
 	}
 	
-	public void setorderdetails(String orderdetails){
-		this.orderdetails = orderdetails;
+	public void settax(float tax){
+		this.tax = tax;
 	}
 	
-	public String getusername() {
-		return orderdetails;
+	public float getamount(){
+		return amount;
+	}
+	
+	public void setamount(float amount){
+		this.amount = amount;
+	}
+	
+	public float getorderstatus(){
+		return orderstatusID;
+	}
+	
+	public void setorderstatusID(int orderstatusID){
+		this.orderstatusID = orderstatusID;
+	}
+	
+	public String getusername(){
+		return username;
 	}
 	
 	public void setusername(String username){
 		this.username = username;
 	}
-=======
 
->>>>>>> f5c8211606d58d7cf9e7c4a72b8895ebb5bbcce8
 }

@@ -7,29 +7,20 @@ import java.util.Set;
 
 import dal.Databaseoperation;
 import dal.OrderDAO;
-import model.product.Product;
+import model.order.Order;
 
 public class OrderManagerFacade{
 	
-<<<<<<< HEAD
 	private static OrderDAO odao = new OrderDAO();
 	
 	public Set<Order> getAllOrders(){
 		return odao.getAllOrders();
 	}
 	
-	public Order getOrder(int id) {
-		return odao.getOrder(id);
-=======
-	OrderDAO odao = new OrderDAO();
-
-	public void createOrder(int orderID, String orderdate, String shipingaddress, 
-		     float totalprice, float tax, double amount, int orderstatus){
-		        
-		odao.createOrder(orderID, orderdate, shipingaddress, totalprice, tax, amount, orderstatus);
-	    
->>>>>>> f5c8211606d58d7cf9e7c4a72b8895ebb5bbcce8
+	public Order getOrder(int orderID) {
+		return odao.getOrder(orderID);
 	}
+
 
 //	public void createOrder(float amount, String username, String orderdate){
 //		        
@@ -58,13 +49,5 @@ public class OrderManagerFacade{
 	
 	public String getOrderStatus(int orderID){
 		return odao.getOrderStatus(orderID);
-	}
-	
-	public void getProductDetail(int ProductID){
-		odao.getProductDetail(ProductID);
-	}
-	
-	public void getCustomerDetail(String customerusername){
-		odao.getCustomerDetail(customerusername);
 	}
 }

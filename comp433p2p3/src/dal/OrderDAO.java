@@ -1,6 +1,5 @@
 package dal;
 
-<<<<<<< HEAD
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,55 +10,49 @@ import java.util.Iterator;
 import java.util.Set;
 
 import model.order.Order;
-=======
 import model.product.Product;
->>>>>>> f5c8211606d58d7cf9e7c4a72b8895ebb5bbcce8
 
 public class OrderDAO extends Databaseoperation{
 	
 	private static Set<Order> orders = new HashSet<Order>();
 	
-<<<<<<< HEAD
 	public OrderDAO() {
-		Order order = new Order();
-	    
-		order.setorderID(2);
-		order.setusername("sonialin2");
-		order.setorderdate("20161031");
-		order.setamount(10);
-		order.setshippingaddress("5566 N sheridan rd");
-		order.settax(1);
-		order.settotalprice(11);
-		order.setorderdetails("some details");
-		
-		orders.add(order);
+		super();
 	}
 	
 	public Set<Order> getAllOrders(){
 		return orders;
+		// To do: select * from orders and add to set for return
 	}
 	
-	public Order getOrder(int id) {
-		Iterator<Order> it = orders.iterator();
-		while(it.hasNext()) {
-          Order order = (Order)it.next();
-          if (order.getorderID()==id) {
-        	  return order;
-          }
-        }
-		return null;
-=======
-	
-	public void createOrder(int orderID, String orderdate, String shipingaddress, 
-		     float totalprice, float tax, double amount, int orderstatus){
-		        
-		String addquery = "INSERT INTO Order VALUES (" + orderID + "," + orderdate +","+ shipingaddress+ "," 
-	               + totalprice+","+tax+","+ amount+")";
-		// To do: automatically set orderstatus to 1(paid) when creating an order
-	
-	    super.accessDatabase(addquery);
-	    
->>>>>>> f5c8211606d58d7cf9e7c4a72b8895ebb5bbcce8
+	public Order getOrder(int orderID) {
+		Order order = new Order();
+		String getquery = "SELECT OrderID, `OrderPrice`, `Customer_Username`, `OrderDate`, `OrderStatus_StatusID` FROM Order WHERE OrderID = ?;";
+		Connection connection = super.getConnection();
+		Statement stmt = null;
+
+		try {
+			stmt = connection.createStatement();
+			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getquery);
+			preStatement.setInt(1, orderID);
+			ResultSet rs = preStatement.executeQuery();
+
+			order.setorderID(orderID);
+			order.settotalprice(rs.getFloat(2));
+			order.setusername(rs.getString(3));
+			order.setorderdate(rs.getString(4));
+			order.setorderstatusID(rs.getInt(5));
+
+			stmt.close();
+			rs.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		}
+
+		super.closeConnection(connection);
+
+		return order;
 	}
 	
 //	public void createOrder(float amount, String username, String orderdate){
@@ -92,36 +85,7 @@ public class OrderDAO extends Databaseoperation{
 //		super.closeConnection(connection); 
 //	}
 //	
-//	public Order getOrder(int orderID) {
-//		Order order = new Order();
-//		String getquery = "SELECT OrderID, `OrderPrice`, `Customer_Username`, `OrderDate` FROM Order WHERE OrderID = ?;";
-//		Connection connection = super.getConnection();
-//		Statement stmt = null;
-//
-//		try {
-//			stmt = connection.createStatement();
-//			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getquery);
-//			preStatement.setInt(1, orderID);
-//			ResultSet rs = preStatement.executeQuery();
-//		
-//			order.setorderID(orderID);
-//			order.settotalprice(rs.getFloat(2));
-//			order.setusername(rs.getString(3));
-//			order.setorderdate(rs.getString(4));
-//
-//			stmt.close();
-//			rs.close();
-//
-//		} catch (SQLException e) {
-//			System.out.println(e.toString());
-//		}
-//
-//		super.closeConnection(connection);
-//
-//		return order;
-//
-//	}
-//	
+	
 	public void payOrder(int orderID){
 		String updateOrderQuery = "UPDATE Order SET OrderStatus_StatusID = 1 WHERE OrderID = " + orderID;
 				

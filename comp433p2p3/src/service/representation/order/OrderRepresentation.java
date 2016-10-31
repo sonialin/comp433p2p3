@@ -12,77 +12,37 @@ import javax.xml.bind.annotation.XmlType;
 public class OrderRepresentation {
 	int orderID;
 	String orderdate;
-<<<<<<< HEAD
 	String shippingaddress;
 	float totalprice;
 	float tax;
 	float amount;
 	int orderstatusID;
-	String orderdetails;
 	String username;
-=======
-	String shipingaddress;
-	float totalprice;
-	float tax;
-	double amount;
-	int orderstatusID;
->>>>>>> f5c8211606d58d7cf9e7c4a72b8895ebb5bbcce8
 	
-	public OrderRepresentation(int orderID, String orderdate, String shipingaddress, 
-			     float totalprice, float tax, double amount, int orderstatusID){
-		
-		this.orderID = orderID;
-		this.orderdate = orderdate;
-		this.shipingaddress = shipingaddress;
-		this.totalprice = totalprice;
-		this.tax=tax;
-		this.amount=amount;
-		this.orderstatusID=orderstatusID;
-	}
+	public OrderRepresentation( ){ }
 	
 	public int getorderID(){
 		return orderID;
+	}
+	
+	public void setorderID(int orderID){
+		this.orderID = orderID;
 	}
 	
 	public String getorderdate(){
 		return orderdate;
 	}
 	
-	public String getshipingaddress(){
-		return shipingaddress;
+	public void setorderdate(String orderdate){
+		this.orderdate = orderdate;
 	}
 	
-<<<<<<< HEAD
-	public String getshippingaddress(){
+	public String getshipingaddress(){
 		return shippingaddress;
 	}
 	
-	public void setshippingaddress(String address) {
-		this.shippingaddress = address;
-	}
-	
-	public float getamount(){
-		return amount;
-=======
-	public float gettotalprice(){
-		return totalprice;
-	}
-	
-	public float gettax(){
-		return tax;
->>>>>>> f5c8211606d58d7cf9e7c4a72b8895ebb5bbcce8
-	}
-	
-	public double getamount(){
-		return amount;
-	}
-	
-	public float gettax(){
-		return tax;
-	}
-	
-	public void settax(float tax){
-		this.tax = tax;
+	public void setshippingaddress(String shippingaddress){
+		this.shippingaddress = shippingaddress;
 	}
 	
 	public float gettotalprice(){
@@ -93,19 +53,36 @@ public class OrderRepresentation {
 		this.totalprice = totalprice;
 	}
 	
-	public String getorderdetails() {
-		return orderdetails;
+	public float gettax(){
+		return tax;
 	}
 	
-	public void setorderdetails(String orderdetails){
-		this.orderdetails = orderdetails;
+	public void settax(float tax){
+		this.tax = tax;
 	}
 	
-	public String getusername() {
-		return orderdetails;
+	public float getamount(){
+		return amount;
+	}
+	
+	public void setamount(float amount){
+		this.amount = amount;
+	}
+	
+	public int getorderstatusID(){
+		return orderstatusID;
+	}
+	
+	public void setorderstatusID(int orderstatusID){
+		this.orderstatusID = orderstatusID;
+	}
+	
+	public String getusername(){
+		return username;
 	}
 	
 	public void setusername(String username){
 		this.username = username;
 	}
+
 }

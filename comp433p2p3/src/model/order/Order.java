@@ -1,49 +1,84 @@
 package model.order;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Order {
 	int orderID;
 	String orderdate;
-	String shipingaddress;
+	String shippingaddress;
 	float totalprice;
 	float tax;
-	double amount;
+	float amount;
 	int orderstatusID;
+	String username;
 	
-	public Order(int orderID, String orderdate, String shipingaddress, 
-			     float totalprice, float tax, double amount, int orderstatusID){
-		
-		this.orderID = orderID;
-		this.orderdate = orderdate;
-		this.shipingaddress = shipingaddress;
-		this.totalprice = totalprice;
-		this.tax=tax;
-		this.amount=amount;
-		this.orderstatusID=orderstatusID;
-	}
+	public Order( ){ }
 	
 	public int getorderID(){
 		return orderID;
+	}
+	
+	public void setorderID(int orderID){
+		this.orderID = orderID;
 	}
 	
 	public String getorderdate(){
 		return orderdate;
 	}
 	
-	public String getshipingaddress(){
-		return shipingaddress;
+	public void setorderdate(String orderdate){
+		this.orderdate = orderdate;
+	}
+	
+	public String getshippingaddress(){
+		return shippingaddress;
+	}
+	
+	public void setshippingaddress(String shippingaddress){
+		this.shippingaddress = shippingaddress;
 	}
 	
 	public float gettotalprice(){
 		return totalprice;
 	}
 	
+	public void settotalprice(float totalprice){
+		this.totalprice = totalprice;
+	}
+	
 	public float gettax(){
 		return tax;
 	}
 	
-	public double getamount(){
+	public void settax(float tax){
+		this.tax = tax;
+	}
+	
+	public float getamount(){
 		return amount;
 	}
-
+	
+	public void setamount(float amount){
+		this.amount = amount;
+	}
+	
+	public int getorderstatusID(){
+		return orderstatusID;
+	}
+	
+	public void setorderstatusID(int orderstatusID){
+		this.orderstatusID = orderstatusID;
+	}
+	
+	public String getusername(){
+		return username;
+	}
+	
+	public void setusername(String username){
+		this.username = username;
+	}
+	
+	// To do: getorderdetails()
 
 }

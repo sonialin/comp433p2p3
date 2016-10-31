@@ -4,9 +4,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.company.hr.Employee;
-import com.company.hr.service.representation.EmployeeRepresentation;
-
 import dal.OrderDAO;
 import model.order.Order;
 import model.order.OrderManagerFacade;
@@ -16,16 +13,7 @@ public class OrderActivity {
 	
 	private static OrderManagerFacade omf = new OrderManagerFacade();
 	
-<<<<<<< HEAD
-=======
-	public OrderRepresentation createOrder(int orderID, String orderdate, String shipingaddress, 
-		     float totalprice, float tax, double amount, int orderstatus){
-		        
-		omf.createOrder(orderID, orderdate, shipingaddress, totalprice, tax, amount, orderstatus);    
-	}
-	
->>>>>>> f5c8211606d58d7cf9e7c4a72b8895ebb5bbcce8
-	public Set<OrderRepresentation> getOrders() {
+	public Set<OrderRepresentation> getAllOrders() {
 		
 		Set<Order> orders = new HashSet<Order>();
 		Set<OrderRepresentation> orderRepresentations = new HashSet<OrderRepresentation>();
@@ -42,7 +30,7 @@ public class OrderActivity {
           orderRepresentation.setshippingaddress(order.getshippingaddress());
           orderRepresentation.settax(order.gettax());
           orderRepresentation.settotalprice(order.gettotalprice());
-          orderRepresentation.setorderdetails(order.getorderdetails());
+          orderRepresentation.setorderstatusID(order.getorderstatusID());
           
           //now add this representation in the list
           orderRepresentations.add(orderRepresentation);
@@ -52,7 +40,6 @@ public class OrderActivity {
 	
 	public OrderRepresentation getOrder(int orderID) {
 		
-<<<<<<< HEAD
 		Order order = omf.getOrder(orderID);
 		
 		OrderRepresentation orderRep = new OrderRepresentation();
@@ -63,18 +50,15 @@ public class OrderActivity {
 		orderRep.setshippingaddress(order.getshippingaddress());
 		orderRep.settax(order.gettax());
 		orderRep.settotalprice(order.gettotalprice());
-		orderRep.setorderdetails(order.getorderdetails());
+		orderRep.setorderstatusID(order.getorderstatusID());
 		
 		return orderRep;
-=======
-		//To do
->>>>>>> f5c8211606d58d7cf9e7c4a72b8895ebb5bbcce8
+
 	}
 	
-//	public OrderRepresentation createOrder(int orderID, String orderdate, String shipingaddress, 
-//    float totalprice, float tax, double amount, int orderstatus){
+//	public void createOrder(){
 //       
-//		omf.createOrder(orderID, orderdate, shipingaddress, totalprice, tax, amount, orderstatus);    
+//		
 //	}
 	
 	public void payOrder(int orderID){	
@@ -96,22 +80,9 @@ public class OrderActivity {
 	public void refund(int orderID){
 		omf.refund(orderID);
 	}
-<<<<<<< HEAD
-
-=======
 	
 	public String getOrderStatus(int orderID){
 		return omf.getOrderStatus(orderID);
 	}
-	
-//	public String getProductDetail(int ProductID){
-//		omf.getProductDetail(ProductID);
-//	}
-	// to-do: move this method across layers to the product collection
-	
-//	public void getCustomerDetail(String customerusername){
-//		odao.getCustomerDetail(customerusername);
-	}
-	// to-do: move this method across layers to the customer collection
->>>>>>> f5c8211606d58d7cf9e7c4a72b8895ebb5bbcce8
+
 }
