@@ -52,7 +52,7 @@ public class OrderDAO extends Databaseoperation{
 	
 	public Order getOrder(int orderID) {
 		Order order = new Order();
-		String getquery = "SELECT OrderID, `OrderPrice`, `Customer_Username`, `OrderDate`, `OrderStatus_StatusID` FROM Order WHERE OrderID = ?;";
+		String getquery = "SELECT `OrderID`, `OrderPrice`, `Customer_Username`, `OrderDate`, `OrderStatus_StatusID` FROM ecommerce.`Order` WHERE OrderID = ?;";
 		Connection connection = super.getConnection();
 		Statement stmt = null;
 
