@@ -9,7 +9,10 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.joda.time.DateTime;
+
 import model.order.Order;
+import model.product.Product;
 
 public class OrderDAO extends Databaseoperation{
 	
@@ -77,7 +80,7 @@ public class OrderDAO extends Databaseoperation{
 		return order;
 	}
 	
-	public Order createOrder(float amount, String username, String orderdate){
+	public Order createOrder(float amount, String username, String orderdate, String orderdetails){
 		Order order = new Order();
 		order.setamount(amount);
 		order.setusername(username);
@@ -87,6 +90,7 @@ public class OrderDAO extends Databaseoperation{
 		String addquery = "INSERT INTO `Order` (`OrderPrice`, `Customer_Username`, `OrderDate`, `OrderStatus_StatusID`, `Cart_CartID`) VALUES (?,?,?,?,?);";
 
 		// To do: add shipping address to the address table with association to the created order
+		// To do: add orderdetails field to db and all order layers
 		
 		Connection connection = super.getConnection();
 		Statement stmt = null;
@@ -275,5 +279,18 @@ public class OrderDAO extends Databaseoperation{
         	  return;
           }
         }
+	}
+	
+	public void submitOrder(Set<Product> products, String username){
+		Iterator<Product> it = products.iterator();
+		Order order;
+		String orderdetails = null;
+		float amount; 
+		while(it.hasNext()) {
+          Product product = (Product)it.next();
+          orderdetails += product.getProductID() ;
+          orderdetails += product.getProductname();
+        }
+		order.createOrder(amount, username, DateTime.now().toString(), orderdetails);
 	}
 }
