@@ -17,12 +17,16 @@ public class ReviewManagerFacade{
 		
 	}
 	
-	public Set<Review> getReview(String Poductname){
+	public Set<Review> getRelatedReviews(String Poductname){
 		
-		return rdao.getReview(Poductname);
+		return rdao.getRelatedReviews(Poductname);
 		
 	}
 	
-	
+	public Review getReview(int reviewID){
+		
+		return rdao.getReview(reviewID);
+		
+	}
 
 }

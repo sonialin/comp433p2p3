@@ -18,12 +18,12 @@ import service.workflow.ProductActivity;
 
 import javax.ws.rs.core.CacheControl;
 
-@Path("/Productservice/")
+@Path("/productservice/")
 public class ProductResource implements ProductService {
 
 	@GET
 	@Produces({ "application/xml", "application/json" })
-	@Path("/Product")
+	@Path("/product")
 	// @Cacheable(cc="public, maxAge=3600") example for caching   
 	public Set<ProductRepresentation> searchProduct(String productName) {
 		System.out.println("GET METHOD Request for all Products .............");
@@ -33,7 +33,7 @@ public class ProductResource implements ProductService {
 
 	@GET
 	@Produces({ "application/xml", "application/json" })
-	@Path("/Product/{ProductId}")
+	@Path("/product/{ProductId}")
 	public ProductRepresentation getProduct(@PathParam("ProductId") int id) {
 		System.out.println("GET METHOD Request from Client with ProductRequest String ............." + id);
 		ProductActivity pdtActivity = new ProductActivity();
@@ -42,7 +42,7 @@ public class ProductResource implements ProductService {
 
 	@POST
 	@Produces({ "application/xml", "application/json" })
-	@Path("/Product")
+	@Path("/product")
 	public ProductRepresentation addProduct(ProductRequest ProductRequest) {
 		System.out.println("POST METHOD Request from Client with ............." 
 				+ ProductRequest.getProductname()+ "  "
@@ -60,7 +60,7 @@ public class ProductResource implements ProductService {
 
 	@DELETE
 	@Produces({ "application/xml", "application/json" })
-	@Path("/Product/{ProductId}")
+	@Path("/product/{ProductId}")
 	public Response deleteProduct(@PathParam("ProductId") int id) {
 		System.out.println("Delete METHOD Request from Client with ProductRequest String ............." + id);
 		ProductActivity pdtActivity = new ProductActivity();

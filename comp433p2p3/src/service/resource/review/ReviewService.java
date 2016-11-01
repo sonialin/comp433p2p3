@@ -10,7 +10,8 @@ import service.representation.review.ReviewRepresentation;
 public interface ReviewService {
 
 	public Response writeReview(String customerusername, int productID, String reviewcontent, int rate);
+	public ReviewRepresentation getReview(int reviewID);
 
-	public Set<ReviewRepresentation> getReview(String Poductname);
+	public Set<ReviewRepresentation> getRelatedReviews(String Poductname);
 
 }

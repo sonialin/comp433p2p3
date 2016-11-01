@@ -9,14 +9,16 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.Response;
+
 import service.representation.review.ReviewRepresentation;
 import service.workflow.ReviewActivity;
 
+@Path("/reviewservice/")
 public class ReviewResource implements ReviewService {
 
 	@POST
 	@Produces({ "application/xml", "application/json" })
-	@Path("/Review/{customerusername,productID, reviewcontent,rate}")
+	@Path("/review/")
 	public Response writeReview(@PathParam("customerusername") String customerusername,
 			@PathParam("productID") int productID, @PathParam("reviewcontent") String reviewcontent,
 			@PathParam("rate") int rate) {
@@ -30,14 +32,23 @@ public class ReviewResource implements ReviewService {
 		return null;
 
 	}
+	
+	@GET
+	@Produces({"application/xml" , "application/json"})
+	@Path("/review/{reviewID}")
+	public ReviewRepresentation getReview(@PathParam("reviewID") int reviewID) {
+		System.out.println("GET METHOD Request from Client with orderRequest int ............." + reviewID);
+		ReviewActivity reviewActivity = new ReviewActivity();
+		return reviewActivity.getReview(reviewID);
+	}
 
 	@GET
 	@Produces({ "application/xml", "application/json" })
-	@Path("/Review/{ProductName}")
-	public Set<ReviewRepresentation> getReview(@PathParam("ProductName") String productName) {
+	@Path("/review/{ProductName}")
+	public Set<ReviewRepresentation> getRelatedReviews(@PathParam("ProductName") String productName) {
 		System.out.println("GET METHOD Request for selected product reviews .............");
 		ReviewActivity rwActivity = new ReviewActivity();
-		return rwActivity.getReview(productName);
+		return rwActivity.getRelatedReviews(productName);
 	}
 
 }
