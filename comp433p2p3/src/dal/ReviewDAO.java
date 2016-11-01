@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 
+import service.representation.review.ReviewRepresentation;
+
 import com.mysql.jdbc.PreparedStatement;
 
 import model.review.Review;
@@ -45,11 +47,46 @@ public class ReviewDAO extends Databaseoperation {
 
 		super.closeConnection(connection);
 	}
+	
+	public Review getReview(int reviewID) {
+		Review review = new Review();
+		String getquery = "SELECT ProductReviewID, `ProductReviewContent`, `Rating`, `ProductReviewDate`, `Product_ProductID`, `Customer_Username` FROM ProductReview WHERE ProductReviewID = ?;";
+		Connection connection = super.getConnection();
+		Statement stmt = null;
 
+<<<<<<< HEAD
 	public Set<Review> getReview(int productID) {
+=======
+		try {
+			stmt = connection.createStatement();
+			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getquery);
+			preStatement.setInt(1, reviewID);
+			ResultSet rs = preStatement.executeQuery();
+
+			review.setProductreviewID(reviewID);
+			review.setProductreviewcontent(rs.getString(2));
+			review.setRating(rs.getInt(3));
+			review.setProductreviewDate(rs.getDate(4));
+			review.setCustomerusername(rs.getString(5));
+			review.setProductproductID(rs.getInt(6));
+		
+			stmt.close();
+			rs.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		}
+
+		super.closeConnection(connection);
+
+		return review;
+	}
+
+	public Set<Review> getRelatedReviews(int productID) {
+>>>>>>> branch 'master' of https://TingLiu6@bitbucket.org/TingLiu6/comp433p2p3.git
 
 		Review review = new Review();
-		String dispalyreviewquery = "Select * from ProductReview where Poductname = ?";
+		String dispalyreviewquery = "Select * from ProductReview where Product_ProductID = ?";
 		Connection connection = super.getConnection();
 		Statement stmt = null;
 

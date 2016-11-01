@@ -23,7 +23,11 @@ public class ProductResource implements ProductService {
 
 	@GET
 	@Produces({ "application/xml", "application/json" })
+<<<<<<< HEAD
 	@Path("/products/{productname}")
+=======
+	@Path("/product")
+>>>>>>> branch 'master' of https://TingLiu6@bitbucket.org/TingLiu6/comp433p2p3.git
 	// @Cacheable(cc="public, maxAge=3600") example for caching   
 	public Set<ProductRepresentation> searchProduct(@PathParam("productname") String productName) {
 		System.out.println("GET METHOD Request for all Products ............." + productName);
@@ -33,8 +37,13 @@ public class ProductResource implements ProductService {
 
 	@GET
 	@Produces({ "application/xml", "application/json" })
+<<<<<<< HEAD
 	@Path("/product/{productId}")
 	public ProductRepresentation getProduct(@PathParam("productId") int id) {
+=======
+	@Path("/product/{ProductId}")
+	public ProductRepresentation getProduct(@PathParam("ProductId") int id) {
+>>>>>>> branch 'master' of https://TingLiu6@bitbucket.org/TingLiu6/comp433p2p3.git
 		System.out.println("GET METHOD Request from Client with ProductRequest String ............." + id);
 		ProductActivity pdtActivity = new ProductActivity();
 		return pdtActivity.getProduct(id);
@@ -42,7 +51,7 @@ public class ProductResource implements ProductService {
 
 	@POST
 	@Produces({ "application/xml", "application/json" })
-	@Path("/Product")
+	@Path("/product")
 	public ProductRepresentation addProduct(ProductRequest ProductRequest) {
 		System.out.println("POST METHOD Request from Client with ............." 
 				+ ProductRequest.getProductname()+ "  "
@@ -60,7 +69,7 @@ public class ProductResource implements ProductService {
 
 	@DELETE
 	@Produces({ "application/xml", "application/json" })
-	@Path("/Product/{ProductId}")
+	@Path("/product/{ProductId}")
 	public Response deleteProduct(@PathParam("ProductId") int id) {
 		System.out.println("Delete METHOD Request from Client with ProductRequest String ............." + id);
 		ProductActivity pdtActivity = new ProductActivity();

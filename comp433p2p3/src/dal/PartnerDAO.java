@@ -120,13 +120,14 @@ public class PartnerDAO extends Databaseoperation {
 	public void notifyPartnersofsale(int orderID) {
 		OrderDAO odao = new OrderDAO();
 
-		odao.getOrderStatus(orderID);
+		System.out.println("Order number "+ orderID + " 's new status is "+ odao.getOrderStatus(orderID));
 	}
 
 	public void generateReport(int orderID) {
 		OrderDAO odao = new OrderDAO();
 
 		odao.fulfillOrder(orderID);
+		System.out.println("Generating report for newly fulfilled order number " + orderID);
 	}
 
 }
