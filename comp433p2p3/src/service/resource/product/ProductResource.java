@@ -23,12 +23,8 @@ public class ProductResource implements ProductService {
 
 	@GET
 	@Produces({ "application/xml", "application/json" })
-<<<<<<< HEAD
 	@Path("/products/{productname}")
-=======
-	@Path("/product")
->>>>>>> branch 'master' of https://TingLiu6@bitbucket.org/TingLiu6/comp433p2p3.git
-	// @Cacheable(cc="public, maxAge=3600") example for caching   
+  
 	public Set<ProductRepresentation> searchProduct(@PathParam("productname") String productName) {
 		System.out.println("GET METHOD Request for all Products ............." + productName);
 		ProductActivity pdtActivity = new ProductActivity();
@@ -37,13 +33,8 @@ public class ProductResource implements ProductService {
 
 	@GET
 	@Produces({ "application/xml", "application/json" })
-<<<<<<< HEAD
 	@Path("/product/{productId}")
 	public ProductRepresentation getProduct(@PathParam("productId") int id) {
-=======
-	@Path("/product/{ProductId}")
-	public ProductRepresentation getProduct(@PathParam("ProductId") int id) {
->>>>>>> branch 'master' of https://TingLiu6@bitbucket.org/TingLiu6/comp433p2p3.git
 		System.out.println("GET METHOD Request from Client with ProductRequest String ............." + id);
 		ProductActivity pdtActivity = new ProductActivity();
 		return pdtActivity.getProduct(id);

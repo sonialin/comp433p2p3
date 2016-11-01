@@ -125,10 +125,10 @@ public class ProductDAO extends Databaseoperation {
 			stmt = connection.createStatement();
 			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(deletequery);
 			preStatement.setInt(1, productID);
-			ResultSet rs = preStatement.executeQuery();
+			preStatement.executeUpdate();
 
 			stmt.close();
-			rs.close();
+			
 
 		} catch (SQLException e) {
 			System.out.println(e.toString());
@@ -230,11 +230,11 @@ public class ProductDAO extends Databaseoperation {
 	/**
 	 * buy product means create an order
 	 */
-	 public void buyProduct(Set<Product> products) {
+	 public void buyProduct(Set<Product> products,String username) {
 		 
 		 OrderDAO odao = new OrderDAO();
 		 
-	     odao.createOrder();
+	     odao.submitOrder(products, username);
 	 }
 
 	/**

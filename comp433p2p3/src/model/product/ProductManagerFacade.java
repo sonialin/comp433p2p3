@@ -56,8 +56,8 @@ public class ProductManagerFacade{
 	/**
      * buyproduct, that means submitorder
      */
-	public void buyProduct(){
-		//order.submitOrder();  
+	public void buyProduct(Set<Product> products,String username){
+		 pdao.buyProduct(products, username); 
 	}
 	
 	/**

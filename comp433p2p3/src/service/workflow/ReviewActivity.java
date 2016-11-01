@@ -20,18 +20,13 @@ public class ReviewActivity {
 		return "OK";
 	}
 
-<<<<<<< HEAD
+
 	public Set<ReviewRepresentation> getReview(int productID) {
-=======
-	public Set<ReviewRepresentation> getRelatedReviews(int productID) {
->>>>>>> branch 'master' of https://TingLiu6@bitbucket.org/TingLiu6/comp433p2p3.git
+
 		Set<Review> reviews = new HashSet<Review>();
 		Set<ReviewRepresentation> reviewRepresentations = new HashSet<ReviewRepresentation>();
-<<<<<<< HEAD
+
 		reviews = rm.getReview(productID);
-=======
-		reviews = rm.getRelatedReviews(productID);
->>>>>>> branch 'master' of https://TingLiu6@bitbucket.org/TingLiu6/comp433p2p3.git
 
 		Iterator<Review> it = reviews.iterator();
 		while(it.hasNext()) {
@@ -49,20 +44,7 @@ public class ReviewActivity {
 
 	}
 	
-	public ReviewRepresentation getReview(int reviewID) {
-		
-		Review review = rm.getReview(reviewID);
-		
-		ReviewRepresentation reviewRep = new ReviewRepresentation();
-		reviewRep.setProductreviewID(review.getProductreviewID());
-		reviewRep.setProductreviewcontent(review.getProductreviewcontent());
-		reviewRep.setCustomerusername(review.getCustomerusername());
-		reviewRep.setProductproductID(review.getProductproductID());
-		reviewRep.setRating(review.getRating());
-		
-		return reviewRep;
-
-	}
+	
 	
 
 
