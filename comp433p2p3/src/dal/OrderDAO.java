@@ -290,6 +290,7 @@ public class OrderDAO extends Databaseoperation{
           Product product = (Product)it.next();
           orderdetails += product.getProductID() ;
           orderdetails += product.getProductname();
+          amount += product.getProductprice();
         }
 		order.createOrder(amount, username, DateTime.now().toString(), orderdetails);
 	}
