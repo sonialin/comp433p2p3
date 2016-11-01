@@ -17,9 +17,9 @@ public class ReviewManagerFacade{
 		
 	}
 	
-	public Set<Review> getRelatedReviews(String Poductname){
+	public Set<Review> getRelatedReviews(int productID){
 		
-		return rdao.getRelatedReviews(Poductname);
+		return rdao.getRelatedReviews(productID);
 		
 	}
 	

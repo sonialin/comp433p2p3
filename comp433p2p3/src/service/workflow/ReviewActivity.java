@@ -7,7 +7,6 @@ import java.util.Set;
 
 import model.review.Review;
 import model.review.ReviewManagerFacade;
-import service.representation.order.OrderRepresentation;
 import service.representation.review.ReviewRepresentation;
 
 public class ReviewActivity {
@@ -21,10 +20,10 @@ public class ReviewActivity {
 		return "OK";
 	}
 
-	public Set<ReviewRepresentation> getRelatedReviews(String Poductname) {
+	public Set<ReviewRepresentation> getRelatedReviews(int productID) {
 		Set<Review> reviews = new HashSet<Review>();
 		Set<ReviewRepresentation> reviewRepresentations = new HashSet<ReviewRepresentation>();
-		reviews = rm.getRelatedReviews(Poductname);
+		reviews = rm.getRelatedReviews(productID);
 
 		Iterator<Review> it = reviews.iterator();
 		while(it.hasNext()) {

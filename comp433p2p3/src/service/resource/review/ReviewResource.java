@@ -37,18 +37,18 @@ public class ReviewResource implements ReviewService {
 	@Produces({"application/xml" , "application/json"})
 	@Path("/review/{reviewID}")
 	public ReviewRepresentation getReview(@PathParam("reviewID") int reviewID) {
-		System.out.println("GET METHOD Request from Client with orderRequest int ............." + reviewID);
+		System.out.println("GET METHOD Request from Client with reviewRequest int ............." + reviewID);
 		ReviewActivity reviewActivity = new ReviewActivity();
 		return reviewActivity.getReview(reviewID);
 	}
 
 	@GET
 	@Produces({ "application/xml", "application/json" })
-	@Path("/review/{ProductName}")
-	public Set<ReviewRepresentation> getRelatedReviews(@PathParam("ProductName") String productName) {
-		System.out.println("GET METHOD Request for selected product reviews .............");
+	@Path("/review/{productID}/{reviewID}")
+	public Set<ReviewRepresentation> getRelatedReviews(@PathParam("productID") int productID) {
+		System.out.println("GET METHOD Request for reviews of product with ID ............." + productID);
 		ReviewActivity rwActivity = new ReviewActivity();
-		return rwActivity.getRelatedReviews(productName);
+		return rwActivity.getRelatedReviews(productID);
 	}
 
 }
