@@ -44,7 +44,7 @@ public class ReviewResource implements ReviewService {
 
 	@GET
 	@Produces({ "application/xml", "application/json" })
-	@Path("/review/{productID}/{reviewID}")
+	@Path("/r_reviews/{productID}")
 	public Set<ReviewRepresentation> getRelatedReviews(@PathParam("productID") int productID) {
 		System.out.println("GET METHOD Request for reviews of product with ID ............." + productID);
 		ReviewActivity rwActivity = new ReviewActivity();
