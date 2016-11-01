@@ -11,6 +11,6 @@ public interface ReviewService {
 
 	public Response writeReview(String customerusername, int productID, String reviewcontent, int rate);
 
-	public Set<ReviewRepresentation> getReview(String Poductname);
+	public Set<ReviewRepresentation> getReview(int productID);
 
 }

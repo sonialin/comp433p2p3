@@ -18,23 +18,23 @@ import service.workflow.ProductActivity;
 
 import javax.ws.rs.core.CacheControl;
 
-@Path("/Productservice/")
+@Path("/productservice/")
 public class ProductResource implements ProductService {
 
 	@GET
 	@Produces({ "application/xml", "application/json" })
-	@Path("/Product")
+	@Path("/products/{productname}")
 	// @Cacheable(cc="public, maxAge=3600") example for caching   
-	public Set<ProductRepresentation> searchProduct(String productName) {
-		System.out.println("GET METHOD Request for all Products .............");
+	public Set<ProductRepresentation> searchProduct(@PathParam("productname") String productName) {
+		System.out.println("GET METHOD Request for all Products ............." + productName);
 		ProductActivity pdtActivity = new ProductActivity();
 		return pdtActivity.searchProduct(productName);
 	}
 
 	@GET
 	@Produces({ "application/xml", "application/json" })
-	@Path("/Product/{ProductId}")
-	public ProductRepresentation getProduct(@PathParam("ProductId") int id) {
+	@Path("/product/{productId}")
+	public ProductRepresentation getProduct(@PathParam("productId") int id) {
 		System.out.println("GET METHOD Request from Client with ProductRequest String ............." + id);
 		ProductActivity pdtActivity = new ProductActivity();
 		return pdtActivity.getProduct(id);

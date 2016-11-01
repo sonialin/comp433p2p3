@@ -46,7 +46,7 @@ public class ReviewDAO extends Databaseoperation {
 		super.closeConnection(connection);
 	}
 
-	public Set<Review> getReview(String productname) {
+	public Set<Review> getReview(int productID) {
 
 		Review review = new Review();
 		String dispalyreviewquery = "Select * from ProductReview where Poductname = ?";
@@ -56,7 +56,7 @@ public class ReviewDAO extends Databaseoperation {
 		try {
 			stmt = connection.createStatement();
 			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(dispalyreviewquery);
-			preStatement.setString(1, productname);
+			preStatement.setInt(1, productID);
 			ResultSet rs = preStatement.executeQuery();
 
 			while (rs.next()) {

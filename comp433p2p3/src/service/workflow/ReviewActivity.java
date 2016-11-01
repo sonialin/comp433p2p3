@@ -21,10 +21,10 @@ public class ReviewActivity {
 		return "OK";
 	}
 
-	public Set<ReviewRepresentation> getReview(String Poductname) {
+	public Set<ReviewRepresentation> getReview(int productID) {
 		Set<Review> reviews = new HashSet<Review>();
 		Set<ReviewRepresentation> reviewRepresentations = new HashSet<ReviewRepresentation>();
-		reviews = rm.getReview(Poductname);
+		reviews = rm.getReview(productID);
 
 		Iterator<Review> it = reviews.iterator();
 		while(it.hasNext()) {

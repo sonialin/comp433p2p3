@@ -33,11 +33,11 @@ public class ReviewResource implements ReviewService {
 
 	@GET
 	@Produces({ "application/xml", "application/json" })
-	@Path("/Review/{ProductName}")
-	public Set<ReviewRepresentation> getReview(@PathParam("ProductName") String productName) {
+	@Path("/Review/{productID}")
+	public Set<ReviewRepresentation> getReview(@PathParam("productID") int productID) {
 		System.out.println("GET METHOD Request for selected product reviews .............");
 		ReviewActivity rwActivity = new ReviewActivity();
-		return rwActivity.getReview(productName);
+		return rwActivity.getReview(productID);
 	}
 
 }
