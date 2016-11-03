@@ -9,12 +9,14 @@ import java.io.Serializable;
 public class Order implements Serializable {
 	int orderID;
 	String orderdate;
-	String shippingaddress;
+	String username;
+	String productname;
+	int productqty;		
 	float totalprice;
 	float tax;
 	float amount;
-	int orderstatusID;
-	String username;
+	String shippingaddress;
+	String orderstatus;	
 	
 	public Order( ){ }
 	
@@ -26,7 +28,7 @@ public class Order implements Serializable {
 	public void setorderID(int orderID){
 		this.orderID = orderID;
 	}
-	
+		
 	public String getorderdate(){
 		return orderdate;
 	}
@@ -36,14 +38,35 @@ public class Order implements Serializable {
 		this.orderdate = orderdate;
 	}
 	
-	public String getshippingaddress(){
-		return shippingaddress;
+	
+	
+	public String getusername(){
+		return username;
 	}
 	
 	@XmlElement
-	public void setshippingaddress(String shippingaddress){
-		this.shippingaddress = shippingaddress;
+	public void setusername(String username){
+		this.username = username;
 	}
+	
+	public String getproductname(){
+		return productname;
+	}
+	
+	@XmlElement
+	public void setproductname(String productname){
+		this.productname = productname;
+	}
+	
+	public int getproductqty(){
+		return productqty;
+	}
+	
+	@XmlElement
+	public void setproductqty(int productqty){
+		this.productqty = productqty;
+	}
+	
 	
 	public float gettotalprice(){
 		return totalprice;
@@ -72,24 +95,26 @@ public class Order implements Serializable {
 		this.amount = amount;
 	}
 	
-	public int getorderstatusID(){
-		return orderstatusID;
+	
+	
+	public String getshippingaddress(){
+		return shippingaddress;
 	}
 	
 	@XmlElement
-	public void setorderstatusID(int orderstatusID){
-		this.orderstatusID = orderstatusID;
+	public void setshippingaddress(String shippingaddress){
+		this.shippingaddress = shippingaddress;
 	}
 	
-	public String getusername(){
-		return username;
+	public String getorderstatus(){
+		return orderstatus;
 	}
 	
 	@XmlElement
-	public void setusername(String username){
-		this.username = username;
+	public void setorderstatus(String orderstatus){
+		this.orderstatus = orderstatus;
 	}
 	
-	// To do: getorderdetails()
+	
 
 }

@@ -2,6 +2,7 @@ package service.representation.order;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -12,42 +13,69 @@ import javax.xml.bind.annotation.XmlType;
 public class OrderRepresentation {
 	int orderID;
 	String orderdate;
-	String shippingaddress;
+	String username;
+	String productname;
+	int productqty;		
 	float totalprice;
 	float tax;
 	float amount;
-	int orderstatusID;
-	String username;
+	String shippingaddress;
+	String orderstatus;	
 	
-	public OrderRepresentation( ){ }
+
 	
 	public int getorderID(){
 		return orderID;
 	}
 	
+	
 	public void setorderID(int orderID){
 		this.orderID = orderID;
 	}
-	
+		
 	public String getorderdate(){
 		return orderdate;
 	}
+	
 	
 	public void setorderdate(String orderdate){
 		this.orderdate = orderdate;
 	}
 	
-	public String getshippingaddress(){
-		return shippingaddress;
+	
+	
+	public String getusername(){
+		return username;
 	}
 	
-	public void setshippingaddress(String shippingaddress){
-		this.shippingaddress = shippingaddress;
+	
+	public void setusername(String username){
+		this.username = username;
 	}
+	
+	public String getproductname(){
+		return productname;
+	}
+	
+	
+	public void setproductname(String productname){
+		this.productname = productname;
+	}
+	
+	public int getproductqty(){
+		return productqty;
+	}
+	
+	
+	public void setproductqty(int productqty){
+		this.productqty = productqty;
+	}
+	
 	
 	public float gettotalprice(){
 		return totalprice;
 	}
+	
 	
 	public void settotalprice(float totalprice){
 		this.totalprice = totalprice;
@@ -57,6 +85,7 @@ public class OrderRepresentation {
 		return tax;
 	}
 	
+	
 	public void settax(float tax){
 		this.tax = tax;
 	}
@@ -65,24 +94,29 @@ public class OrderRepresentation {
 		return amount;
 	}
 	
+	
 	public void setamount(float amount){
 		this.amount = amount;
 	}
 	
-	public int getorderstatusID(){
-		return orderstatusID;
+	
+	
+	public String getshippingaddress(){
+		return shippingaddress;
 	}
 	
-	public void setorderstatusID(int orderstatusID){
-		this.orderstatusID = orderstatusID;
+	
+	public void setshippingaddress(String shippingaddress){
+		this.shippingaddress = shippingaddress;
 	}
 	
-	public String getusername(){
-		return username;
+	public String getorderstatus(){
+		return orderstatus;
 	}
 	
-	public void setusername(String username){
-		this.username = username;
+	
+	public void setorderstatus(String orderstatus){
+		this.orderstatus = orderstatus;
 	}
-
+	
 }

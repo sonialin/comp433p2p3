@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import dal.OrderDAO;
 import model.order.Order;
 import model.order.OrderManagerFacade;
 import service.representation.order.OrderRepresentation;
@@ -23,14 +22,17 @@ public class OrderActivity {
 		while(it.hasNext()) {
           Order order = (Order)it.next();
           OrderRepresentation orderRepresentation = new OrderRepresentation();
+                   
           orderRepresentation.setorderID(order.getorderID());
           orderRepresentation.setorderdate(order.getorderdate());
           orderRepresentation.setusername(order.getusername());
-          orderRepresentation.setamount(order.getamount());
-          orderRepresentation.setshippingaddress(order.getshippingaddress());
-          orderRepresentation.settax(order.gettax());
+          orderRepresentation.setproductname(order.getproductname());
+          orderRepresentation.setproductqty(order.getproductqty());
           orderRepresentation.settotalprice(order.gettotalprice());
-          orderRepresentation.setorderstatusID(order.getorderstatusID());
+          orderRepresentation.settax(order.gettax());
+          orderRepresentation.setamount(order.getamount());
+          orderRepresentation.setshippingaddress(order.getshippingaddress());			
+          orderRepresentation.setorderstatus(order.getorderstatus());
           
           //now add this representation in the list
           orderRepresentations.add(orderRepresentation);
@@ -42,17 +44,19 @@ public class OrderActivity {
 		
 		Order order = omf.getOrder(orderID);
 		
-		OrderRepresentation orderRep = new OrderRepresentation();
-		orderRep.setorderID(order.getorderID());
-		orderRep.setorderdate(order.getorderdate());
-		orderRep.setusername(order.getusername());
-		orderRep.setamount(order.getamount());
-		orderRep.setshippingaddress(order.getshippingaddress());
-		orderRep.settax(order.gettax());
-		orderRep.settotalprice(order.gettotalprice());
-		orderRep.setorderstatusID(order.getorderstatusID());
+		OrderRepresentation orderRepresentation = new OrderRepresentation();
+		orderRepresentation.setorderID(order.getorderID());
+        orderRepresentation.setorderdate(order.getorderdate());
+        orderRepresentation.setusername(order.getusername());
+        orderRepresentation.setproductname(order.getproductname());
+        orderRepresentation.setproductqty(order.getproductqty());
+        orderRepresentation.settotalprice(order.gettotalprice());
+        orderRepresentation.settax(order.gettax());
+        orderRepresentation.setamount(order.getamount());
+        orderRepresentation.setshippingaddress(order.getshippingaddress());			
+        orderRepresentation.setorderstatus(order.getorderstatus());
 		
-		return orderRep;
+		return orderRepresentation;
 
 	}
 	

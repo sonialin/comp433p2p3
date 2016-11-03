@@ -33,7 +33,7 @@ public class OrderResource implements OrderService {
 	
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/order/{orderID}")
+	@Path("/getorder/{orderID}")
 	public OrderRepresentation getOrder(@PathParam("orderID") int orderID) {
 		System.out.println("GET METHOD Request from Client with orderRequest int ............." + orderID);
 		OrderActivity orderActivity = new OrderActivity();
@@ -51,7 +51,7 @@ public class OrderResource implements OrderService {
 	
 	@PATCH
 	@Produces({"application/xml" , "application/json"})
-	@Path("/order/{orderID}")
+	@Path("/payorder/{orderID}")
 	public Response payOrder(int orderID) {
 		System.out.println("PATCH METHOD Request from Client with orderID............." + orderID );
 		OrderActivity orderActivity = new OrderActivity();

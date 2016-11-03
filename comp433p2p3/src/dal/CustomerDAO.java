@@ -1,13 +1,9 @@
 package dal;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-
-import model.costant.Constant;
 import model.customer.Customer;
 
 public class CustomerDAO extends Databaseoperation{
@@ -120,11 +116,5 @@ public class CustomerDAO extends Databaseoperation{
 		
 	}
 	
-	/**
-	 * Get Order Details customers submitted from database
-	 */
-	public void getCustomDetail(String customerusername){
-		
-     }
 
 }

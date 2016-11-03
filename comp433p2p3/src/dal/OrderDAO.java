@@ -52,7 +52,15 @@ public class OrderDAO extends Databaseoperation{
 	
 	public Order getOrder(int orderID) {
 		Order order = new Order();
-		String getquery = "SELECT `OrderID`, `OrderPrice`, `Customer_Username`, `OrderDate`, `OrderStatus_StatusID` FROM ecommerce.`Order` WHERE OrderID = ?;";
+		String getquery = "SELECT `order`.OrderID,`OrderDate`, `order`.Customer_Username, ProductName,`CartLineItemQuantity`,"
+						  + "`CartPrice`, `Tax`, `OrderPrice`,`StreetAddressLine1`,`statusName`	"
+						  + "FROM `order`, product, cartlineitem, cart, address, orderstatus	"
+						  + "WHERE `order`.cart_cartID = cart.cartID "
+						  + "AND cartlineitem.`Cart_CartID` = cart.cartID "
+						  + "AND `order`.customer_username = address.customer_username "
+						  + "AND cartlineitem.product_productID = product.productID "
+						  + "AND orderstatus.statusID = `order`.orderstatus_statusID "
+						  + "AND  `order`.orderID = ?";
 		Connection connection = super.getConnection();
 		Statement stmt = null;
 
@@ -61,13 +69,19 @@ public class OrderDAO extends Databaseoperation{
 			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getquery);
 			preStatement.setInt(1, orderID);
 			ResultSet rs = preStatement.executeQuery();
-
-			order.setorderID(orderID);
-			order.settotalprice(rs.getFloat(2));
+			
+			if(rs.next()){
+		    order.setorderID(orderID);
+			order.setorderdate(rs.getString(2));
 			order.setusername(rs.getString(3));
-			order.setorderdate(rs.getString(4));
-			order.setorderstatusID(rs.getInt(5));
-
+			order.setproductname(rs.getString(4));
+			order.setproductqty(rs.getInt(5));
+			order.settotalprice(rs.getFloat(6));
+			order.settax(rs.getFloat(7));
+			order.setamount(rs.getFloat(8));
+			order.setshippingaddress(rs.getString(9));			
+			order.setorderstatus(rs.getString(10));
+			}
 			stmt.close();
 			rs.close();
 
@@ -82,10 +96,10 @@ public class OrderDAO extends Databaseoperation{
 	
 	public Order createOrder(float amount, String username, String orderdate, String orderdetails){
 		Order order = new Order();
-		order.setamount(amount);
-		order.setusername(username);
-		order.setorderdate(orderdate);
-		order.setorderstatusID(1);
+		//order.setamount(amount);
+		//order.setusername(username);
+		//order.setorderdate(orderdate);
+		//order.setorderstatusID(1);
 		
 		String addquery = "INSERT INTO `Order` (`OrderPrice`, `Customer_Username`, `OrderDate`, `OrderStatus_StatusID`, `Cart_CartID`) VALUES (?,?,?,?,?);";
 
@@ -105,11 +119,10 @@ public class OrderDAO extends Databaseoperation{
 			preStatement.setInt(4, 1);
 			preStatement.setInt(5, 1); // To do: properly associate order with cart
 			
-			ResultSet rs = preStatement.executeQuery();
+			preStatement.executeUpdate();
 
 			stmt.close();
-			rs.close();
-
+			
 		} catch (SQLException e) {
 			System.out.println(e.toString());
 		}
