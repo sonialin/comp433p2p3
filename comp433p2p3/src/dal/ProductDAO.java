@@ -24,7 +24,6 @@ public class ProductDAO extends Databaseoperation {
 		super();
 	}
 	
-	
 	Set<Product> products = new HashSet<Product>();
 	
 	/**
@@ -147,9 +146,7 @@ public class ProductDAO extends Databaseoperation {
 	 * @return
 	 */
 	public Set<Product> searchProduct(String ProductName) {
-		
-		products.clear();
-		
+		products.clear();			
 		String searchquery = "SELECT * FROM product where ProductName like '%" + ProductName + "%';";
 		Connection connection = super.getConnection();
 		Statement stmt = null;

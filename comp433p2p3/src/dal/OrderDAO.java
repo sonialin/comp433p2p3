@@ -53,7 +53,7 @@ public class OrderDAO extends Databaseoperation{
 	public Order getOrder(int orderID) {
 		Order order = new Order();
 		String getquery = "SELECT `order`.OrderID,`OrderDate`, `order`.Customer_Username, ProductName,`CartLineItemQuantity`,"
-						  + "`CartPrice`, `Tax`, `OrderPrice`,`StreetAddressLine1`,`statusName`	"
+						  + "`CartPrice`, `Tax`, `OrderPrice`,`StreetAddressLine1`,`City`,`State`,`Zipcode`,`statusName`	"
 						  + "FROM `order`, product, cartlineitem, cart, address, orderstatus	"
 						  + "WHERE `order`.cart_cartID = cart.cartID "
 						  + "AND cartlineitem.`Cart_CartID` = cart.cartID "
@@ -79,8 +79,8 @@ public class OrderDAO extends Databaseoperation{
 			order.settotalprice(rs.getFloat(6));
 			order.settax(rs.getFloat(7));
 			order.setamount(rs.getFloat(8));
-			order.setshippingaddress(rs.getString(9));			
-			order.setorderstatus(rs.getString(10));
+			order.setshippingaddress(rs.getString(9)+ "," + rs.getString(10)+ "," +rs.getString(11)+ "," + rs.getString(12));			
+			order.setorderstatus(rs.getString(13));
 			}
 			stmt.close();
 			rs.close();
