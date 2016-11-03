@@ -87,6 +87,8 @@ VALUES ('HTC One A9 Factory Unlocked Smartphone, 32GB 4G LTE 5-Inch HD Display (
 
 INSERT INTO `Customer` (`Username`, `Password`, `Firstname`, `Lastname`, `Email`) 
 VALUES ('sonialin', '123456', 'Sonia', 'Lin', 'jlin7@luc.edu');
+INSERT INTO `Customer` (`Username`, `Password`, `Firstname`, `Lastname`, `Email`) 
+VALUES ('AshleyLiu', '654321', 'Ashley', 'Liu', 'tliu6@luc.edu');
 
 INSERT INTO `OrderStatus` (`StatusName`, `StatusID`) VALUES ('Paid', 1);
 INSERT INTO `OrderStatus` (`StatusName`, `StatusID`) VALUES ('Processed', 2);
@@ -107,6 +109,9 @@ VALUES ('Visa', '1234223432344234', 20170501, 999, 'Sonia Lin', 1);
 
 INSERT INTO `ProductReview` (`ProductReviewContent`, `Rating`, `ProductReviewDate`, `Product_ProductID`, `Customer_Username`)
 VALUES ('Great phone and arrived on time.', 5, CURRENT_TIMESTAMP, 11, 'sonialin');
+
+INSERT INTO `ProductReview` (`ProductReviewContent`, `Rating`, `ProductReviewDate`, `Product_ProductID`, `Customer_Username`)
+VALUES ('Love this phone, good looking and easy to use', 5, CURRENT_TIMESTAMP, 11, 'AshleyLiu');
 
 INSERT INTO `ecommerce`.`Address` (`StreetAddressLine1`, `StreetAddressLine2`, `City`, `State`, `Zipcode`, `Partner_PartnerID`, `Customer_Username`, `Order_OrderID`, `Payment_Order_OrderID`)
 VALUES ('200 S Frontage Rd', NULL, 'Burr Ridge', 'IL', '60527', 1, NULL, NULL, NULL);

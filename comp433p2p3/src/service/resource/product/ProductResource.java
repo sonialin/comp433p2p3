@@ -17,8 +17,6 @@ import service.representation.product.ProductRepresentation;
 import service.representation.product.ProductRequest;
 import service.workflow.ProductActivity;
 
-import javax.ws.rs.core.CacheControl;
-
 @Path("/productservice/")
 public class ProductResource implements ProductService {
 
