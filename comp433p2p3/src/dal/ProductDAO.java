@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.bouncycastle.jcajce.provider.asymmetric.RSA;
@@ -22,8 +24,9 @@ public class ProductDAO extends Databaseoperation {
 		super();
 	}
 	
+	
 	Set<Product> products = new HashSet<Product>();
-
+	
 	/**
 	 * addProduct
 	 */
@@ -145,7 +148,8 @@ public class ProductDAO extends Databaseoperation {
 	 */
 	public Set<Product> searchProduct(String ProductName) {
 		
-		Product product = new Product();
+		products.clear();
+		
 		String searchquery = "SELECT * FROM product where ProductName like '%" + ProductName + "%';";
 		Connection connection = super.getConnection();
 		Statement stmt = null;
@@ -157,31 +161,20 @@ public class ProductDAO extends Databaseoperation {
 			//ResultSet rs = preStatement.executeQuery();
 			ResultSet rs = stmt.executeQuery(searchquery);
 			
-			ResultSetMetaData rsmd = rs.getMetaData();  
-		    int columnCount = rsmd.getColumnCount();  
-			for (int i=1; i<=columnCount; i++){  
-		        System.out.print(rsmd.getColumnName(i));  
-		        System.out.print("(" + rsmd.getColumnTypeName(i) + ")");  
-		        System.out.print(" | ");  
-		    }  
-		    System.out.println();  
-		    // Êä³öÊý¾Ý  
-		    while (rs.next()){  
-		        for (int i=1; i<=columnCount; i++){ 
-		        
-		            System.out.print(rs.getObject(i) + " | ");  
-		        }  
-		        System.out.println();  
-		    }
+			
 			while (rs.next()) {
+				Product product = new Product();                        //needs to create a new Product Object for every loop, other wise all the "products" will have the same hashcode and thus be considered the same object
 				product.setProductID(rs.getInt(1));
+				System.out.println("getProductID=" + product.getProductID());
 				product.setProductName(rs.getString(2));
+				System.out.println("getProductname=" + product.getProductname());
 				product.setProductprice(rs.getFloat(3));
 				product.setProductdecription(rs.getString(4));				
 				product.setProductownerID(rs.getInt(5));
 				product.setProductquantity(rs.getInt(6));
 
 				products.add(product);
+				System.out.println("size2222222222=" + products.size());
 			}
 
 			stmt.close();
@@ -191,7 +184,7 @@ public class ProductDAO extends Databaseoperation {
 			System.out.println(e.toString());
 		}
 		super.closeConnection(connection);
-
+		System.out.println("size111111=" + products.size());
 		return products;
 	}
 

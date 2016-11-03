@@ -1,5 +1,6 @@
 package service.resource.product;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.ws.rs.DELETE;
@@ -26,6 +27,7 @@ public class ProductResource implements ProductService {
 	@Path("/products/{productname}")
   
 	public Set<ProductRepresentation> searchProduct(@PathParam("productname") String productName) {
+		
 		System.out.println("GET METHOD Request for all Products ............." + productName);
 		ProductActivity pdtActivity = new ProductActivity();
 		return pdtActivity.searchProduct(productName);

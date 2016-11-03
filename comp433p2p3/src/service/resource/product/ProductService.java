@@ -1,5 +1,6 @@
 package service.resource.product;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.jws.WebService;
@@ -15,7 +16,5 @@ public interface ProductService {
 	public ProductRepresentation getProduct(int productId);
 
 	public ProductRepresentation addProduct(ProductRequest productRequest);
-
-
 
 }

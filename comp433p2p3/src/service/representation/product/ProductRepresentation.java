@@ -12,7 +12,7 @@ public class ProductRepresentation {
 
 	int productID;
 	String productname;
-	String productdecription;
+	String productdescription;
 	float productprice;
 	int productownerID;
 	int productquantity;
@@ -33,12 +33,12 @@ public class ProductRepresentation {
 		return productname;
 	}
 	
-	public void setProductdecription(String productdecription){
-		this.productdecription = productdecription;
+	public void setProductdecription(String productdescription){
+		this.productdescription = productdescription;
 	}
 	
 	public String getProductdecription(){
-		return productdecription;
+		return productdescription;
 	}
 	
 	public void setProductprice(float productprice){

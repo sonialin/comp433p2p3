@@ -1,5 +1,6 @@
 package model.product;
 
+import java.util.List;
 import java.util.Set;
 
 import dal.Databaseoperation;
@@ -43,6 +44,7 @@ public class ProductManagerFacade{
      * @return 
      */	
 	public Set<Product> searchProduct(String ProductName){
+		
 		return pdao.searchProduct(ProductName);
 	}
 	
