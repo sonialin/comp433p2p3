@@ -56,10 +56,10 @@ public class ProductManagerFacade{
 	}
 	
 	/**
-     * buyproduct, that means submitorder
+     * buy product, that means submit order
      */
-	public void buyProduct(Set<Product> products,String username){
-		 pdao.buyProduct(products, username); 
+	public void buyProduct(int productID, int qty, String username){
+		 pdao.buyProduct(productID, qty, username); 
 	}
 	
 	/**

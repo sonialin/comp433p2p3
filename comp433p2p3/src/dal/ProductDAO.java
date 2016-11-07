@@ -220,11 +220,11 @@ public class ProductDAO extends Databaseoperation {
 	/**
 	 * buy product means create an order
 	 */
-	 public void buyProduct(Set<Product> products,String username) {
+	 public void buyProduct(int productID, int qty, String username) {
 		 
 		 OrderDAO odao = new OrderDAO();
 		 
-	     odao.submitOrder(products, username);
+	     odao.submitOrder(productID, qty, username);
 	 }
 
 	/**

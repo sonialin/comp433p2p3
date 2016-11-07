@@ -82,7 +82,7 @@ VALUES ('HTC One A9 Unlocked 16GB 4g LTE 5.0-inch - International Version (Carbo
 
 INSERT INTO `Product` (`ProductName`, `ProductPrice`, `ProductDescription`, `ProductOwner_ProductOwnerID`, `ProductQuantity`) 
 VALUES ('HTC One A9 Factory Unlocked Smartphone, 32GB 4G LTE 5-Inch HD Display (International Stock No Warranty), Gray', 
-330.00, 'From the company that crafted the world\'s first all-metal design, HTC again sets a new design standard. The HTC One A9 features a super-thin metal frame with an elegant finish, expandable SD card memory and edge-to-edge Corning Gorilla Glass.', 
+330.00, 'From the company that crafted the worlds first all-metal design, HTC again sets a new design standard. The HTC One A9 features a super-thin metal frame with an elegant finish, expandable SD card memory and edge-to-edge Corning Gorilla Glass.', 
 3, 20);
 
 INSERT INTO `Customer` (`Username`, `Password`, `Firstname`, `Lastname`, `Email`) 
@@ -90,6 +90,7 @@ VALUES ('sonialin', '123456', 'Sonia', 'Lin', 'jlin7@luc.edu');
 INSERT INTO `Customer` (`Username`, `Password`, `Firstname`, `Lastname`, `Email`) 
 VALUES ('AshleyLiu', '654321', 'Ashley', 'Liu', 'tliu6@luc.edu');
 
+INSERT INTO `OrderStatus` (`StatusName`, `StatusID`) VALUES ('Unpaid', 0);
 INSERT INTO `OrderStatus` (`StatusName`, `StatusID`) VALUES ('Paid', 1);
 INSERT INTO `OrderStatus` (`StatusName`, `StatusID`) VALUES ('Processed', 2);
 INSERT INTO `OrderStatus` (`StatusName`, `StatusID`) VALUES ('Shipped', 3);
@@ -101,8 +102,8 @@ INSERT INTO `Cart` (`CartPrice`, `Tax`) VALUES (159.49, 9.97);
 INSERT INTO `CartLineItem` (`Cart_CartID`, `Product_ProductID`, `CartLineItemQuantity`, `CartLineItemPrice`) 
 VALUES (1, 11, 1, 159.49);
 
-INSERT INTO `Order` (`OrderPrice`, `Customer_Username`, `OrderDate`, `OrderStatus_StatusID`, `Cart_CartID`) 
-VALUES (169.46, 'sonialin', 20160930, 1, 1);
+INSERT INTO `Order` (`Customer_Username`, `OrderDate`, `ProductName`,`ProductQty`,`OrderPrice`,`Tax`,`Amount`,`ShippingAddress`,`OrderStatus`) 
+VALUES ('sonialin', CURRENT_TIMESTAMP, 'Samsung Galaxy J5 SM-J500H/DS GSM Factory Unlocked Smartphone, International Version (Gold)', 1, 159.49, 9.97, 169.46, '1032 W Sheridan Rd,Chicago, IL, 60660', 1);
 
 INSERT INTO `Payment` (`CardType`, `CardNumber`, `ExpirationDate`, `SecurityCode`, `BillingName`, `Order_OrderID`)
 VALUES ('Visa', '1234223432344234', 20170501, 999, 'Sonia Lin', 1);

@@ -87,28 +87,22 @@ ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `ecommerce`.`Order` (
   `OrderID` INT NOT NULL AUTO_INCREMENT,
-  `OrderPrice` DECIMAL(10,2) NULL,
+  
   `Customer_Username` VARCHAR(45) NOT NULL,
-  `OrderDate` DATETIME NULL,
-  `OrderStatus_StatusID` INT NOT NULL,
-  `Cart_CartID` INT NOT NULL,
+  `OrderDate` TIMESTAMP NULL,
+  `ProductName` VARCHAR(200) NOT NULL,
+  `ProductQty` INT NOT NULL,
+  `OrderPrice` DECIMAL(10,2) NULL,
+  `Tax` DECIMAL(10,2) NULL,
+  `Amount` DECIMAL(10,2) NULL,
+  `ShippingAddress` VARCHAR(200) NOT NULL,
+  `OrderStatus` INT NOT NULL,
   PRIMARY KEY (`OrderID`),
   INDEX `fk_Order_Customer1_idx` (`Customer_Username` ASC),
-  INDEX `fk_Order_OrderStatus1_idx` (`OrderStatus_StatusID` ASC),
-  INDEX `fk_Order_Cart1_idx` (`Cart_CartID` ASC),
+ 
   CONSTRAINT `fk_Order_Customer1`
     FOREIGN KEY (`Customer_Username`)
     REFERENCES `ecommerce`.`Customer` (`Username`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Order_OrderStatus1`
-    FOREIGN KEY (`OrderStatus_StatusID`)
-    REFERENCES `ecommerce`.`OrderStatus` (`StatusID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Order_Cart1`
-    FOREIGN KEY (`Cart_CartID`)
-    REFERENCES `ecommerce`.`Cart` (`CartID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

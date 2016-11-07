@@ -11,6 +11,7 @@ import java.util.Set;
 
 import org.joda.time.DateTime;
 
+import model.constant.Constant;
 import model.order.Order;
 import model.product.Product;
 
@@ -52,15 +53,7 @@ public class OrderDAO extends Databaseoperation{
 	
 	public Order getOrder(int orderID) {
 		Order order = new Order();
-		String getquery = "SELECT `order`.OrderID,`OrderDate`, `order`.Customer_Username, ProductName,`CartLineItemQuantity`,"
-						  + "`CartPrice`, `Tax`, `OrderPrice`,`StreetAddressLine1`,`City`,`State`,`Zipcode`,`statusName`	"
-						  + "FROM `order`, product, cartlineitem, cart, address, orderstatus	"
-						  + "WHERE `order`.cart_cartID = cart.cartID "
-						  + "AND cartlineitem.`Cart_CartID` = cart.cartID "
-						  + "AND `order`.customer_username = address.customer_username "
-						  + "AND cartlineitem.product_productID = product.productID "
-						  + "AND orderstatus.statusID = `order`.orderstatus_statusID "
-						  + "AND  `order`.orderID = ?";
+		String getquery = "SELECT * FROM `order` WHERE orderID =?";
 		Connection connection = super.getConnection();
 		Statement stmt = null;
 
@@ -71,16 +64,16 @@ public class OrderDAO extends Databaseoperation{
 			ResultSet rs = preStatement.executeQuery();
 			
 			if(rs.next()){
-		    order.setorderID(orderID);
-			order.setorderdate(rs.getString(2));
-			order.setusername(rs.getString(3));
+		    order.setorderID(orderID);			
+			order.setusername(rs.getString(2));
+			order.setorderdate(rs.getString(3));
 			order.setproductname(rs.getString(4));
 			order.setproductqty(rs.getInt(5));
 			order.settotalprice(rs.getFloat(6));
 			order.settax(rs.getFloat(7));
 			order.setamount(rs.getFloat(8));
-			order.setshippingaddress(rs.getString(9)+ "," + rs.getString(10)+ "," +rs.getString(11)+ "," + rs.getString(12));			
-			order.setorderstatus(rs.getString(13));
+			order.setshippingaddress(rs.getString(9));			
+			order.setorderstatus(rs.getString(10));
 			}
 			stmt.close();
 			rs.close();
@@ -94,32 +87,63 @@ public class OrderDAO extends Databaseoperation{
 		return order;
 	}
 	
-	public Order createOrder(float amount, String username, String orderdate, String orderdetails){
+	public Order createOrder(String username, String productname,int productqty,float totalprice,int orderstatus){
 		Order order = new Order();
-		//order.setamount(amount);
-		//order.setusername(username);
-		//order.setorderdate(orderdate);
-		//order.setorderstatusID(1);
+		String shippingaddress = null;
+		String orderstatusname = null;
+		int orderID = 0;
+		String getaddressquery = "SELECT `StreetAddressLine1`,`City`,`State`,`Zipcode` FROM address WHERE `Customer_Username`=?";
+		String addquery = "INSERT INTO `Order` (`Customer_Username`, `OrderDate`, `ProductName`,`ProductQty`,`OrderPrice`,`Tax`,`Amount`,`ShippingAddress`,`OrderStatus`) VALUES (?,CURRENT_TIMESTAMP,?,?,?,?,?,?,?)";
+		String getdatequery = "SELECT `OrderDate` FROM `order` WHERE `OrderID`=?";
+		String getstatusname = "SELECT `StatusName` FROM `ordersatus` WHERE `statusID`=?";
 		
-		String addquery = "INSERT INTO `Order` (`OrderPrice`, `Customer_Username`, `OrderDate`, `OrderStatus_StatusID`, `Cart_CartID`) VALUES (?,?,?,?,?);";
-
-		// To do: add shipping address to the address table with association to the created order
-		// To do: add orderdetails field to db and all order layers
 		
 		Connection connection = super.getConnection();
 		Statement stmt = null;
 
 		try {
+			//get shipping address from address table which the user uses
 			stmt = connection.createStatement();
-
-			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(addquery);
-			preStatement.setFloat(1, amount);
-			preStatement.setString(2, username);
-			preStatement.setString(3, orderdate);
-			preStatement.setInt(4, 1);
-			preStatement.setInt(5, 1); // To do: properly associate order with cart
+			PreparedStatement preStatement1 = (PreparedStatement) connection.prepareStatement(getaddressquery);
+			preStatement1.setString(1, username);
+			ResultSet rs1 = preStatement1.executeQuery();
+			shippingaddress = rs1.getString(1)+ "," + rs1.getString(2)+ "," +rs1.getString(3)+ "," + rs1.getString(4);			
 			
-			preStatement.executeUpdate();
+			//create an order record into order table
+			PreparedStatement preStatement2 = (PreparedStatement) connection.prepareStatement(addquery);
+			preStatement2.setString(1, username);
+			preStatement2.setString(2, productname);
+			preStatement2.setInt(3,productqty );
+			preStatement2.setFloat(4, totalprice); // To do: properly associate order with cart
+			preStatement2.setFloat(5, Constant.TAXRATE);
+			preStatement2.setFloat(6, totalprice + Constant.TAXRATE);
+			preStatement2.setString(7, shippingaddress);
+			preStatement2.setInt(8,orderstatus );		
+			
+			preStatement2.executeUpdate();
+			
+			//get the auto generated orderID first and then get all the order info
+			ResultSet rs2 = preStatement2.getGeneratedKeys();
+			orderID = rs2.getInt(1);
+			PreparedStatement preStatement3 = (PreparedStatement) connection.prepareStatement(getdatequery);
+			preStatement2.setInt(1, orderID);
+			ResultSet rs3 = preStatement3.executeQuery();
+			
+			PreparedStatement preStatement4 = (PreparedStatement) connection.prepareStatement(getaddressquery);
+			preStatement4.setInt(1, orderID);
+			ResultSet rs4 = preStatement1.executeQuery();
+			orderstatusname = rs4.getString(1);
+						
+			order.setorderID(orderID);
+			order.setorderdate(rs3.getString(1));
+			order.setusername(username);			
+			order.setproductname(productname);
+			order.setproductqty(productqty);
+			order.settotalprice(totalprice);
+			order.settax(Constant.TAXRATE);
+			order.setamount(totalprice + Constant.TAXRATE);
+			order.setshippingaddress(shippingaddress);			
+			order.setorderstatus(orderstatusname);
 
 			stmt.close();
 			
@@ -294,17 +318,38 @@ public class OrderDAO extends Databaseoperation{
         }
 	}
 	
-	public void submitOrder(Set<Product> products, String username){
-		Iterator<Product> it = products.iterator();
-		Order order;
-		String orderdetails = null;
-		float amount = 0; 
-		while(it.hasNext()) {
-          Product product = (Product)it.next();
-          orderdetails += product.getProductID() ;
-          orderdetails += product.getProductname();
-          amount += product.getProductprice();
-        }
-		//order.createOrder(amount, username, DateTime.now().toString(), orderdetails);
+	public void submitOrder(int productID, int qty, String username){             //select quantity before buying
+		
+		String status = null;
+		String productname = null;
+		float totalprice = 0;
+		String getquery = "SELECT `productname`, `productprice` FROM product WHERE productID = ?";
+		Connection connection = super.getConnection();
+		Statement stmt = null;
+
+		try {
+			stmt = connection.createStatement();
+			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getquery);
+			preStatement.setInt(1, productID);
+			ResultSet rs = preStatement.executeQuery();
+
+			while (rs.next()) {			
+				
+				productname = rs.getString(1);
+				totalprice = rs.getFloat(2);
+						
+			}
+
+			stmt.close();
+			rs.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		}
+
+		super.closeConnection(connection);
+
+		
+		createOrder(username, productname, qty, totalprice, 0);
 	}
 }

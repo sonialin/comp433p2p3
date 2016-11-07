@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import model.link.Link;
 import model.product.Product;
 import model.product.ProductManagerFacade;
 import service.representation.product.ProductRepresentation;
@@ -40,6 +41,8 @@ public class ProductActivity {
 			ProductRepresentations.add(productRepresentation);
 			System.out.println("pid=" + productRepresentation.getProductID());
 			System.out.println("pname=" + productRepresentation.getProductname());
+			
+			setLinks(productRepresentation);
 		}
 		return ProductRepresentations;
 	}
@@ -56,7 +59,17 @@ public class ProductActivity {
 		pdtRep.setProductownerID(pdt.getProductownerID());
 		pdtRep.setProductquantity(pdt.getProductquantity());
 
+				
+		// Add the links
+		setLinks(pdtRep);
+		
 		return pdtRep;
+		
+		/**
+		 * Sets all the links appropriately, for each kind of representation based on state
+		 * @param orderRep
+		 */
+		
 	}
 
 	public ProductRepresentation addProduct(String productname, String productdecription, float productprice, 
@@ -73,5 +86,14 @@ public class ProductActivity {
 		pm.deleteProduct(id);
 
 		return "OK";
+	}
+	
+	private void setLinks(ProductRepresentation productRep) {
+		// Set up the activities that can be performed on orders
+		Link buy = new Link("buy", 
+				"http://api.ourapiname.com:8082/orderservice/submitorder?proudctID" + productRep.getProductID());	
+		
+	
+		productRep.setLinks(buy);
 	}
 }
