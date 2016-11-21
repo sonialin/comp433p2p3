@@ -24,18 +24,29 @@ public class OrderDAO extends Databaseoperation{
 	}
 	
 	public Set<Order> getAllOrders(){
-		String getquery = "SELECT OrderID, `OrderPrice`, `Customer_Username`, `OrderDate`, `OrderStatus_StatusID` FROM Order;";
+		String getquery = "SELECT * FROM `order`;";
 		Connection connection = super.getConnection();
 		Statement stmt = null;
-
+		
 		try {
 			stmt = connection.createStatement();
 			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getquery);
 			ResultSet rs = preStatement.executeQuery();
 
 			while (rs.next()) {
+				Order order = new Order();
 	            for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) {
-	              orders.add((Order)rs.getObject(i));
+	            	order.setorderID(rs.getInt(1));			
+	    			order.setusername(rs.getString(2));
+	    			order.setorderdate(rs.getString(3));
+	    			order.setproductname(rs.getString(4));
+	    			order.setproductqty(rs.getInt(5));
+	    			order.settotalprice(rs.getFloat(6));
+	    			order.settax(rs.getFloat(7));
+	    			order.setamount(rs.getFloat(8));
+	    			order.setshippingaddress(rs.getString(9));			
+	    			order.setorderstatus(rs.getString(10));
+	    			orders.add(order);
 	            }
 	        }
 
