@@ -7,13 +7,39 @@ import java.util.List;
 import java.util.Set;
 
 import model.link.Link;
+import model.order.Order;
 import model.product.Product;
 import model.product.ProductManagerFacade;
+import service.representation.order.OrderRepresentation;
 import service.representation.product.ProductRepresentation;
 
 public class ProductActivity {
 
 	private static ProductManagerFacade pm = new ProductManagerFacade();
+	
+	public Set<ProductRepresentation> getAllProducts() {
+		
+		Set<Product> products = new HashSet<Product>();
+		Set<ProductRepresentation> productRepresentations = new HashSet<ProductRepresentation>();
+		products = pm.getAllProducts();
+		
+		Iterator<Product> it = products.iterator();
+		while(it.hasNext()) {
+			Product pdt = (Product) it.next();
+			ProductRepresentation productRepresentation = new ProductRepresentation();
+                   
+			productRepresentation.setProductID(pdt.getProductID());
+			productRepresentation.setProductName(pdt.getProductname());
+			productRepresentation.setProductprice(pdt.getProductprice());			
+			productRepresentation.setProductdecription(pdt.getProductdecription());
+			productRepresentation.setProductownerID(pdt.getProductownerID());
+			productRepresentation.setProductquantity(pdt.getProductquantity());
+          
+			//now add this representation in the list
+			productRepresentations.add(productRepresentation);
+        }
+		return productRepresentations;
+	}
 
 	public Set<ProductRepresentation> searchProduct(String productName) {
 		System.out.println("searchProduct");

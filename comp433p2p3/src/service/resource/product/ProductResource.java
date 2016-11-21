@@ -26,6 +26,16 @@ import service.workflow.ProductActivity;
 public class ProductResource implements ProductService {
 
 	@GET
+	@Produces({MediaType.APPLICATION_JSON})
+	@Path("/product")
+	//@Cacheable(cc="public, maxAge=3600") example for caching
+	public Set<ProductRepresentation> getAllProducts() {
+		System.out.println("GET METHOD Request for all products .............");
+		ProductActivity productActivity = new ProductActivity();
+		return productActivity.getAllProducts();	
+	}
+	
+	@GET
 	@Produces({ "application/xml", "application/json" })
 	@Path("/products/{productname}")
   

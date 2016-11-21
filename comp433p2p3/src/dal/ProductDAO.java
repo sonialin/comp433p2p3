@@ -15,7 +15,6 @@ import org.bouncycastle.jcajce.provider.asymmetric.RSA;
 
 import dal.Databaseoperation;
 import model.order.Order;
-
 import model.product.Product;
 
 public class ProductDAO extends Databaseoperation {
@@ -138,6 +137,41 @@ public class ProductDAO extends Databaseoperation {
 
 		super.closeConnection(connection);
 
+	}
+	
+	public Set<Product> getAllProducts(){
+		String getquery = "SELECT * FROM `product`;";
+		Connection connection = super.getConnection();
+		Statement stmt = null;
+		
+		try {
+			stmt = connection.createStatement();
+			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getquery);
+			ResultSet rs = preStatement.executeQuery();
+
+			while (rs.next()) {
+				Product product = new Product();
+	            for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) {
+	            	product.setProductID(rs.getInt(1));			
+	    			product.setProductName(rs.getString(2));			
+	    			product.setProductprice(rs.getFloat(3));
+	    			product.setProductdecription(rs.getString(4));
+	    			product.setProductownerID(rs.getInt(5));
+	    			product.setProductquantity(rs.getInt(6));
+	    			products.add(product);
+	            }
+	        }
+
+			stmt.close();
+			rs.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		}
+
+		super.closeConnection(connection);
+
+		return products;
 	}
 
 	/**

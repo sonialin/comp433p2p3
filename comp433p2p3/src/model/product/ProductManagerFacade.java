@@ -39,6 +39,11 @@ public class ProductManagerFacade{
 		pdao.deleteProduct(productID);
 	}
 	
+	public Set<Product> getAllProducts(){
+		
+		return pdao.getAllProducts();
+	}
+	
     /**
      * searchProduct
      * @return 
