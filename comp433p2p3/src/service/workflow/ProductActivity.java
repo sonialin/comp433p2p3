@@ -116,7 +116,7 @@ public class ProductActivity {
 	
 	private void setLinks(ProductRepresentation productRep) {
 		// Set up the activities that can be performed on orders
-		Link buy = new Link("buy", 
+		Link buy = new Link("post","APPLICATION_JSON","buy", 
 				"http://localhost:8082/orderservice/addToCart?productId=" + productRep.getProductID());	
 		productRep.setLinks(buy);
 	}
