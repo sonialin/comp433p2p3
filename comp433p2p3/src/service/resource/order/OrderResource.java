@@ -23,7 +23,7 @@ import service.workflow.OrderActivity;
 public class OrderResource implements OrderService {
 
 	@GET
-	@Produces({"application/xml" , "application/json"})
+	@Produces({MediaType.APPLICATION_JSON})
 	@Path("/order")
 	//@Cacheable(cc="public, maxAge=3600") example for caching
 	public Set<OrderRepresentation> getAllOrders() {

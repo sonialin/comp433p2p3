@@ -5,11 +5,14 @@ import java.util.Set;
 
 import javax.jws.WebService;
 
+import service.representation.order.OrderRepresentation;
 import service.representation.product.ProductRepresentation;
 import service.representation.product.ProductRequest;
 
 @WebService
 public interface ProductService {
+	
+	public Set<ProductRepresentation> getAllProducts();
 
 	public Set<ProductRepresentation> searchProduct(String productName);
 

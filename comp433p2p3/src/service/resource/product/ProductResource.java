@@ -7,19 +7,34 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 
 import service.representation.product.ProductRepresentation;
 import service.representation.product.ProductRequest;
 import service.workflow.ProductActivity;
 
+@CrossOriginResourceSharing(allowAllOrigins = true)
+
 @Path("/productservice/")
 public class ProductResource implements ProductService {
 
+	@GET
+	@Produces({MediaType.APPLICATION_JSON})
+	@Path("/product")
+	//@Cacheable(cc="public, maxAge=3600") example for caching
+	public Set<ProductRepresentation> getAllProducts() {
+		System.out.println("GET METHOD Request for all products .............");
+		ProductActivity productActivity = new ProductActivity();
+		return productActivity.getAllProducts();	
+	}
+	
 	@GET
 	@Produces({ "application/xml", "application/json" })
 	@Path("/products/{productname}")
@@ -31,14 +46,23 @@ public class ProductResource implements ProductService {
 		return pdtActivity.searchProduct(productName);
 	}
 
+	@Override
 	@GET
-	@Produces({ "application/xml", "application/json" })
+	@Produces({MediaType.APPLICATION_JSON})
 	@Path("/product/{productId}")
 	public ProductRepresentation getProduct(@PathParam("productId") int id) {
-		System.out.println("GET METHOD Request from Client with ProductRequest String ............." + id);
 		ProductActivity pdtActivity = new ProductActivity();
 		return pdtActivity.getProduct(id);
 	}
+	
+//	@GET
+//	@Produces({ "application/xml", "application/json" })
+//	@Path("/product/{productId}")
+//	public ProductRepresentation getProduct(@PathParam("productId") int id) {
+//		System.out.println("GET METHOD Request from Client with ProductRequest String ............." + id);
+//		ProductActivity pdtActivity = new ProductActivity();
+//		return pdtActivity.getProduct(id);
+//	}
 
 	@POST
 	@Produces({ "application/xml", "application/json" })
