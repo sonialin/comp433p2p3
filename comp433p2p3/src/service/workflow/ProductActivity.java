@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.ws.rs.core.Response;
+
 import model.link.Link;
 import model.order.Order;
 import model.product.Product;
@@ -37,6 +39,8 @@ public class ProductActivity {
           
 			//now add this representation in the list
 			productRepresentations.add(productRepresentation);
+			
+			setLinks(productRepresentation);
         }
 		return productRepresentations;
 	}
@@ -97,6 +101,9 @@ public class ProductActivity {
 		 */
 		
 	}
+	
+	
+
 
 	public ProductRepresentation addProduct(String productname, String productdecription, float productprice, 
 			                 int productownerID,	int productquantity) {
@@ -116,7 +123,7 @@ public class ProductActivity {
 	
 	private void setLinks(ProductRepresentation productRep) {
 		// Set up the activities that can be performed on orders
-		Link buy = new Link("post","APPLICATION_JSON","buy", 
+		Link buy = new Link("post","APPLICATION_JSON","Add to cart", 
 				"http://localhost:8082/orderservice/addToCart?productId=" + productRep.getProductID());	
 		productRep.setLinks(buy);
 	}

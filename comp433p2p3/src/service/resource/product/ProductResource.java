@@ -36,7 +36,7 @@ public class ProductResource implements ProductService {
 	}
 	
 	@GET
-	@Produces({ "application/xml", "application/json" })
+	@Produces({"application/json" , "application/xml" })
 	@Path("/products/{productname}")
   
 	public Set<ProductRepresentation> searchProduct(@PathParam("productname") String productName) {
@@ -55,18 +55,12 @@ public class ProductResource implements ProductService {
 		return pdtActivity.getProduct(id);
 	}
 	
-//	@GET
-//	@Produces({ "application/xml", "application/json" })
-//	@Path("/product/{productId}")
-//	public ProductRepresentation getProduct(@PathParam("productId") int id) {
-//		System.out.println("GET METHOD Request from Client with ProductRequest String ............." + id);
-//		ProductActivity pdtActivity = new ProductActivity();
-//		return pdtActivity.getProduct(id);
-//	}
+	
+
 
 	@POST
 	@Produces({ "application/xml", "application/json" })
-	@Path("/product")
+	@Path("/products")
 	public ProductRepresentation addProduct(ProductRequest ProductRequest) {
 		System.out.println("POST METHOD Request from Client with ............." 
 				+ ProductRequest.getProductname()+ "  "
@@ -84,7 +78,7 @@ public class ProductResource implements ProductService {
 
 	@DELETE
 	@Produces({ "application/xml", "application/json" })
-	@Path("/product/{ProductId}")
+	@Path("/products/{ProductId}")
 	public Response deleteProduct(@PathParam("ProductId") int id) {
 		System.out.println("Delete METHOD Request from Client with ProductRequest String ............." + id);
 		ProductActivity pdtActivity = new ProductActivity();

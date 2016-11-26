@@ -75,9 +75,10 @@ public class ProductDAO extends Databaseoperation {
 	}
 
 	/**
-	 * getProduct
+	 * getProduct, if the product exists, return the product, if not, return null
 	 */
 	public Product getProduct(int productID) {
+		Boolean productexist = null;
 		Product product = new Product();
 		String getquery = "SELECT productID, `ProductName`, `ProductPrice`, `ProductDescription`, `ProductOwner_ProductOwnerID`, `ProductQuantity` FROM PRODUCT WHERE productID= ?;";
 		
@@ -91,16 +92,19 @@ public class ProductDAO extends Databaseoperation {
 			ResultSet rs = preStatement.executeQuery();
 			
 			if(rs.next()){
+			productexist = true;
 			product.setProductID(productID);			
 			product.setProductName(rs.getString(2));			
 			product.setProductprice(rs.getFloat(3));
 			product.setProductdecription(rs.getString(4));
 			product.setProductownerID(rs.getInt(5));
 			product.setProductquantity(rs.getInt(6));
+			
 			}
 			
+			else
+				productexist = false;	
 			
-
 			stmt.close();
 			rs.close();
 
@@ -109,9 +113,14 @@ public class ProductDAO extends Databaseoperation {
 		}
 
 		super.closeConnection(connection);
-
-		return product;
-
+             
+		if(productexist)
+		         return product;
+        else
+	             return null;
+		
+		
+		
 	}
 
 	/**
@@ -175,11 +184,12 @@ public class ProductDAO extends Databaseoperation {
 	}
 
 	/**
-	 * searchProduct
+	 * searchProduct,if there're products match the keywords, return the products, if not, return null
 	 * 
 	 * @return
 	 */
 	public Set<Product> searchProduct(String ProductName) {
+		Boolean productexist = null;
 		products.clear();			
 		String searchquery = "SELECT * FROM product where ProductName like '%" + ProductName + "%';";
 		Connection connection = super.getConnection();
@@ -194,6 +204,7 @@ public class ProductDAO extends Databaseoperation {
 			
 			
 			while (rs.next()) {
+				productexist = true;
 				Product product = new Product();                        //needs to create a new Product Object for every loop, other wise all the "products" will have the same hashcode and thus be considered the same object
 				product.setProductID(rs.getInt(1));
 				System.out.println("getProductID=" + product.getProductID());
@@ -216,7 +227,11 @@ public class ProductDAO extends Databaseoperation {
 		}
 		super.closeConnection(connection);
 		System.out.println("size111111=" + products.size());
-		return products;
+		
+		if(productexist)
+	         return products;
+        else
+           return null;
 	}
 
 	/**

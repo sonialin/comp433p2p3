@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.jws.WebService;
+import javax.ws.rs.core.Response;
 
 import service.representation.order.OrderRepresentation;
 import service.representation.product.ProductRepresentation;
