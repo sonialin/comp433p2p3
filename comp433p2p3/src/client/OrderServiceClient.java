@@ -26,33 +26,33 @@ public final class OrderServiceClient {
          /*****************************************************************************************
           * GET METHOD invoke
           *****************************************************************************************/
-         System.out.println("GET METHOD .........................................................");
-         WebClient getClient = WebClient.create("http://localhost:8081", providers);
-         
-         //Configuring the CXF logging interceptor for the outgoing message
-         WebClient.getConfig(getClient).getOutInterceptors().add(new LoggingOutInterceptor());
-       //Configuring the CXF logging interceptor for the incoming response
-         WebClient.getConfig(getClient).getInInterceptors().add(new LoggingInInterceptor());
-         
-         // change application/xml  to get in xml format
-         getClient = getClient.accept("application/json").type("application/json").path("/orderservice/order/1");
-         
-         //The following lines are to show how to log messages without the CXF interceptors
-         String getRequestURI = getClient.getCurrentURI().toString();
-         System.out.println("Client GET METHOD Request URI:  " + getRequestURI);
-         String getRequestHeaders = getClient.getHeaders().toString();
-         System.out.println("Client GET METHOD Request Headers:  " + getRequestHeaders);
-         
-         //to see as raw XML/json
-         String response = getClient.get(String.class);
-         System.out.println("GET METHOD Response: ...." + response);
+//         System.out.println("GET METHOD .........................................................");
+//         WebClient getClient = WebClient.create("http://localhost:8082", providers);
+//         
+//         //Configuring the CXF logging interceptor for the outgoing message
+//         WebClient.getConfig(getClient).getOutInterceptors().add(new LoggingOutInterceptor());
+//       //Configuring the CXF logging interceptor for the incoming response
+//         WebClient.getConfig(getClient).getInInterceptors().add(new LoggingInInterceptor());
+//         
+//         // change application/xml  to get in xml format
+//         getClient = getClient.accept("application/json").type("application/json").path("/orderservice/order/1");
+//         
+//         //The following lines are to show how to log messages without the CXF interceptors
+//         String getRequestURI = getClient.getCurrentURI().toString();
+//         System.out.println("Client GET METHOD Request URI:  " + getRequestURI);
+//         String getRequestHeaders = getClient.getHeaders().toString();
+//         System.out.println("Client GET METHOD Request Headers:  " + getRequestHeaders);
+//         
+//         //to see as raw XML/json
+//         String response = getClient.get(String.class);
+//         System.out.println("GET METHOD Response: ...." + response);
        
         
         /*****************************************************************************************
          * POST METHOD invoke
         *****************************************************************************************/
         System.out.println("POST METHOD .........................................................");
-        WebClient postClient = WebClient.create("http://localhost:8081", providers);
+        WebClient postClient = WebClient.create("http://localhost:8082", providers);
         WebClient.getConfig(postClient).getOutInterceptors().add(new LoggingOutInterceptor());
         WebClient.getConfig(postClient).getInInterceptors().add(new LoggingInInterceptor());
                  
@@ -74,43 +74,43 @@ public final class OrderServiceClient {
         /*****************************************************************************************
          * GET METHOD invoke for all orders
          *****************************************************************************************/
-        System.out.println("GET METHOD for all orders..........................................");
-        WebClient getAllClient = WebClient.create("http://localhost:8081", providers);
-        WebClient.getConfig(getAllClient).getOutInterceptors().add(new LoggingOutInterceptor());
-        WebClient.getConfig(getAllClient).getInInterceptors().add(new LoggingInInterceptor());
-        
-        // change application/xml  to get in xml format
-        getAllClient = getAllClient.accept("application/json").type("application/json").path("/orderservice/order");
-                 
-        String getAllRequestURI = getAllClient.getCurrentURI().toString();
-        System.out.println("Client GET METHOD Request URI:  " + getAllRequestURI);
-        String getAllRequestHeaders = getAllClient.getHeaders().toString();
-        System.out.println("Client GET METHOD Request Headers:  " + getAllRequestHeaders);
-        
-        //to see as raw XML/json
-        String getAllResponse = getAllClient.get(String.class);
-        System.out.println("GET All METHOD Response: ...." + getAllResponse);
+//        System.out.println("GET METHOD for all orders..........................................");
+//        WebClient getAllClient = WebClient.create("http://localhost:8082", providers);
+//        WebClient.getConfig(getAllClient).getOutInterceptors().add(new LoggingOutInterceptor());
+//        WebClient.getConfig(getAllClient).getInInterceptors().add(new LoggingInInterceptor());
+//        
+//        // change application/xml  to get in xml format
+//        getAllClient = getAllClient.accept("application/json").type("application/json").path("/orderservice/order");
+//                 
+//        String getAllRequestURI = getAllClient.getCurrentURI().toString();
+//        System.out.println("Client GET METHOD Request URI:  " + getAllRequestURI);
+//        String getAllRequestHeaders = getAllClient.getHeaders().toString();
+//        System.out.println("Client GET METHOD Request Headers:  " + getAllRequestHeaders);
+//        
+//        //to see as raw XML/json
+//        String getAllResponse = getAllClient.get(String.class);
+//        System.out.println("GET All METHOD Response: ...." + getAllResponse);
 //        
         /*****************************************************************************************
          * DELETE METHOD invoke
         *****************************************************************************************/
-        System.out.println("DELETE METHOD .........................................................");
-        WebClient deleteClient = WebClient.create("http://localhost:8081", providers);
-        WebClient.getConfig(deleteClient).getOutInterceptors().add(new LoggingOutInterceptor());
-        WebClient.getConfig(deleteClient).getInInterceptors().add(new LoggingInInterceptor());
-        
-        // change application/xml  to application/json get in json format
-        deleteClient = deleteClient.accept("application/xml").type("application/json").path("/orderservice/order/1");
-     	
-        String deleteRequestURI = deleteClient.getCurrentURI().toString();
-        System.out.println("Client DELETE METHOD Request URI:  " + deleteRequestURI);
-        String deleteRequestHeaders = deleteClient.getHeaders().toString();
-        System.out.println("Client DELETE METHOD Request Headers:  " + deleteRequestHeaders);
-        
-        deleteClient.delete();
-        System.out.println("DELETE MEDTHOD Response ......... OK");
-         
-        System.exit(0);
+//        System.out.println("DELETE METHOD .........................................................");
+//        WebClient deleteClient = WebClient.create("http://localhost:8082", providers);
+//        WebClient.getConfig(deleteClient).getOutInterceptors().add(new LoggingOutInterceptor());
+//        WebClient.getConfig(deleteClient).getInInterceptors().add(new LoggingInInterceptor());
+//        
+//        // change application/xml  to application/json get in json format
+//        deleteClient = deleteClient.accept("application/xml").type("application/json").path("/orderservice/order/1");
+//     	
+//        String deleteRequestURI = deleteClient.getCurrentURI().toString();
+//        System.out.println("Client DELETE METHOD Request URI:  " + deleteRequestURI);
+//        String deleteRequestHeaders = deleteClient.getHeaders().toString();
+//        System.out.println("Client DELETE METHOD Request Headers:  " + deleteRequestHeaders);
+//        
+//        deleteClient.delete();
+//        System.out.println("DELETE MEDTHOD Response ......... OK");
+//         
+//        System.exit(0);
     }
 
 }

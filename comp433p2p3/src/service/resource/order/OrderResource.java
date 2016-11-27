@@ -2,6 +2,7 @@ package service.resource.order;
 
 import java.util.Set;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -42,12 +43,13 @@ public class OrderResource implements OrderService {
 	}
 	
 	@POST
-	@Produces({"application/xml" , "application/json"})
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces({MediaType.APPLICATION_JSON})
 	@Path("/order")
-	public OrderRepresentation createOrder(OrderRequest orderRequest) {
-		System.out.println("POST METHOD Request from Client with username............." + orderRequest.getusername() );
+	public OrderRepresentation createOrder(@PathParam("amount") float amount, @PathParam("username") String username, @PathParam("orderdate") String orderdate) {
+//		System.out.println("POST METHOD Request from Client with username............." + orderRequest.getusername() );
 		OrderActivity orderActivity = new OrderActivity();
-		return orderActivity.createOrder(orderRequest.getamount(), orderRequest.getusername(), orderRequest.getorderdate());
+		return orderActivity.createOrder(amount, username, orderdate);
 	}
 	
 	@PATCH
