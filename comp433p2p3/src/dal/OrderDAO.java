@@ -27,6 +27,7 @@ public class OrderDAO extends Databaseoperation{
 		String getquery = "SELECT * FROM `order`;";
 		Connection connection = super.getConnection();
 		Statement stmt = null;
+		orders.clear();
 		
 		try {
 			stmt = connection.createStatement();
@@ -36,16 +37,16 @@ public class OrderDAO extends Databaseoperation{
 			while (rs.next()) {
 				Order order = new Order();
 	            for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) {
-	            	order.setorderID(rs.getInt(1));			
-	    			order.setusername(rs.getString(2));
-	    			order.setorderdate(rs.getString(3));
-	    			order.setproductname(rs.getString(4));
-	    			order.setproductqty(rs.getInt(5));
-	    			order.settotalprice(rs.getFloat(6));
-	    			order.settax(rs.getFloat(7));
-	    			order.setamount(rs.getFloat(8));
-	    			order.setshippingaddress(rs.getString(9));			
-	    			order.setorderstatus(rs.getString(10));
+	            	order.setorderID(rs.getInt(1));						
+					order.setusername(rs.getString(2));
+					order.setorderdate(rs.getString(3));
+					order.setproductname(rs.getString(4));
+					order.setproductqty(rs.getInt(5));
+					order.settotalprice(rs.getFloat(9));
+					order.settax(rs.getFloat(8));
+					order.setamount(rs.getFloat(6));
+					order.setshippingaddress(rs.getString(10));			
+					order.setorderstatus(rs.getString(11));
 	    			orders.add(order);
 	            }
 	        }
@@ -75,16 +76,16 @@ public class OrderDAO extends Databaseoperation{
 			ResultSet rs = preStatement.executeQuery();
 			
 			if(rs.next()){
-		    order.setorderID(orderID);			
-			order.setusername(rs.getString(2));
-			order.setorderdate(rs.getString(3));
-			order.setproductname(rs.getString(4));
-			order.setproductqty(rs.getInt(5));
-			order.settotalprice(rs.getFloat(6));
-			order.settax(rs.getFloat(7));
-			order.setamount(rs.getFloat(8));
-			order.setshippingaddress(rs.getString(9));			
-			order.setorderstatus(rs.getString(10));
+			    order.setorderID(orderID);			
+				order.setusername(rs.getString(2));
+				order.setorderdate(rs.getString(3));
+				order.setproductname(rs.getString(4));
+				order.setproductqty(rs.getInt(5));
+				order.settotalprice(rs.getFloat(9));
+				order.settax(rs.getFloat(8));
+				order.setamount(rs.getFloat(6));
+				order.setshippingaddress(rs.getString(10));			
+				order.setorderstatus(rs.getString(11));
 			}
 			stmt.close();
 			rs.close();
@@ -98,13 +99,13 @@ public class OrderDAO extends Databaseoperation{
 		return order;
 	}
 	
-	public Order createOrder(String username, String productname,int productqty,float totalprice,int orderstatus){
+	public Order createOrder(String username, String productname, int productqty, float amount, int orderstatus){
 		Order order = new Order();
 		String shippingaddress = null;
 		String orderstatusname = null;
 		int orderID = 0;
 		String getaddressquery = "SELECT `StreetAddressLine1`,`City`,`State`,`Zipcode` FROM address WHERE `Customer_Username`=?";
-		String addquery = "INSERT INTO `Order` (`Customer_Username`, `OrderDate`, `ProductName`,`ProductQty`,`OrderPrice`,`Tax`,`Amount`,`ShippingAddress`,`OrderStatus`) VALUES (?,CURRENT_TIMESTAMP,?,?,?,?,?,?,?)";
+		String addquery = "INSERT INTO `Order` (`Customer_Username`, `OrderDate`, `ProductName`,`ProductQty`,`ProductPrice`,`Subtotal`,`Tax`,`TotalAmount`,`ShippingAddress`,`OrderStatus`) VALUES (?,CURRENT_TIMESTAMP,?,?,?,?,?,?,?,1)";
 		String getdatequery = "SELECT `OrderDate` FROM `order` WHERE `OrderID`=?";
 		String getstatusname = "SELECT `StatusName` FROM `ordersatus` WHERE `statusID`=?";
 		
@@ -118,41 +119,50 @@ public class OrderDAO extends Databaseoperation{
 			PreparedStatement preStatement1 = (PreparedStatement) connection.prepareStatement(getaddressquery);
 			preStatement1.setString(1, username);
 			ResultSet rs1 = preStatement1.executeQuery();
-			shippingaddress = rs1.getString(1)+ "," + rs1.getString(2)+ "," +rs1.getString(3)+ "," + rs1.getString(4);			
+			if(rs1.next()){
+				shippingaddress = rs1.getString(1)+ ", " + rs1.getString(2)+ ", " +rs1.getString(3)+ ", " + rs1.getString(4);
+			} else {
+				shippingaddress = "n/a";
+			}
 			
 			//create an order record into order table
 			PreparedStatement preStatement2 = (PreparedStatement) connection.prepareStatement(addquery);
 			preStatement2.setString(1, username);
 			preStatement2.setString(2, productname);
-			preStatement2.setInt(3,productqty );
-			preStatement2.setFloat(4, totalprice); // To do: properly associate order with cart
-			preStatement2.setFloat(5, Constant.TAXRATE);
-			preStatement2.setFloat(6, totalprice + Constant.TAXRATE);
-			preStatement2.setString(7, shippingaddress);
-			preStatement2.setInt(8,orderstatus );		
-			
+			preStatement2.setInt(3, productqty);
+			preStatement2.setFloat(4, amount);
+			preStatement2.setFloat(5, amount*productqty);
+			preStatement2.setFloat(6, amount*productqty*Constant.TAXRATE);
+			preStatement2.setFloat(7, (amount*productqty*(1+Constant.TAXRATE)));
+			preStatement2.setString(8, shippingaddress);
+//			preStatement2.setInt(8,orderstatus );		
+//			
 			preStatement2.executeUpdate();
 			
-			//get the auto generated orderID first and then get all the order info
-			ResultSet rs2 = preStatement2.getGeneratedKeys();
-			orderID = rs2.getInt(1);
-			PreparedStatement preStatement3 = (PreparedStatement) connection.prepareStatement(getdatequery);
-			preStatement2.setInt(1, orderID);
-			ResultSet rs3 = preStatement3.executeQuery();
+			// To do: fix get generated order id and get status name
 			
-			PreparedStatement preStatement4 = (PreparedStatement) connection.prepareStatement(getaddressquery);
-			preStatement4.setInt(1, orderID);
-			ResultSet rs4 = preStatement1.executeQuery();
-			orderstatusname = rs4.getString(1);
+			//get the auto generated orderID first and then get all the order info
+//			ResultSet rs2 = preStatement2.getGeneratedKeys();
+//			orderID = rs2.getInt(1);
+//			PreparedStatement preStatement3 = (PreparedStatement) connection.prepareStatement(getdatequery);
+//			preStatement2.setInt(1, orderID);
+//			ResultSet rs3 = preStatement3.executeQuery();
+			
+//			PreparedStatement preStatement4 = (PreparedStatement) connection.prepareStatement(getaddressquery);
+//			preStatement4.setInt(1, orderID);
+//			ResultSet rs4 = preStatement1.executeQuery();
+//			orderstatusname = rs4.getString(1);
+			
+			// To do: Return correct values instead of dummy ones
 						
 			order.setorderID(orderID);
-			order.setorderdate(rs3.getString(1));
+			order.setorderdate("20161128");
 			order.setusername(username);			
 			order.setproductname(productname);
 			order.setproductqty(productqty);
-			order.settotalprice(totalprice);
+			//order.settotalprice(totalprice);
 			order.settax(Constant.TAXRATE);
-			order.setamount(totalprice + Constant.TAXRATE);
+			//order.setamount(totalprice + Constant.TAXRATE);
 			order.setshippingaddress(shippingaddress);			
 			order.setorderstatus(orderstatusname);
 

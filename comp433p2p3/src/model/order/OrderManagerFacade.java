@@ -21,9 +21,9 @@ public class OrderManagerFacade{
 		return odao.getOrder(orderID);
 	}
 
-	public Order createOrder(float amount, String username, String orderdate){        
-		//Order order = odao.createOrder(amount, username, orderdate);
-		return null;//order;
+	public Order createOrder(String username, String productname, float amount, int productqty){        
+		Order order = odao.createOrder(username, productname, productqty, amount, 1);
+		return order;
 	}
 	
 	public void payOrder(int orderID){

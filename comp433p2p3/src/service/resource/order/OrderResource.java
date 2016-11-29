@@ -43,13 +43,13 @@ public class OrderResource implements OrderService {
 	}
 	
 	@POST
+	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces({MediaType.APPLICATION_JSON})
 	@Path("/order")
-	public OrderRepresentation createOrder(@PathParam("amount") float amount, @PathParam("username") String username, @PathParam("orderdate") String orderdate) {
+	public OrderRepresentation createOrder(OrderRequest orderRequest) {
 //		System.out.println("POST METHOD Request from Client with username............." + orderRequest.getusername() );
 		OrderActivity orderActivity = new OrderActivity();
-		return orderActivity.createOrder(amount, username, orderdate);
+		return orderActivity.createOrder(orderRequest.getusername(), orderRequest.getproductname(), orderRequest.getamount(), orderRequest.getproductqty());
 	}
 	
 	@PATCH

@@ -102,11 +102,11 @@ INSERT INTO `Cart` (`CartPrice`, `Tax`) VALUES (159.49, 9.97);
 INSERT INTO `CartLineItem` (`Cart_CartID`, `Product_ProductID`, `CartLineItemQuantity`, `CartLineItemPrice`) 
 VALUES (1, 11, 1, 159.49);
 
-INSERT INTO `Order` (`Customer_Username`, `OrderDate`, `ProductName`,`ProductQty`,`OrderPrice`,`Tax`,`Amount`,`ShippingAddress`,`OrderStatus`) 
-VALUES ('sonialin', CURRENT_TIMESTAMP, 'Samsung Galaxy J5 SM-J500H/DS GSM Factory Unlocked Smartphone, International Version (Gold)', 1, 159.49, 9.97, 169.46, '1032 W Sheridan Rd,Chicago, IL, 60660', 1);
+INSERT INTO `Order` (`Customer_Username`, `OrderDate`, `ProductName`,`ProductQty`,`ProductPrice`,`Subtotal`, `Tax`,`TotalAmount`,`ShippingAddress`,`OrderStatus`) 
+VALUES ('sonialin', CURRENT_TIMESTAMP, 'Samsung Galaxy J5 SM-J500H/DS GSM Factory Unlocked Smartphone, International Version (Gold)', 1, 159.49, 159.49, 9.97, 169.46, '1032 W Sheridan Rd,Chicago, IL, 60660', 1);
 
-INSERT INTO `Order` (`Customer_Username`, `OrderDate`, `ProductName`,`ProductQty`,`OrderPrice`,`Tax`,`Amount`,`ShippingAddress`,`OrderStatus`) 
-VALUES ('sonialin', CURRENT_TIMESTAMP, 'Kindle Voyage E-reader, 6" High-Resolution Display (300 ppi) with Adaptive Built-in Light, PagePress Sensors, Wi-Fi - Includes Special Offers', 1, 199.99, 9.97, 219.93, '1032 W Sheridan Rd,Chicago, IL, 60660', 1);
+INSERT INTO `Order` (`Customer_Username`, `OrderDate`, `ProductName`,`ProductQty`,`ProductPrice`,`Subtotal`, `Tax`,`TotalAmount`,`ShippingAddress`,`OrderStatus`) 
+VALUES ('sonialin', CURRENT_TIMESTAMP, 'Kindle Voyage E-reader, 6" High-Resolution Display (300 ppi) with Adaptive Built-in Light, PagePress Sensors, Wi-Fi - Includes Special Offers', 2, 199.99, 399.98, 25.00, 424.98, '1032 W Sheridan Rd,Chicago, IL, 60660', 1);
 
 INSERT INTO `Payment` (`CardType`, `CardNumber`, `ExpirationDate`, `SecurityCode`, `BillingName`, `Order_OrderID`)
 VALUES ('Visa', '1234223432344234', 20170501, 999, 'Sonia Lin', 1);

@@ -60,13 +60,12 @@ public class OrderActivity {
 
 	}
 	
-	public OrderRepresentation createOrder(float amount, String username, String orderdate) {	
-		Order order = omf.createOrder(amount, username, orderdate);
-		
+	public OrderRepresentation createOrder(String username, String productname, float amount, int productqty) {	
+		Order order = omf.createOrder(username, productname, amount, productqty);
 		OrderRepresentation orderRep = new OrderRepresentation();
 		orderRep.setamount(order.getamount());
 		orderRep.setusername(order.getusername());
-		orderRep.setorderdate(order.getorderdate());
+		orderRep.setproductqty(order.getproductqty());
 		
 		return orderRep;
 	}
