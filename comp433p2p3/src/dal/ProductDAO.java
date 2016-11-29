@@ -157,6 +157,7 @@ public class ProductDAO extends Databaseoperation {
 			stmt = connection.createStatement();
 			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getquery);
 			ResultSet rs = preStatement.executeQuery();
+			products.clear();
 
 			while (rs.next()) {
 				Product product = new Product();
