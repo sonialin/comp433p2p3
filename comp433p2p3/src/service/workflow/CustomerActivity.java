@@ -38,6 +38,17 @@ private static CustomerManagerFacade cmf = new CustomerManagerFacade();
 		return cusRep;
 	}
 	
+	public CustomerRepresentation createCustomer(String username, String Password) throws SQLException {
+		
+		Customer cus = cmf.addCustomerUP(username,Password);
+		
+		CustomerRepresentation cusRep = new CustomerRepresentation();
+		cusRep.setCustomerUsername(cus.getCustomerUsername());
+		cusRep.setCustomerPassword(cus.getCustomerPassword());
+		
+		return cusRep;
+	}
+	
 	public String deleteCustomer(String username) throws SQLException {
 		
 		cmf.deleteCustomer(username);

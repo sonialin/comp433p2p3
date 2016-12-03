@@ -19,6 +19,11 @@ public class CustomerManagerFacade{
 		return cdao.addCustomer(customerusername,customerpassword, customerfirstname, customerlastname, customeremail);
 		
 	}	
+	
+	public Customer addCustomerUP(String customerusername, String customerpassword) throws SQLException{
+		return cdao.addCustomerUP(customerusername,customerpassword);
+	}
+	
 	public void deleteCustomer(String customerusername) throws SQLException{
 		cdao.deleteCustomer(customerusername);
 	}

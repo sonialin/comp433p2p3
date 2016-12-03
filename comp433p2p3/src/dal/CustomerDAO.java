@@ -41,6 +41,18 @@ public class CustomerDAO extends Databaseoperation{
         
 	}
 	
+	
+	public void deleteCustomer(String customerusername) throws SQLException{
+		
+		con=getConnection();
+		
+
+		String deletequery = "DELETE FROM Customer WHERE Username = '" + customerusername + "';";  
+		pstmt = (PreparedStatement) con.prepareStatement(deletequery);
+		pstmt.executeUpdate();
+
+	}
+	
 	public Customer addCustomer(String customerusername, String customerpassword,
             String customerfirstname, String customerlastname,
             String customeremail) throws SQLException{
@@ -70,14 +82,25 @@ public class CustomerDAO extends Databaseoperation{
 
 	}
 	
-	public void deleteCustomer(String customerusername) throws SQLException{
+	public Customer addCustomerUP(String customerusername, String customerpassword
+            ) throws SQLException{
 		
 		con=getConnection();
 		
-
-		String deletequery = "DELETE FROM Customer WHERE Username = '" + customerusername + "';";  
-		pstmt = (PreparedStatement) con.prepareStatement(deletequery);
+		Customer cus = new Customer();
+		cus.setCustomerUsername(customerusername);
+		cus.setCustomerPassword(customerpassword);
+		
+		String addquery = "insert into Customer (Username,Password) values(?,?)";
+		
+		pstmt = con.prepareStatement(addquery);
+		pstmt.setString(1, cus.getCustomerUsername());
+		pstmt.setString(2, cus.getCustomerPassword());
 		pstmt.executeUpdate();
+		pstmt.close();
+		con.close();		
+		
+		return cus;
 
 	}
 	

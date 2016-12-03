@@ -35,6 +35,15 @@ public class CustomerResource implements CustomerService{
 		return cusActivity.createCustomer(customerRequest.getCustomerUsername(), customerRequest.getCustomerPassword(), customerRequest.getCustomerFirstname(),customerRequest.getCustomerLastname(),customerRequest.getCustomerEmail());
 	}
 	
+	@POST
+	@Produces({"application/xml" , "application/json"})
+	@Path("/customer/UP")
+	public CustomerRepresentation createCustomerUP(CustomerRequest customerRequest) throws SQLException {
+		System.out.println("POST METHOD Request from Client with ............." + customerRequest.getCustomerUsername() + " " + customerRequest.getCustomerPassword());
+		CustomerActivity cusActivity = new CustomerActivity();
+		return cusActivity.createCustomer(customerRequest.getCustomerUsername(), customerRequest.getCustomerPassword());
+	}
+	
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
 	@Path("/customer/{customerUsername}")

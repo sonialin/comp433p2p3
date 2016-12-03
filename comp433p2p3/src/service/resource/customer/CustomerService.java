@@ -13,5 +13,6 @@ public interface CustomerService {
 	
 	public CustomerRepresentation getCustomer(String cusUsername) throws SQLException;
 	public CustomerRepresentation createCustomer(CustomerRequest customerRequest) throws SQLException;
+	public CustomerRepresentation createCustomerUP(CustomerRequest customerRequest) throws SQLException;
 	public Response deleteCustomer(String cusUsername) throws SQLException;
 }
