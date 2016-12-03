@@ -36,7 +36,7 @@ public class ProductResource implements ProductService {
 	}
 	
 	@GET
-	@Produces({"application/json" , "application/xml" })
+	@Produces({MediaType.APPLICATION_JSON})
 	@Path("/products/{productname}")
   
 	public Set<ProductRepresentation> searchProduct(@PathParam("productname") String productName) {
