@@ -6,11 +6,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import service.representation.AbstractRepresentation;
+
 @XmlRootElement(name = "Order")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 
-public class OrderRepresentation {
+public class OrderRepresentation extends AbstractRepresentation {
 	int orderID;
 	String orderdate;
 	String username;

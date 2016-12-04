@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import model.link.Link;
 import model.order.Order;
 import model.order.OrderManagerFacade;
 import service.representation.order.OrderRepresentation;
@@ -55,6 +56,8 @@ public class OrderActivity {
         orderRepresentation.setamount(order.getamount());
         orderRepresentation.setshippingaddress(order.getshippingaddress());			
         orderRepresentation.setorderstatus(order.getorderstatus());
+        
+        setLinks(orderRepresentation);
 		
 		return orderRepresentation;
 
@@ -102,6 +105,13 @@ public class OrderActivity {
 		omf.deleteOrder(orderID);
 		
 		return "OK";
+	}
+	
+	private void setLinks(OrderRepresentation orderRep) {
+		// Set up the activities that can be performed on orders
+		Link cancel = new Link("patch","APPLICATION_JSON","Cancel", 
+				"http://localhost:8082/orderservice/cancelorder/");	
+		orderRep.setLinks(cancel);
 	}
 
 }

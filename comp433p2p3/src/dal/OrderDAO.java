@@ -257,7 +257,7 @@ public class OrderDAO extends Databaseoperation{
 	}
 	
 	public void cancelOrder(int orderID){
-		String updateOrderQuery = "UPDATE Order SET OrderStatus_StatusID = 5 WHERE OrderID = ?";
+		String updateOrderQuery = "UPDATE `Order` SET `OrderStatus` = 5 WHERE `OrderID` = ?";
 		Connection connection = super.getConnection();
 		Statement stmt = null;
 
@@ -265,7 +265,7 @@ public class OrderDAO extends Databaseoperation{
 			stmt = connection.createStatement();
 			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(updateOrderQuery);
 			preStatement.setInt(1, orderID);
-			preStatement.executeQuery();
+			preStatement.executeUpdate();
 
 			stmt.close();
 
