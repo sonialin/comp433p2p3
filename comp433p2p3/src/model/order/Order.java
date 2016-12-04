@@ -38,8 +38,6 @@ public class Order implements Serializable {
 		this.orderdate = orderdate;
 	}
 	
-	
-	
 	public String getusername(){
 		return username;
 	}
@@ -115,6 +113,4 @@ public class Order implements Serializable {
 		this.orderstatus = orderstatus;
 	}
 	
-	
-
 }

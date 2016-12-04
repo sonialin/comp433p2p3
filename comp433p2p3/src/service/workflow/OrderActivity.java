@@ -37,6 +37,7 @@ public class OrderActivity {
           
           //now add this representation in the list
           orderRepresentations.add(orderRepresentation);
+          setLinks(orderRepresentation);
         }
 		return orderRepresentations;
 	}

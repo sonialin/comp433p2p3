@@ -24,12 +24,9 @@ public class OrderRepresentation extends AbstractRepresentation {
 	String shippingaddress;
 	String orderstatus;	
 	
-
-	
 	public int getorderID(){
 		return orderID;
 	}
-	
 	
 	public void setorderID(int orderID){
 		this.orderID = orderID;
@@ -39,17 +36,13 @@ public class OrderRepresentation extends AbstractRepresentation {
 		return orderdate;
 	}
 	
-	
 	public void setorderdate(String orderdate){
 		this.orderdate = orderdate;
 	}
 	
-	
-	
 	public String getusername(){
 		return username;
 	}
-	
 	
 	public void setusername(String username){
 		this.username = username;
@@ -59,7 +52,6 @@ public class OrderRepresentation extends AbstractRepresentation {
 		return productname;
 	}
 	
-	
 	public void setproductname(String productname){
 		this.productname = productname;
 	}
@@ -68,11 +60,9 @@ public class OrderRepresentation extends AbstractRepresentation {
 		return productqty;
 	}
 	
-	
 	public void setproductqty(int productqty){
 		this.productqty = productqty;
 	}
-	
 	
 	public float gettotalprice(){
 		return totalprice;
@@ -87,7 +77,6 @@ public class OrderRepresentation extends AbstractRepresentation {
 		return tax;
 	}
 	
-	
 	public void settax(float tax){
 		this.tax = tax;
 	}
@@ -96,17 +85,13 @@ public class OrderRepresentation extends AbstractRepresentation {
 		return amount;
 	}
 	
-	
 	public void setamount(float amount){
 		this.amount = amount;
 	}
 	
-	
-	
 	public String getshippingaddress(){
 		return shippingaddress;
 	}
-	
 	
 	public void setshippingaddress(String shippingaddress){
 		this.shippingaddress = shippingaddress;
@@ -115,7 +100,6 @@ public class OrderRepresentation extends AbstractRepresentation {
 	public String getorderstatus(){
 		return orderstatus;
 	}
-	
 	
 	public void setorderstatus(String orderstatus){
 		this.orderstatus = orderstatus;

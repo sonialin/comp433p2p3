@@ -25,6 +25,7 @@ public class OrderDAO extends Databaseoperation{
 	
 	public Set<Order> getAllOrders(){
 		String getquery = "SELECT * FROM `order`;";
+		String getstatusname = "SELECT `StatusName` FROM `OrderStatus` WHERE `StatusID`=?";
 		Connection connection = super.getConnection();
 		Statement stmt = null;
 		orders.clear();
@@ -32,6 +33,7 @@ public class OrderDAO extends Databaseoperation{
 		try {
 			stmt = connection.createStatement();
 			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getquery);
+			PreparedStatement preStatement2 = (PreparedStatement) connection.prepareStatement(getstatusname);
 			ResultSet rs = preStatement.executeQuery();
 
 			while (rs.next()) {
@@ -45,8 +47,15 @@ public class OrderDAO extends Databaseoperation{
 					order.settotalprice(rs.getFloat(9));
 					order.settax(rs.getFloat(8));
 					order.setamount(rs.getFloat(6));
-					order.setshippingaddress(rs.getString(10));			
-					order.setorderstatus(rs.getString(11));
+					order.setshippingaddress(rs.getString(10));
+							
+					preStatement2.setInt(1, rs.getInt(11));
+					ResultSet rs2 = preStatement2.executeQuery();
+					
+					while (rs2.next()) {
+						order.setorderstatus(rs2.getString(1));
+					}
+					
 	    			orders.add(order);
 	            }
 	        }
@@ -66,12 +75,14 @@ public class OrderDAO extends Databaseoperation{
 	public Order getOrder(int orderID) {
 		Order order = new Order();
 		String getquery = "SELECT * FROM `order` WHERE orderID =?";
+		String getstatusname = "SELECT `StatusName` FROM `OrderStatus` WHERE `StatusID`=?";
 		Connection connection = super.getConnection();
 		Statement stmt = null;
 
 		try {
 			stmt = connection.createStatement();
 			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(getquery);
+			PreparedStatement preStatement2 = (PreparedStatement) connection.prepareStatement(getstatusname);
 			preStatement.setInt(1, orderID);
 			ResultSet rs = preStatement.executeQuery();
 			
@@ -84,8 +95,14 @@ public class OrderDAO extends Databaseoperation{
 				order.settotalprice(rs.getFloat(9));
 				order.settax(rs.getFloat(8));
 				order.setamount(rs.getFloat(6));
-				order.setshippingaddress(rs.getString(10));			
-				order.setorderstatus(rs.getString(11));
+				order.setshippingaddress(rs.getString(10));
+				
+				preStatement2.setInt(1, rs.getInt(11));
+				ResultSet rs2 = preStatement2.executeQuery();
+				
+				while (rs2.next()) {
+					order.setorderstatus(rs2.getString(1));
+				}
 			}
 			stmt.close();
 			rs.close();
@@ -107,7 +124,7 @@ public class OrderDAO extends Databaseoperation{
 		String getaddressquery = "SELECT `StreetAddressLine1`,`City`,`State`,`Zipcode` FROM address WHERE `Customer_Username`=?";
 		String addquery = "INSERT INTO `Order` (`Customer_Username`, `OrderDate`, `ProductName`,`ProductQty`,`ProductPrice`,`Subtotal`,`Tax`,`TotalAmount`,`ShippingAddress`,`OrderStatus`) VALUES (?,CURRENT_TIMESTAMP,?,?,?,?,?,?,?,1)";
 		String getdatequery = "SELECT `OrderDate` FROM `order` WHERE `OrderID`=?";
-		String getstatusname = "SELECT `StatusName` FROM `ordersatus` WHERE `statusID`=?";
+		String getstatusname = "SELECT `StatusName` FROM `OrderStatus` WHERE `StatusID`=?";
 		
 		
 		Connection connection = super.getConnection();
