@@ -23,9 +23,10 @@ public class ProductManagerFacade{
      /**
       * addProduct
       */
-	public void addProduct(String productname, String productdecription,
+	public Product addProduct(String productname, String productdecription,
 	        float productprice, int productownerID, int productquantity){
-	       pdao.addProduct(productname, productdecription, productprice, productownerID, productquantity); 
+	       Product product = pdao.addProduct(productname, productdecription, productprice, productownerID, productquantity); 
+	       return product;
 	}
 	
 	public Product getProduct(int productID){

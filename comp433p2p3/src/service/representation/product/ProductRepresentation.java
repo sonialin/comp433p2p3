@@ -35,11 +35,11 @@ public class ProductRepresentation extends AbstractRepresentation{
 		return productname;
 	}
 	
-	public void setProductdecription(String productdescription){
+	public void setProductdescription(String productdescription){
 		this.productdescription = productdescription;
 	}
 	
-	public String getProductdecription(){
+	public String getProductdescription(){
 		return productdescription;
 	}
 	

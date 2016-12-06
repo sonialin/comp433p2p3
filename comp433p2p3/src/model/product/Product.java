@@ -4,7 +4,7 @@ public class Product {
 	
 	int productID;
 	String productname;
-	String productdecription;
+	String productdescription;
 	float productprice;
 	int productownerID;
 	int productquantity;
@@ -27,12 +27,12 @@ public class Product {
 		return productname;
 	}
 	
-	public void setProductdecription(String productdecription){
-		this.productdecription = productdecription;
+	public void setProductdescription(String productdescription){
+		this.productdescription = productdescription;
 	}
 	
-	public String getProductdecription(){
-		return productdecription;
+	public String getProductdescription(){
+		return productdescription;
 	}
 	
 	public void setProductprice(float productprice){

@@ -9,10 +9,8 @@ import java.util.Set;
 import javax.ws.rs.core.Response;
 
 import model.link.Link;
-import model.order.Order;
 import model.product.Product;
 import model.product.ProductManagerFacade;
-import service.representation.order.OrderRepresentation;
 import service.representation.product.ProductRepresentation;
 
 public class ProductActivity {
@@ -33,7 +31,7 @@ public class ProductActivity {
 			productRepresentation.setProductID(pdt.getProductID());
 			productRepresentation.setProductName(pdt.getProductname());
 			productRepresentation.setProductprice(pdt.getProductprice());			
-			productRepresentation.setProductdecription(pdt.getProductdecription());
+			productRepresentation.setProductdescription(pdt.getProductdescription());
 			productRepresentation.setProductownerID(pdt.getProductownerID());
 			productRepresentation.setProductquantity(pdt.getProductquantity());
           
@@ -62,7 +60,7 @@ public class ProductActivity {
 			productRepresentation.setProductID(pdt.getProductID());
 			productRepresentation.setProductName(pdt.getProductname());
 			productRepresentation.setProductprice(pdt.getProductprice());			
-			productRepresentation.setProductdecription(pdt.getProductdecription());
+			productRepresentation.setProductdescription(pdt.getProductdescription());
 			productRepresentation.setProductownerID(pdt.getProductownerID());
 			productRepresentation.setProductquantity(pdt.getProductquantity());
 			
@@ -84,7 +82,7 @@ public class ProductActivity {
 		ProductRepresentation pdtRep = new ProductRepresentation();
 		pdtRep.setProductID(pdt.getProductID());
 		pdtRep.setProductName(pdt.getProductname());
-		pdtRep.setProductdecription(pdt.getProductdecription());
+		pdtRep.setProductdescription(pdt.getProductdescription());
 		pdtRep.setProductprice(pdt.getProductprice());
 		pdtRep.setProductownerID(pdt.getProductownerID());
 		pdtRep.setProductquantity(pdt.getProductquantity());
@@ -108,10 +106,16 @@ public class ProductActivity {
 	public ProductRepresentation addProduct(String productname, String productdecription, float productprice, 
 			                 int productownerID,	int productquantity) {
 
-		pm.addProduct(productname, productdecription, productprice, productownerID, productquantity);
-		return null;
-
+		Product product = pm.addProduct(productname, productdecription, productprice, productownerID, productquantity);
+		ProductRepresentation productRep = new ProductRepresentation();
+		productRep.setProductName(product.getProductname());
+		productRep.setProductdescription(product.getProductdescription());
+		productRep.setProductquantity(product.getProductquantity());
+		productRep.setProductprice(product.getProductprice());
+		productRep.setProductownerID(product.getProductownerID());
 		
+		return productRep;
+
 	}
 
 	public String deleteProduct(int id) {

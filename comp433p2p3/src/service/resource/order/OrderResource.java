@@ -71,17 +71,21 @@ public class OrderResource implements OrderService {
 //		orderActivity.fulfillOrder(orderID);
 //		return null;
 //	}
-//	
-//	@PATCH
-//	@Produces({"application/xml" , "application/json"})
-//	@Path("/order/{orderID}")
-//	public Response shipOrder(int orderID) {
-//		System.out.println("PATCH METHOD Request from Client with orderID............." + orderID );
-//		OrderActivity orderActivity = new OrderActivity();
-//		orderActivity.shipOrder(orderID);
-//		return null;
-//	}
-//	
+	
+	@PATCH
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/shiporder")
+	public Response shipOrder(OrderRequest orderRequest) {
+		System.out.println("PATCH METHOD Request from Client with orderID............." + orderRequest.getorderID() );
+		OrderActivity orderActivity = new OrderActivity();
+		String res = orderActivity.shipOrder(orderRequest.getorderID());
+		if (res.equals("OK")) {
+			return Response.status(Status.OK).build();
+		}
+		return null;
+	}
+	
 //	@PATCH
 //	@Produces({"application/xml" , "application/json"})
 //	@Path("/order/{orderID}")
@@ -100,6 +104,10 @@ public class OrderResource implements OrderService {
 		System.out.println("PATCH METHOD Request from Client with orderID............." + orderRequest.getorderID() );
 		OrderActivity orderActivity = new OrderActivity();
 		orderActivity.cancelOrder(orderRequest.getorderID());
+		String res = orderActivity.cancelOrder(orderRequest.getorderID());
+		if (res.equals("OK")) {
+			return Response.status(Status.OK).build();
+		}
 		return null;
 	}
 	

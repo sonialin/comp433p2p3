@@ -82,16 +82,20 @@ public class OrderActivity {
 		omf.fulfillOrder(orderID);
 	}
 	
-	public void shipOrder(int orderID){
+	public String shipOrder(int orderID){
 		omf.shipOrder(orderID);
+		
+		return "OK";
 	}
 	
 	public void deliverOrder(int orderID){
 		omf.deliverOrder(orderID);
 	}
 	
-	public void cancelOrder(int orderID){
+	public String cancelOrder(int orderID){
 		omf.cancelOrder(orderID);
+		
+		return "OK";
 	}
 
 	public void refundOrder(int orderID){

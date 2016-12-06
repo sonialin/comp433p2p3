@@ -52,18 +52,18 @@ public class ProductDAO extends Databaseoperation {
 			preStatement.executeUpdate();
 		
 			//get the auto generated productID first and then get all the product info
-			ResultSet rs = preStatement.getGeneratedKeys();
-			productID = rs.getInt(1);
-			PreparedStatement preStatement2 = (PreparedStatement) connection.prepareStatement(selectquery);
-			preStatement2.setInt(1, productID);
-			ResultSet rs1 = preStatement2.executeQuery();
+//			ResultSet rs = preStatement.getGeneratedKeys();
+//			productID = rs.getInt(1);
+//			PreparedStatement preStatement2 = (PreparedStatement) connection.prepareStatement(selectquery);
+//			preStatement2.setInt(1, productID);
+//			ResultSet rs1 = preStatement2.executeQuery();
 			
-			product.setProductID(productID);
-			product.setProductName(rs1.getString(2));			
-			product.setProductprice(rs1.getFloat(3));
-			product.setProductdecription(rs1.getString(4));
-			product.setProductownerID(rs1.getInt(5));
-			product.setProductquantity(rs1.getInt(6));
+//			product.setProductID(productID);
+			product.setProductName(productname);			
+			product.setProductprice(productprice);
+			product.setProductdescription(productdescription);
+			product.setProductownerID(productownerID);
+			product.setProductquantity(productquantity);
 
 			stmt.close();
 			
@@ -98,7 +98,7 @@ public class ProductDAO extends Databaseoperation {
 			product.setProductID(productID);			
 			product.setProductName(rs.getString(2));			
 			product.setProductprice(rs.getFloat(3));
-			product.setProductdecription(rs.getString(4));
+			product.setProductdescription(rs.getString(4));
 			product.setProductownerID(rs.getInt(5));
 			product.setProductquantity(rs.getInt(6));
 			
@@ -167,7 +167,7 @@ public class ProductDAO extends Databaseoperation {
 	            	product.setProductID(rs.getInt(1));			
 	    			product.setProductName(rs.getString(2));			
 	    			product.setProductprice(rs.getFloat(3));
-	    			product.setProductdecription(rs.getString(4));
+	    			product.setProductdescription(rs.getString(4));
 	    			product.setProductownerID(rs.getInt(5));
 	    			product.setProductquantity(rs.getInt(6));
 	    			products.add(product);
@@ -214,7 +214,7 @@ public class ProductDAO extends Databaseoperation {
 				product.setProductName(rs.getString(2));
 				System.out.println("getProductname=" + product.getProductname());
 				product.setProductprice(rs.getFloat(3));
-				product.setProductdecription(rs.getString(4));				
+				product.setProductdescription(rs.getString(4));				
 				product.setProductownerID(rs.getInt(5));
 				product.setProductquantity(rs.getInt(6));
 
