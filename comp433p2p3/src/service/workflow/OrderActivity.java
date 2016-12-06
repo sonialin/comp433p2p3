@@ -117,6 +117,10 @@ public class OrderActivity {
 		Link cancel = new Link("patch","APPLICATION_JSON","Cancel", 
 				"http://localhost:8082/orderservice/cancelorder/");	
 		orderRep.setLinks(cancel);
+		Link ship = new Link("patch","APPLICATION_JSON","Cancel", 
+				"http://localhost:8082/orderservice/shiporder/");	
+		orderRep.setLinks(cancel);
+		orderRep.setLinks(ship);
 	}
 
 }
