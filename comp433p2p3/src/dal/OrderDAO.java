@@ -1,10 +1,13 @@
 package dal;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -121,6 +124,7 @@ public class OrderDAO extends Databaseoperation{
 		String shippingaddress = null;
 		String orderstatusname = null;
 		int orderID = 0;
+		String orderdate = null;
 		String getaddressquery = "SELECT `StreetAddressLine1`,`City`,`State`,`Zipcode` FROM address WHERE `Customer_Username`=?";
 		String addquery = "INSERT INTO `Order` (`Customer_Username`, `OrderDate`, `ProductName`,`ProductQty`,`ProductPrice`,`Subtotal`,`Tax`,`TotalAmount`,`ShippingAddress`,`OrderStatus`) VALUES (?,CURRENT_TIMESTAMP,?,?,?,?,?,?,?,1)";
 		String getdatequery = "SELECT `OrderDate` FROM `order` WHERE `OrderID`=?";
@@ -143,7 +147,7 @@ public class OrderDAO extends Databaseoperation{
 			}
 			
 			//create an order record into order table
-			PreparedStatement preStatement2 = (PreparedStatement) connection.prepareStatement(addquery);
+			PreparedStatement preStatement2 = (PreparedStatement) connection.prepareStatement(addquery, PreparedStatement.RETURN_GENERATED_KEYS);
 			preStatement2.setString(1, username);
 			preStatement2.setString(2, productname);
 			preStatement2.setInt(3, productqty);
@@ -152,36 +156,38 @@ public class OrderDAO extends Databaseoperation{
 			preStatement2.setFloat(6, amount*productqty*Constant.TAXRATE);
 			preStatement2.setFloat(7, (amount*productqty*(1+Constant.TAXRATE)));
 			preStatement2.setString(8, shippingaddress);
-//			preStatement2.setInt(8,orderstatus );		
-//			
+					
 			preStatement2.executeUpdate();
 			
 			// To do: fix get generated order id and get status name
 			
 			//get the auto generated orderID first and then get all the order info
-//			ResultSet rs2 = preStatement2.getGeneratedKeys();
-//			orderID = rs2.getInt(1);
-//			PreparedStatement preStatement3 = (PreparedStatement) connection.prepareStatement(getdatequery);
-//			preStatement2.setInt(1, orderID);
-//			ResultSet rs3 = preStatement3.executeQuery();
+			ResultSet rs2 = preStatement2.getGeneratedKeys();
 			
-//			PreparedStatement preStatement4 = (PreparedStatement) connection.prepareStatement(getaddressquery);
-//			preStatement4.setInt(1, orderID);
-//			ResultSet rs4 = preStatement1.executeQuery();
-//			orderstatusname = rs4.getString(1);
+			if(rs2.next()){
+//				orderID = rs2.getInt(1);
+				System.out.println(rs2);
+			}
+			
+//			PreparedStatement preStatement3 = (PreparedStatement) connection.prepareStatement(getdatequery);
+//			preStatement3.setInt(1, orderID);
+//			ResultSet rs3 = preStatement3.executeQuery();
+//			if(rs3.next()){
+//				orderdate = rs3.getString(1);
+//			}
 			
 			// To do: Return correct values instead of dummy ones
-						
+			
 			order.setorderID(orderID);
-			order.setorderdate("20161128");
+			order.setorderdate("20161205");
 			order.setusername(username);			
 			order.setproductname(productname);
 			order.setproductqty(productqty);
-			//order.settotalprice(totalprice);
-			order.settax(Constant.TAXRATE);
-			//order.setamount(totalprice + Constant.TAXRATE);
+			order.setamount(amount);
+			order.settax(amount*productqty*Constant.TAXRATE);
+			order.settotalprice(amount*productqty*(1+Constant.TAXRATE));
 			order.setshippingaddress(shippingaddress);			
-			order.setorderstatus(orderstatusname);
+			order.setorderstatus("Paid");
 
 			stmt.close();
 			

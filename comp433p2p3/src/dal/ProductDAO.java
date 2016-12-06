@@ -11,6 +11,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.ws.rs.NotFoundException;
+
 import org.bouncycastle.jcajce.provider.asymmetric.RSA;
 
 import dal.Databaseoperation;
@@ -229,10 +231,8 @@ public class ProductDAO extends Databaseoperation {
 		super.closeConnection(connection);
 		System.out.println("size111111=" + products.size());
 		
-		if(productexist)
-	         return products;
-        else
-           return null;
+		return products;
+		
 	}
 
 	/**
