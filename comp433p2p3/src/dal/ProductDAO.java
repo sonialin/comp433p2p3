@@ -30,7 +30,7 @@ public class ProductDAO extends Databaseoperation {
 	/**
 	 * addProduct
 	 */
-	public Product addProduct(String productname, String productdecription, float productprice, int productownerID,
+	public Product addProduct(String productname, String productdescription, float productprice, int productownerID,
 			int productquantity) {
 		Product product = new Product();
 		String addquery = "INSERT INTO `Product` (`ProductName`, `ProductPrice`, `ProductDescription`, `ProductOwner_ProductOwnerID`, `ProductQuantity`) VALUES (?,?,?,?,?);";
@@ -43,9 +43,9 @@ public class ProductDAO extends Databaseoperation {
 			stmt = connection.createStatement();
 
 			PreparedStatement preStatement = (PreparedStatement) connection.prepareStatement(addquery);
-			preStatement.setString(1, "ProductName");
+			preStatement.setString(1, productname);
 			preStatement.setFloat(2, productprice);
-			preStatement.setString(3, "ProductDescription");
+			preStatement.setString(3, productdescription);
 			preStatement.setInt(4, productownerID);
 			preStatement.setInt(5, productquantity);
 
