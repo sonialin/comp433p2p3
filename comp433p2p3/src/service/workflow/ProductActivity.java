@@ -100,7 +100,30 @@ public class ProductActivity {
 		
 	}
 	
-	
+	public ProductRepresentation getProductDetails(int id) {
+
+		Product pdt = pm.getProduct(id);
+
+		ProductRepresentation pdtRep = new ProductRepresentation();
+		pdtRep.setProductID(pdt.getProductID());
+		pdtRep.setProductName(pdt.getProductname());
+		pdtRep.setProductdescription(pdt.getProductdescription());
+		pdtRep.setProductprice(pdt.getProductprice());
+		pdtRep.setProductownerID(pdt.getProductownerID());
+		pdtRep.setProductquantity(pdt.getProductquantity());
+
+				
+		// Add the links
+		setLinks(pdtRep);
+		
+		return pdtRep;
+		
+		/**
+		 * Sets all the links appropriately, for each kind of representation based on state
+		 * @param orderRep
+		 */
+		
+	}
 
 
 	public ProductRepresentation addProduct(String productname, String productdecription, float productprice, 
@@ -128,7 +151,9 @@ public class ProductActivity {
 	private void setLinks(ProductRepresentation productRep) {
 		// Set up the activities that can be performed on orders
 		Link buy = new Link("post","APPLICATION_JSON","Buy", 
-				"http://localhost:8082/orderservice/order?productName=" + productRep.getProductname());	
-		productRep.setLinks(buy);
+				"http://localhost:8082/orderservice/order?productName=" + productRep.getProductname());
+		Link view = new Link("get","APPLICATION_JSON","View", 
+				"http://localhost:8082/productservice/product/" + productRep.getProductID() + "/view");	
+		productRep.setLinks(buy, view);
 	}
 }

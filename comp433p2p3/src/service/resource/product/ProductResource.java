@@ -55,7 +55,13 @@ public class ProductResource implements ProductService {
 		return pdtActivity.getProduct(id);
 	}
 	
-	
+	@GET
+	@Produces({MediaType.APPLICATION_JSON})
+	@Path("/product/{productId}/view")
+	public ProductRepresentation getProductDetails(@PathParam("productId") int id) {
+		ProductActivity pdtActivity = new ProductActivity();
+		return pdtActivity.getProductDetails(id);
+	}
 
 
 	@POST

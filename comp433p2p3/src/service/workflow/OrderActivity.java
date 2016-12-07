@@ -116,11 +116,9 @@ public class OrderActivity {
 		// Set up the activities that can be performed on orders
 		Link cancel = new Link("patch","APPLICATION_JSON","Cancel", 
 				"http://localhost:8082/orderservice/cancelorder/");	
-		orderRep.setLinks(cancel);
-		Link ship = new Link("patch","APPLICATION_JSON","Cancel", 
-				"http://localhost:8082/orderservice/shiporder/");	
-		orderRep.setLinks(cancel);
-		orderRep.setLinks(ship);
+		Link ship = new Link("patch","APPLICATION_JSON","Ship", 
+				"http://localhost:8082/orderservice/shiporder/");
+		orderRep.setLinks(cancel, ship);
 	}
 
 }
